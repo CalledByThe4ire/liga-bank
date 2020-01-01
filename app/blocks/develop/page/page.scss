@@ -1,0 +1,11 @@
+.page {
+  @include make-container();
+  display: flex;
+  flex-flow: row wrap;
+  min-width: map-get($grid-breakpoints, sm);
+  max-width: map-get($grid-breakpoints, lg);
+  min-height: 100vh;
+  color: $body-color;
+  font-family: $font-family-base;
+  background-color: $body-bg;
+}

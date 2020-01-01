@@ -1,0 +1,29 @@
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin margin-x($margin) {
+  margin-right: $margin;
+  margin-left: $margin;
+}
+
+@mixin margin-y($margin) {
+  margin-top: $margin;
+  margin-bottom: $margin;
+}
+
+@mixin padding-x($padding) {
+  padding-right: $padding;
+  padding-left: $padding;
+}
+
+@mixin padding-y($padding) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
+@mixin icon-colors($fallback: black) {
+  fill: $fallback;
+  @content;
+}

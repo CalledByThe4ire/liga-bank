@@ -1,0 +1,47 @@
+html {
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 100%;
+  font-size: 62.5%;
+
+  * {
+    &,
+    &::before,
+    &::after {
+      box-sizing: inherit;
+    }
+  }
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+
+  * {
+    pointer-events: none;
+  }
+}
+
+table {
+  width: 100%;
+  border: 0;
+  border-collapse: collapse;
+}

@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-rational-order",
+    "stylelint-config-prettier"
+  ],
+  "plugins": ["stylelint-scss"],
+  "rules": {
+    "order/properties-alphabetical-order": null,
+    "max-nesting-depth": null
+  }
+}
