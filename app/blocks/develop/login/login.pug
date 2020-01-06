@@ -1,0 +1,7 @@
+mixin login(data)
+	+b('button').login&attributes(attributes)
+		+e('span').icon
+			svg(width=20, height=22)
+				use(xlink:href='#login__icon')
+		+e('span').text Войти в Интернет-банк
+		block

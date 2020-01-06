@@ -1,0 +1,13 @@
+include ../login/login
+
+mixin main-nav(data)
+	+b('nav').main-nav&attributes(attributes)
+		+e('button').trigger
+			svg(width=16, height=10)
+				use(xlink:href='#main-nav__menu')
+		+e('ul').list
+			each item in data
+				+e('li').item
+					+e.link(href='#')= item
+		+login(class='__login')
+		block

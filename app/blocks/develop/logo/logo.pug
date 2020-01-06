@@ -1,0 +1,6 @@
+mixin logo(data)
+	+b('a').logo&attributes(attributes)
+		+e('span').icon
+			svg(width=28, height=25)
+				use(xlink:href='#logo__icon')
+		+e('span').text ЛИГА Банк
