@@ -1,8 +1,5 @@
-include ../logo/logo
 include ../main-nav/main-nav
 
 mixin page-header(data)
 	+b('header').page-header&attributes(attributes)
-		+e('div').inner
-			+logo(class='__logo')
-			+main-nav(global.jsons['main-nav'])
+		+main-nav(global.jsons['main-nav'])(class='__main-nav')

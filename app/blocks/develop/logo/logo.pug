@@ -1,6 +1,3 @@
 mixin logo(data)
 	+b('a').logo&attributes(attributes)
-		+e('span').icon
-			svg(width=28, height=25)
-				use(xlink:href='#logo__icon')
-		+e('span').text ЛИГА Банк
+		+e('img').image(src='@logo/logo.svg', width='149', height='25', alt='ЛИГА Банк', title='ЛИГА Банк')

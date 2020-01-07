@@ -1,3 +1,54 @@
 .login {
+  $root: &;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  align-self: center;
+  padding: 0;
+  color: $link-color;
+  font-size: 16px;
+  line-height: 19px;
+  text-decoration: $link-decoration;
+  transition-duration: 0.3s;
+  transition-property: all;
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+
+    #{$root}__icon {
+      fill: $primary;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &__icon {
+    margin-right: 10px;
+    transition-duration: inherit;
+    transition-property: inherit;
+    fill: $body-color;
+
+    @include media-breakpoint-down(md) {
+      margin-right: initial;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 14px;
+      height: 16px;
+    }
+  }
+
+  &__text {
     display: block;
+    transition-duration: inherit;
+    transition-property: inherit;
+
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }
 }

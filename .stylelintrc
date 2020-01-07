@@ -1,12 +1,7 @@
 {
-  "extends": [
-    "stylelint-config-sass-guidelines",
-    "stylelint-config-rational-order",
-    "stylelint-config-prettier"
-  ],
-  "plugins": ["stylelint-scss"],
+  "extends": "stylelint-config-htmlacademy",
   "rules": {
-    "order/properties-alphabetical-order": null,
-    "max-nesting-depth": null
+    "declaration-no-important": true,
+    "indentation": [2, {"ignore": ["inside-parens"]}]
   }
 }

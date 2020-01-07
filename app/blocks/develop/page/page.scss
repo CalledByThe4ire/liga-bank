@@ -1,11 +1,18 @@
 .page {
-  @include make-container();
+  $max-width: 1366px;
+
   display: flex;
   flex-flow: row wrap;
-  min-width: map-get($grid-breakpoints, sm);
-  max-width: map-get($grid-breakpoints, lg);
   min-height: 100vh;
+  overflow: hidden;
   color: $body-color;
+  font-weight: 400;
   font-family: $font-family-base;
   background-color: $body-bg;
+
+  &__container {
+    @include make-container();
+    min-width: map-get($grid-breakpoints, sm);
+    max-width: $max-width;
+  }
 }

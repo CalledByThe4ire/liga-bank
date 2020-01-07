@@ -1,0 +1,5 @@
+mixin main-nav-list(data)
+	+b('ul').main-nav-list&attributes(attributes)
+		each item in data
+			+e('li').item
+				+e.link(href='#') !{item}

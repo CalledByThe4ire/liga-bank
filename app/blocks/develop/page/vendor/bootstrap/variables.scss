@@ -2,8 +2,8 @@
 //
 // Color system
 
-$primary: #2C36F2;
-$secondary: #F6F7FF;
+$primary: #2c36f2;
+$secondary: #f6f7ff;
 
 // Options
 //
@@ -14,7 +14,8 @@ $enable-grid-classes: false;
 //
 // Settings for the `<body>` element.
 
-$body-color: #1F1E25;
+$body-bg: #f6f7ff;
+$body-color: #1f1e25;
 
 // Links
 //
@@ -25,8 +26,6 @@ $link-decoration: none;
 $link-hover-color: $primary;
 $link-hover-decoration: $link-decoration;
 
-
-
 // Grid breakpoints
 //
 // Define the minimum dimensions at which your layout will change,
@@ -35,10 +34,10 @@ $grid-breakpoints: (
   xs: 0,
   sm: 320px,
   md: 769px,
-  lg: 1024px,
+  lg: 1024px
 );
 
-@include _assert-ascending($grid-breakpoints, '$grid-breakpoints');
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
 @include _assert-starts-at-zero($grid-breakpoints);
 
 // Grid columns
@@ -50,5 +49,5 @@ $grid-gutter-width: 0;
 // Typography
 //
 // Font, line-height, and color for body text, headings, and more.
-$font-family-sans-serif: Roboto, Arial, sans-serif;
+$font-family-sans-serif: roboto, arial, sans-serif;
 $font-family-base: $font-family-sans-serif;
