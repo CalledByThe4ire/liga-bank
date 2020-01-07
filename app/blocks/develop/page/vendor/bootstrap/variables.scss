@@ -16,6 +16,15 @@ $enable-grid-classes: false;
 
 $body-color: #1F1E25;
 
+// Links
+//
+// Style anchor elements.
+
+$link-color: $body-color;
+$link-decoration: none;
+$link-hover-color: $primary;
+$link-hover-decoration: $link-decoration;
+
 
 
 // Grid breakpoints
