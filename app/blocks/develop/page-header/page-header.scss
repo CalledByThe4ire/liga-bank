@@ -1,9 +1,14 @@
 .page-header {
   display: block;
-  background-color: $body-bg;
+
+  &__fluid-container {
+    @include make-container();
+    display: block;
+    background-color: $body-bg;
+  }
 
   &__container {
-    @include make-container();
+    @include margin-x(auto);
     @include padding-x(98px);
     display: flex;
     flex-flow: row nowrap;

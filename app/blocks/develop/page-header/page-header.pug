@@ -2,5 +2,6 @@ include ../main-nav/main-nav
 
 mixin page-header(data)
 	+b('header').page-header&attributes(attributes)
-		+e('div').container
-			+main-nav(global.jsons['main-nav'])(class='__main-nav')
+		+e('div').fluid-container
+			+e('div').container
+				+main-nav(global.jsons['main-nav'])(class='__main-nav')
