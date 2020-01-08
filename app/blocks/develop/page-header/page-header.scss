@@ -4,6 +4,7 @@
   flex-flow: row nowrap;
   align-items: center;
   min-height: 91px;
+  background-color: $body-bg;
 
   @include media-breakpoint-down(md) {
     @include padding-x(45px);

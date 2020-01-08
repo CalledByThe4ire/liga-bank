@@ -8,7 +8,7 @@
   color: $body-color;
   font-weight: 400;
   font-family: $font-family-base;
-  background-color: $body-bg;
+  background-color: transparent;
 
   &__container {
     @include make-container();
