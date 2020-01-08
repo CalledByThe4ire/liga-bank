@@ -4,6 +4,12 @@
   @include make-container();
   @include make-row();
   @include list-unstyled;
+  flex-wrap: nowrap;
+  margin-right: 5px;
+
+  @include media-breakpoint-down(md) {
+    margin-right: initial;
+  }
 
   @include media-breakpoint-down(sm) {
     position: absolute;
@@ -38,11 +44,13 @@
     font-size: 16px;
     line-height: 19px;
     text-decoration: $link-decoration;
+    white-space: nowrap;
 
     @include media-breakpoint-down(md) {
       margin-right: 20px;
       font-size: 14px;
       line-height: 16px;
+      white-space: initial;
     }
 
     &:last-child {
