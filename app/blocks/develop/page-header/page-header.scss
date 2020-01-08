@@ -1,18 +1,25 @@
 .page-header {
-  @include padding-x(98px);
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  min-height: 91px;
+  display: block;
   background-color: $body-bg;
 
-  @include media-breakpoint-down(md) {
-    @include padding-x(45px);
-    min-height: 69px;
-  }
+  &__container {
+    @include make-container();
+    @include padding-x(98px);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    min-width: $min-width;
+    max-width: $max-width;
+    min-height: 91px;
 
-  @include media-breakpoint-down(sm) {
-    @include padding-x(15px);
-    min-height: 48px;
+    @include media-breakpoint-down(md) {
+      @include padding-x(45px);
+      min-height: 69px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      @include padding-x(15px);
+      min-height: 48px;
+    }
   }
 }

@@ -1,6 +1,4 @@
 .page {
-  $max-width: 1366px;
-
   display: flex;
   flex-flow: row wrap;
   min-height: 100vh;
@@ -12,7 +10,5 @@
 
   &__container {
     @include make-container();
-    min-width: map-get($grid-breakpoints, sm);
-    max-width: $max-width;
   }
 }
