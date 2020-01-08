@@ -1,6 +1,5 @@
 document.addEventListener(`DOMContentLoaded`, () => {
   const trigger = document.querySelector(`.main-nav__trigger`);
-  const mq = window.matchMedia(`only screen and (min-width: 768px)`);
 
   const toggleMenu = (state, selector) => {
     const nav = selector.closest(`.main-nav`).querySelector(`.main-nav-list`);
@@ -13,7 +12,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
         selector
           .querySelector(`use`)
           .setAttribute(`xlink:href`, `#main-nav__close`);
-        nav.classList.add(`main-nav-list--phone`);
+        nav.classList.remove(`main-nav-list--hidden`);
         break;
       case `open`:
         selector.classList.remove(`main-nav__trigger--close-menu`);
@@ -23,21 +22,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
         selector
           .querySelector(`use`)
           .setAttribute(`xlink:href`, `#main-nav__menu`);
-        nav.classList.remove(`main-nav-list--phone`);
+        nav.classList.add(`main-nav-list--hidden`);
         break;
       default:
         throw new Error(`Unknown state: ${state}`);
-    }
-  };
-
-  const matchMedia = () => {
-    if (mq.matches) {
-      const triggerAttr = trigger
-        .querySelector(`use`)
-        .getAttribute(`xlink:href`);
-      if (triggerAttr.endsWith(`close`)) {
-        toggleMenu(`open`, trigger);
-      }
     }
   };
 
@@ -51,7 +39,5 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   };
 
-  matchMedia();
-  window.addEventListener(`resize`, matchMedia);
   trigger.addEventListener(`click`, clickHandler);
 });
