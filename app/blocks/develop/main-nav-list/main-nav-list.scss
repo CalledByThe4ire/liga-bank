@@ -12,8 +12,10 @@
   }
 
   @include media-breakpoint-down(sm) {
-    position: absolute;
+    position: fixed;
     top: 0;
+    right: 0;
+    left: 0;
     display: block;
     width: 100%;
     height: initial;
@@ -57,9 +59,14 @@
       margin-right: initial;
     }
 
-    :hover {
+    :hover,
+    :focus {
       color: $link-hover-color;
       text-decoration: $link-hover-decoration;
+    }
+
+    :focus {
+      outline: none;
     }
 
     :active {
