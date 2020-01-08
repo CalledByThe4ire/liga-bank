@@ -1,0 +1,6 @@
+// Variables
+//
+// Container' min-max widths
+
+$min-width: map-get($grid-breakpoints, sm);
+$max-width: 1366px;

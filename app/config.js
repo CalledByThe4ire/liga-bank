@@ -29,6 +29,7 @@ module.exports = {
       'node_modules/bootstrap/scss/mixins/_grid.scss',
       'node_modules/bootstrap/scss/mixins/_image.scss',
       'node_modules/bootstrap/scss/mixins/_lists.scss',
+      'app/blocks/develop/page/base/variables.scss',
       'app/blocks/develop/page/base/mixins.scss',
     ],
     HTMLRoot: './',
