@@ -1,15 +1,33 @@
 .page {
+  $page: &;
+
   display: flex;
   flex-flow: row wrap;
-  min-height: 100vh;
   overflow: hidden;
   color: $body-color;
   font-weight: 400;
   font-family: $font-family-base;
   background-color: transparent;
 
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+  }
+
+  &--overlay::before {
+    display: block;
+  }
+
   &__fluid-container {
     @include make-container();
     display: block;
+    height: 100%;
   }
 }

@@ -1,0 +1,27 @@
+include ../logo/logo
+
+mixin modal(data)
+	+b('div').modal--page-header(id='modal-page-header')&attributes(attributes)
+		+e('div').content
+			+e('header').header
+				+logo({mod: 'extended', width: 150, height: 30})(class='__logo')
+				+e('a').trigger(aria-label='Close modal', data-modal='modal-page-header', tabindex=1)
+					+e('svg').icon(width=16, height=16)
+						use(xlink:href='#modal__close')
+			+e('form').form.form__
+				+e('div').field--login.login-form-field__
+					label(for='login-form-field') Логин
+					input(type='text', id='login-form-field', name='login', , tabindex=2, autofocus)
+					+e('div').feedback
+				+e('div').field--password.password-form-field__
+					label(for='password-form-field') Пароль
+					+e('div').inner
+						input(type='text', id='password-form-field', name='password', tabindex=3 )
+						button(type='button', aria-label='Show password', tabindex=4)
+							svg(width=22, height=12)
+								use(xlink:href='#modal__show')
+					+e('div').feedback
+					a(href='#', tabindex=5) Забыли&nbsp;пароль?
+				button(type='submit', tabindex=6) Войти
+
+

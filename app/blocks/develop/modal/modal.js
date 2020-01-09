@@ -1,0 +1,196 @@
+/* global WatchJS */
+const {watch} = WatchJS;
+
+document.addEventListener(`DOMContentLoaded`, () => {
+  // Modal Form Validation (Observer Pattern, MVC)
+  const errorMessages = {
+    login: {
+      empty: `Обязательно к заполнению`
+    },
+    password: {
+      empty: `Обязательно к заполнению`,
+      length: `Минимальная длина пароля — 6 символов`
+    }
+  };
+
+  const validate = (fields, name) => {
+    const errors = {};
+    switch (name) {
+      case `login`:
+        if (!fields.login) {
+          errors.login = errorMessages.login.empty;
+        } else {
+          errors.login = ``;
+        }
+        break;
+      case `password`:
+        if (!fields.password) {
+          errors.password = errorMessages.password.empty;
+        } else if (fields.password.length < 6) {
+          errors.password = errorMessages.password.length;
+        } else {
+          errors.password = ``;
+        }
+        break;
+
+      default:
+        throw new Error(`Unknown field's name: ${name}`);
+    }
+
+    return {...state.form.errors, ...errors};
+  };
+
+  const updateValidationState = (state, name) => {
+    const errors = validate(state.form.fields, name);
+    state.form.errors = errors;
+  };
+
+  const loginFormData = localStorage.getItem(`loginFormData`)
+    ? JSON.parse(localStorage.getItem(`loginFormData`))
+    : {login: ``, password: ``};
+
+  const {login, password} = loginFormData;
+
+  const state = {
+    form: {
+      processState: `filling`, // sending, finished
+      fields: {
+        login,
+        password
+      },
+      valid: false,
+      errors: {}
+    }
+  };
+
+  const modal = document.querySelector(`#modal-page-header`);
+  const modalClose = modal.querySelector(`.modal__trigger`);
+
+  const form = modal.querySelector(`.modal__form`);
+  const fieldElements = {
+    login: form.querySelector(`.login-form-field input`),
+    password: form.querySelector(`.password-form-field input`)
+  };
+  const submitButton = form.querySelector(`button[type="submit"]`);
+
+  Object.entries(fieldElements).forEach(([name, element]) => {
+    element.value = state.form.fields[name];
+    element.addEventListener(`input`, (e) => {
+      state.form.fields[name] = e.target.value;
+      updateValidationState(state, name);
+    });
+    element.addEventListener(`blur`, () => {
+      state.form.valid = Object.keys(state.form.errors).every(
+          (key) => state.form.errors[key].length === 0
+      );
+      modal.classList.toggle(`modal--invalid`, !state.form.valid);
+    });
+  });
+
+  watch(state.form, `errors`, () => {
+    Object.entries(fieldElements).forEach(([name, element]) => {
+      const rootElementClassName = `${name}-form-field`;
+      const rootElement = element.closest(`.${rootElementClassName}`);
+      const feedbackElement = rootElement.querySelector(
+          `.${rootElementClassName}__feedback`
+      );
+      const errorMessage = state.form.errors[name];
+
+      if (
+        feedbackElement.querySelector(`.${rootElementClassName}__error-message`)
+      ) {
+        rootElement.classList.remove(`${rootElementClassName}--invalid`);
+        feedbackElement.innerHTML = ``;
+        modal.classList.remove(`modal--invalid`);
+      }
+
+      if (!errorMessage) {
+        return;
+      }
+      const errorMessageElement = document.createElement(`span`);
+      errorMessageElement.classList.add(
+          `${rootElementClassName}__error-message`
+      );
+      errorMessageElement.innerHTML = errorMessage;
+      feedbackElement.append(errorMessageElement);
+      rootElement.classList.add(`${rootElementClassName}--invalid`);
+    });
+  });
+
+  watch(state.form, `processState`, () => {
+    const {processState} = state.form;
+    switch (processState) {
+      case `filling`:
+        submitButton.disabled = false;
+        break;
+      case `sending`:
+        submitButton.disabled = true;
+        break;
+      case `finished`:
+        modal.classList.add(`modal--invisible`);
+        break;
+      default:
+        throw new Error(`Unknown state: ${processState}`);
+    }
+  });
+
+  watch(state.form, `valid`, () => {
+    submitButton.disabled = !state.form.valid;
+  });
+
+  form.addEventListener(`submit`, (event) => {
+    event.preventDefault();
+    const {target} = event;
+    state.form.processState = `sending`;
+    const formData = new FormData(target);
+    localStorage.setItem(
+        `loginFormData`,
+        JSON.stringify(Object.fromEntries(formData))
+    );
+    state.form.processState = `finished`;
+  });
+
+  const showPassword = ({target}) => {
+    const input = target.previousElementSibling;
+    input.setAttribute(`type`, `text`);
+  };
+
+  const hidePassword = ({target}) => {
+    const input = target.previousElementSibling;
+    input.setAttribute(`type`, `password`);
+  };
+
+  [`mousedown`, `keydown`].forEach((event) =>
+    fieldElements[`password`].nextElementSibling.addEventListener(
+        event,
+        showPassword
+    )
+  );
+
+  [`mouseup`, `keyup`].forEach((event) =>
+    fieldElements[`password`].nextElementSibling.addEventListener(
+        event,
+        hidePassword
+    )
+  );
+
+  // Modal Visibility
+  [`mousedown`, `keydown`].forEach((event) =>
+    modalClose.addEventListener(event, (e) => {
+      const {type, target} = e;
+      if (type === `keydown`) {
+        if (e.keyCode === 32 || e.keyCode === 13) {
+          target
+            .closest(`#${target.dataset.modal}`)
+            .classList.add(`modal--invisible`);
+          document.body.classList.add(`page--overlay`);
+        }
+      } else {
+        target
+          .closest(`#${target.dataset.modal}`)
+          .classList.add(`modal--invisible`);
+        document.body.classList.add(`page--overlay`);
+      }
+    })
+  );
+});
