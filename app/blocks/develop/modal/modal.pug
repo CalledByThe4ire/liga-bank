@@ -16,7 +16,7 @@ mixin modal(data)
 				+e('div').form-field--password.password-modal-form-field__
 					label(for='password-modal-form-field') Пароль
 					+e('div').inner
-						input(type='text', id='password-modal-form-field', name='password')
+						input(type='password', id='password-modal-form-field', name='password')
 						button(type='button', aria-label='Show password')
 							svg(width=22, height=12)
 								use(xlink:href='#modal__show')
