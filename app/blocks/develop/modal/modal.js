@@ -3,6 +3,15 @@ const {watch} = WatchJS;
 
 document.addEventListener(`DOMContentLoaded`, () => {
   // Modal Form Validation (Observer Pattern, MVC)
+  const modal = document.querySelector(`#modal-page-header`);
+  const modalClose = modal.querySelector(`.modal__trigger`);
+
+  const form = modal.querySelector(`.modal__form`);
+  const fieldElements = {
+    login: form.querySelector(`.login-form-field input`),
+    password: form.querySelector(`.password-form-field input`)
+  };
+  const submitButton = form.querySelector(`button[type="submit"]`);
   const errorMessages = {
     login: {
       empty: `Обязательно к заполнению`
@@ -62,16 +71,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
       errors: {}
     }
   };
-
-  const modal = document.querySelector(`#modal-page-header`);
-  const modalClose = modal.querySelector(`.modal__trigger`);
-
-  const form = modal.querySelector(`.modal__form`);
-  const fieldElements = {
-    login: form.querySelector(`.login-form-field input`),
-    password: form.querySelector(`.password-form-field input`)
-  };
-  const submitButton = form.querySelector(`button[type="submit"]`);
 
   Object.entries(fieldElements).forEach(([name, element]) => {
     element.value = state.form.fields[name];

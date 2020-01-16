@@ -1,7 +1,7 @@
 include ../logo/logo
 
 mixin modal(data)
-	+b('div').modal--page-header(id='modal-page-header')&attributes(attributes)
+	+b('div').modal--page-header.--invisible(id='modal-page-header')&attributes(attributes)
 		+e('div').content
 			+e('header').header
 				+logo({mod: 'extended', width: 150, height: 30})(class='__logo')
@@ -11,7 +11,7 @@ mixin modal(data)
 			+e('form').form.form__
 				+e('div').field--login.login-form-field__
 					label(for='login-form-field') Логин
-					input(type='text', id='login-form-field', name='login', , tabindex=2, autofocus)
+					input(type='text', id='login-form-field', name='login', , tabindex=2)
 					+e('div').feedback
 				+e('div').field--password.password-form-field__
 					label(for='password-form-field') Пароль

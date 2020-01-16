@@ -1,5 +1,15 @@
 document.addEventListener(`DOMContentLoaded`, () => {
+  const login = document.querySelector(`#page-header-login`);
+
   const clickHandler = ({target}) => {
+    const form = document.querySelector(`#${target.dataset.modal} form`);
+    const submit = form.querySelector(`[type="submit"]`);
+    if (localStorage.getItem(`loginFormData`)) {
+      submit.focus();
+    } else {
+      form.elements.login.focus();
+    }
+
     document
       .getElementById(target.dataset.modal)
       .classList.remove(`modal--invisible`);
@@ -15,7 +25,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   };
 
-  const login = document.querySelector(`#page-header-login`);
   login.addEventListener(`click`, clickHandler);
 
   document.addEventListener(`keydown`, keydownHandler);
