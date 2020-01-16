@@ -1,5 +1,5 @@
 .login {
-  $root: &;
+  $login: &;
 
   display: flex;
   flex-flow: row nowrap;
@@ -23,7 +23,7 @@
     color: $link-hover-color;
     text-decoration: $link-hover-decoration;
 
-    #{$root}__icon {
+    #{$login}__icon {
       fill: $primary;
     }
   }
@@ -50,8 +50,6 @@
 
   &__text {
     display: block;
-    transition-duration: inherit;
-    transition-property: inherit;
 
     @include media-breakpoint-down(md) {
       display: none;
