@@ -32,7 +32,7 @@
     &#{$modal}--invalid {
       border-color: $danger;
 
-      & #{$modal}__form {
+      & form {
         & button[type="submit"],
         & button[type="submit"]:hover,
         & button[type="submit"]:focus {
@@ -105,8 +105,7 @@
       }
     }
 
-    form,
-    .form {
+    form {
       position: relative;
 
       display: flex;
@@ -160,7 +159,7 @@
         }
       }
 
-      &__field {
+      & #{$modal}__form-field {
         &:last-of-type {
           margin-bottom: 25px;
 
@@ -211,8 +210,8 @@
     }
   }
 
-  .login-form-field,
-  .password-form-field {
+  .login-modal-form-field,
+  .password-modal-form-field {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
@@ -251,13 +250,13 @@
     }
   }
 
-  .login-form-field {
+  .login-modal-form-field {
     & input {
       margin-bottom: 10px;
     }
   }
 
-  .password-form-field {
+  .password-modal-form-field {
     &__feedback {
       width: 75%;
     }

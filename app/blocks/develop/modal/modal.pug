@@ -5,23 +5,23 @@ mixin modal(data)
 		+e('div').content
 			+e('header').header
 				+logo({mod: 'extended', width: 150, height: 30})(class='__logo')
-				+e('a').trigger(aria-label='Close modal', data-modal='modal-page-header', tabindex=1)
+				+e('a').trigger(aria-label='Close modal', data-modal='modal-page-header')
 					+e('svg').icon(width=16, height=16)
 						use(xlink:href='#modal__close')
-			+e('form').form.form__
-				+e('div').field--login.login-form-field__
-					label(for='login-form-field') Логин
-					input(type='text', id='login-form-field', name='login', , tabindex=2)
+			+e('form')
+				+e('div').form-field--login.login-modal-form-field__
+					label(for='login-modal-form-field') Логин
+					input(type='text', id='login-modal-form-field', name='login')
 					+e('div').feedback
-				+e('div').field--password.password-form-field__
-					label(for='password-form-field') Пароль
+				+e('div').form-field--password.password-modal-form-field__
+					label(for='password-modal-form-field') Пароль
 					+e('div').inner
-						input(type='text', id='password-form-field', name='password', tabindex=3 )
-						button(type='button', aria-label='Show password', tabindex=4)
+						input(type='text', id='password-modal-form-field', name='password')
+						button(type='button', aria-label='Show password')
 							svg(width=22, height=12)
 								use(xlink:href='#modal__show')
 					+e('div').feedback
-					a(href='#', tabindex=5) Забыли&nbsp;пароль?
-				button(type='submit', tabindex=6) Войти
+					a(href='#') Забыли&nbsp;пароль?
+				button(type='submit') Войти
 
 
