@@ -1,5 +1,5 @@
 .main-nav-list {
-  $root: &;
+  $main-nav-list: &;
 
   @include make-container();
   @include make-row();
@@ -28,13 +28,10 @@
     transition-property: opacity;
 
     &--hidden {
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
       opacity: 0;
     }
 
-    #{$root}__item {
+    #{$main-nav-list}__item {
       margin: 0;
       padding: 15px;
     }
