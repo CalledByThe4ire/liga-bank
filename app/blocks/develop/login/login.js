@@ -1,31 +1,49 @@
 document.addEventListener(`DOMContentLoaded`, () => {
-  const login = document.querySelector(`#page-header-login`);
+  const pageHeaderLogin = document.querySelector(`#page-header-login`);
 
   const clickHandler = ({target}) => {
     const form = document.querySelector(`#${target.dataset.modal} form`);
-    const submit = form.querySelector(`[type="submit"]`);
-    if (localStorage.getItem(`loginFormData`)) {
-      submit.focus();
-    } else {
-      form.elements.login.focus();
+    let formSubmit = null;
+    let formLogin = null;
+
+    if (form) {
+      formSubmit = form.querySelector(`[type="submit"]`);
+      formLogin = form.elements.login;
     }
 
-    document
-      .getElementById(target.dataset.modal)
-      .classList.remove(`modal--invisible`);
+    if (localStorage.getItem(`loginFormData`)) {
+      if (formSubmit) {
+        formSubmit.focus();
+      }
+    } else {
+      if (formLogin) {
+        formLogin.focus();
+      }
+    }
+
+    const modal = document.getElementById(target.dataset.modal);
+
+    if (modal) {
+      modal.classList.remove(`modal--invisible`);
+    }
     document.body.classList.add(`page--overlay`);
   };
 
   const keydownHandler = ({keyCode}) => {
     if (keyCode === 27) {
-      document
-        .querySelector(`#modal-page-header`)
-        .classList.add(`modal--invisible`);
+      const modal = document.querySelector(`#modal-page-header`);
+
+      if (modal) {
+        modal.classList.add(`modal--invisible`);
+      }
+
       document.body.classList.remove(`page--overlay`);
     }
   };
 
-  login.addEventListener(`click`, clickHandler);
+  if (pageHeaderLogin) {
+    pageHeaderLogin.addEventListener(`click`, clickHandler);
+  }
 
   document.addEventListener(`keydown`, keydownHandler);
   document.addEventListener(`click`, ({target}) => {
