@@ -4,3 +4,9 @@
 
 $min-width: map-get($grid-breakpoints, sm);
 $max-width: 1366px;
+
+// Offsets
+
+$offset--mobile: 15px;
+$offset--tablet: 45px;
+$offset--desktop: 98px;
