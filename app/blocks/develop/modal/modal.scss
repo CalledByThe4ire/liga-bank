@@ -29,6 +29,10 @@
       width: 678px;
     }
 
+    @include media-breakpoint-down(sm) {
+      width: calc(100% - 30px);
+    }
+
     &#{$modal}--invalid {
       border-color: $danger;
 
