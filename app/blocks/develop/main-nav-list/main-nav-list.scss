@@ -29,6 +29,7 @@
 
     &--hidden {
       opacity: 0;
+      transition-duration: initial;
     }
 
     #{$main-nav-list}__item {
