@@ -10,3 +10,6 @@ $max-width: 1366px;
 $offset--mobile: 15px;
 $offset--tablet: 45px;
 $offset--desktop: 98px;
+
+// Media
+$retina: only screen and ( min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx);
