@@ -4,9 +4,9 @@ include ../login/login
 
 mixin main-nav(data)
 	+b('nav').main-nav&attributes(attributes)
-		+e('button').trigger--close-menu(type='button', aria-label='Close menu')
+		+e('button').trigger--open-menu(type='button', aria-label='Open menu')
 			svg(width=16, height=10)
-				use(xlink:href='#main-nav__close')
+				use(xlink:href='#main-nav__menu')
 		+logo(class='__logo')
 		+main-nav-list(data)(class='__list')
 		+login(class='__login')

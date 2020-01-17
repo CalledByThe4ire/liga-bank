@@ -12,7 +12,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
         selector
           .querySelector(`use`)
           .setAttribute(`xlink:href`, `#main-nav__close`);
-        nav.classList.remove(`main-nav-list--hidden`);
+        if (nav) {
+          nav.classList.remove(`main-nav-list--hidden`);
+        }
         break;
       case `open`:
         selector.classList.remove(`main-nav__trigger--close-menu`);
@@ -22,7 +24,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
         selector
           .querySelector(`use`)
           .setAttribute(`xlink:href`, `#main-nav__menu`);
-        nav.classList.add(`main-nav-list--hidden`);
+        if (nav) {
+          nav.classList.add(`main-nav-list--hidden`);
+        }
         break;
       default:
         throw new Error(`Unknown state: ${state}`);
@@ -39,5 +43,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   };
 
-  trigger.addEventListener(`click`, clickHandler);
+  if (trigger) {
+    trigger.addEventListener(`click`, clickHandler);
+  }
 });
