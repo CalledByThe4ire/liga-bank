@@ -1,6 +1,7 @@
 .login {
   $login: &;
 
+  z-index: 5;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
