@@ -1,13 +1,16 @@
 .page {
   $page: &;
 
-  display: flex;
-  flex-flow: row wrap;
-  overflow: hidden;
+  @include make-container();
+  display: block;
+  height: 100%;
+
   color: $body-color;
   font-weight: 400;
   font-family: $font-family-base;
+
   background-color: transparent;
+  overflow: hidden;
 
   &::before {
     content: "";
@@ -23,11 +26,5 @@
 
   &--overlay::before {
     display: block;
-  }
-
-  &__fluid-container {
-    @include make-container();
-    display: block;
-    height: 100%;
   }
 }

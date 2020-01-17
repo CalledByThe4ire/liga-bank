@@ -1,9 +1,8 @@
 .page-header {
+  @include make-container();
   display: block;
 
   &__fluid-container {
-    @include make-container();
-    display: block;
     background-color: $body-bg;
   }
 
