@@ -9,7 +9,7 @@
 
   &__container {
     @include margin-x(auto);
-    @include padding-x(98px);
+    @include padding-x($offset--desktop);
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -18,12 +18,12 @@
     min-height: 91px;
 
     @include media-breakpoint-down(md) {
-      @include padding-x(45px);
+      @include padding-x($offset--tablet);
       min-height: 69px;
     }
 
     @include media-breakpoint-down(sm) {
-      @include padding-x(15px);
+      @include padding-x($offset--mobile);
       min-height: 48px;
     }
   }
