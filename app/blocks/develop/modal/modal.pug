@@ -1,7 +1,7 @@
 include ../logo/logo
 
 mixin modal(data)
-	+b('div').modal--page-header.--invisible(id='modal-page-header')&attributes(attributes)
+	+b('div').modal.--invisible.--page-header(id='modal-page-header')&attributes(attributes)
 		+e('div').content
 			+e('header').header
 				+logo({mod: 'extended', width: 150, height: 30})(class='__logo')
