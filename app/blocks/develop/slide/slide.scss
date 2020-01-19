@@ -11,6 +11,14 @@
     flex-flow: column nowrap;
     align-items: flex-start;
 
+    > * {
+      max-width: 50%;
+
+      @include media-breakpoint-down(sm) {
+        max-width: 75%;
+      }
+    }
+
     @include padding-x(170px);
     @include padding-y(100px);
 
@@ -70,7 +78,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 235px;
 
     @include padding-x(36px);
     @include padding-y(16px);
@@ -88,8 +95,6 @@
     transition-property: color, background-color;
 
     @include media-breakpoint-down(md) {
-      min-width: 205px;
-
       @include padding-x(32px);
       @include padding-y(15px);
 
@@ -97,8 +102,10 @@
     }
 
     @include media-breakpoint-down(sm) {
+      min-width: 160px;
+
+      @include padding-x(14px);
       @include padding-y(14px);
-      min-width: 190px;
       font-size: 14px;
     }
   }

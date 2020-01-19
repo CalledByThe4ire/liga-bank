@@ -1,8 +1,9 @@
 include ../slide/slide
 
 mixin slider(data)
-	+b('ul').slider&attributes(attributes)
+	+b('ul').slider(id='slider')&attributes(attributes)
 		div.swiper-container
 			div.swiper-wrapper
 				each item in data
-					+slide(item)(class='__slide')
+					+slide(item)(class='__slide swiper-slide')
+			div.swiper-pagination

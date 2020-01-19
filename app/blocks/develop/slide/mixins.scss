@@ -1,13 +1,13 @@
 @mixin bg-image($number) {
-  background: url("img/sprite/bg-image#{$number}--desktop.png") no-repeat center;
+  background: url("img/sprite/bg-image#{$number}--desktop.png") no-repeat center/cover;
 
   @media #{$retina} {
-    background: url("img/sprite/bg-image3--desktop@2x.png") no-repeat
+    background: url("img/sprite/bg-image#{$number}--desktop@2x.png") no-repeat
       center/cover;
   }
 
   @include media-breakpoint-down(md) {
-    background: url("img/sprite/bg-image#{$number}--tablet.png") no-repeat center;
+    background: url("img/sprite/bg-image#{$number}--tablet.png") no-repeat center/cover;
 
     @media #{$retina} {
       background: url("img/sprite/bg-image#{$number}--tablet@2x.png") no-repeat
@@ -17,11 +17,11 @@
 
   @include media-breakpoint-down(sm) {
     background: url("img/sprite/bg-image#{$number}--mobile.png") no-repeat right
-      center;
+      center/auto;
 
     @media #{$retina} {
       background: url("img/sprite/bg-image#{$number}--mobile@2x.png") no-repeat
-        center/auto 100%;
+        right center/auto 100%;
     }
   }
 }

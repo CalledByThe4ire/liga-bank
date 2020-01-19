@@ -1,6 +1,35 @@
 .slider {
-  @include list-unstyled;
   display: block;
   margin: 0;
   padding: 0;
+
+  .swiper {
+    &-container-horizontal > .swiper-pagination-bullets,
+    &-pagination-custom,
+    &-pagination-fraction {
+      bottom: 37px;
+
+      @include media-breakpoint-down(md) {
+        bottom: 12px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        bottom: 7px;
+      }
+    }
+
+    &-pagination-bullet {
+      background-color: $body-color;
+      opacity: 1;
+
+      @include media-breakpoint-down(sm) {
+        width: 6px;
+        height: 6px;
+      }
+
+      &-active {
+        background-color: $body-bg;
+      }
+    }
+  }
 }
