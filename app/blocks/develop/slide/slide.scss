@@ -5,7 +5,7 @@
 
   @include make-container();
   display: block;
-  min-height: inherit;
+  height: initial;
 
   &__content {
     display: flex;
@@ -108,19 +108,16 @@
 
     min-width: $min-width;
     max-width: $max-width;
-    min-height: 400px;
 
     @include margin-x(auto);
     @include padding-x($offset--desktop);
 
     @include media-breakpoint-down(md) {
       @include padding-x($offset--tablet);
-      min-height: 300px;
     }
 
     @include media-breakpoint-down(sm) {
       @include padding-x(initial);
-      min-height: 226px;
     }
   }
 
