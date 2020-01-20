@@ -1,6 +1,8 @@
 .main-nav-list {
   $main-nav-list: &;
 
+  z-index: 5;
+
   @include make-container();
   @include make-row();
   @include list-unstyled;
