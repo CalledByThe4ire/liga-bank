@@ -30,6 +30,7 @@
     transition-property: opacity;
 
     &--hidden {
+      display: none;
       opacity: 0;
       transition-duration: initial;
     }
@@ -67,10 +68,6 @@
 
     :focus {
       outline: none;
-    }
-
-    :active {
-      font-weight: 700;
     }
   }
 
