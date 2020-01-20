@@ -2,13 +2,14 @@
 
 document.addEventListener(`DOMContentLoaded`, () => {
   const mainSlider = new Swiper(`.about`, {
+    autoHeight: true,
     loop: true,
     speed: 500,
     spaceBetween: 10,
     noSwiping: false,
-    // autoplay: {
-    //   delay: 3000
-    // },
+    autoplay: {
+      delay: 3000
+    },
     pagination: {
       el: `.swiper-pagination`,
       type: `bullets`,
@@ -21,10 +22,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
           el: `.swiper-pagination`,
           type: `bullets`,
           clickable: true
+        },
+        autoplay: {
+          delay: 4000
         }
-        // autoplay: {
-        //   delay: 4000
-        // }
       }
     }
   });
