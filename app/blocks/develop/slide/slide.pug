@@ -1,10 +1,9 @@
 mixin slide(data)
 	+b('li').slide&attributes(attributes)(class=`--${data.modifier}`)
 		- const { slogan, caption } = data;
-		+e('div').fluid-container
-			+e('div').container
-				+e('div').content
-					+e('div').title Лига Банк
-					+e('div').slogan !{slogan}
-					if caption !== ''
-						+e('button').button(type='button')= caption
+		+e('div').container
+			+e('div').content
+				+e('div').title Лига Банк
+				+e('div').slogan !{slogan}
+				if caption !== ''
+					+e('button').button(type='button')= caption

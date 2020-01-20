@@ -3,6 +3,7 @@
 .slide {
   $slide: &;
 
+  @include make-container();
   display: block;
   min-height: inherit;
 
@@ -10,14 +11,6 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: flex-start;
-
-    > * {
-      max-width: 50%;
-
-      @include media-breakpoint-down(sm) {
-        max-width: 75%;
-      }
-    }
 
     @include padding-x(170px);
     @include padding-y(100px);
@@ -110,10 +103,6 @@
     }
   }
 
-  &__fluid-container {
-    @include make-container();
-  }
-
   &__container {
     position: relative;
 
@@ -136,12 +125,10 @@
   }
 
   &--first {
-    & #{$slide}__fluid-container {
-      background: linear-gradient(to bottom, $primary 33.33%, #2027b3 100%);
+    background: linear-gradient(to bottom, $primary 33.33%, #2027b3 100%);
 
-      @include media-breakpoint-down(sm) {
-        background: $primary;
-      }
+    @include media-breakpoint-down(sm) {
+      background: $primary;
     }
 
     & #{$slide}__container {
@@ -176,12 +163,10 @@
   }
 
   &--second {
-    & #{$slide}__fluid-container {
-      background-image: linear-gradient(to right, #dde2ec 25%, #f4fbff 25%);
+    background-image: linear-gradient(to right, #dde2ec 25%, #f4fbff 25%);
 
-      @include media-breakpoint-down(sm) {
-        background-image: linear-gradient(to right, #dde2ec 75%, #f4fbff 75%);
-      }
+    @include media-breakpoint-down(sm) {
+      background-image: linear-gradient(to right, #dde2ec 75%, #f4fbff 75%);
     }
 
     & #{$slide}__container {
@@ -190,9 +175,7 @@
   }
 
   &--third {
-    & #{$slide}__fluid-container {
-      background-color: #e6f1fe;
-    }
+    background-color: #e6f1fe;
 
     & #{$slide}__container {
       @include bg-image(3);
