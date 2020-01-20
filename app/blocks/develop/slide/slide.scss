@@ -17,27 +17,37 @@
   &__slogan {
     margin: 0;
     padding: 0;
+  }
+
+  &__title {
+    margin-top: 100px;
+    margin-bottom: 8px;
 
     font-size: 54px;
     font-weight: 700;
 
     @include media-breakpoint-down(md) {
+      margin-top: 63px;
       font-size: 46px;
     }
 
     @include media-breakpoint-down(sm) {
+      margin-top: 36px;
       font-size: 38px;
     }
   }
 
   &__slogan {
     font-size: 22px;
+    margin-bottom: 35px;
 
     @include media-breakpoint-down(md) {
+      margin-bottom: 30px;
       font-size: 18px;
     }
 
     @include media-breakpoint-down(sm) {
+      margin-bottom: 27px;
       font-size: 16px;
     }
   }
@@ -100,6 +110,18 @@
 
     @include media-breakpoint-down(sm) {
       @include padding-x(initial);
+    }
+
+    > * {
+      margin-left: 170px;
+
+      @include media-breakpoint-down(md) {
+        margin-left: 40px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        margin-left: 15px;
+      }
     }
   }
 
