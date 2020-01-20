@@ -1,8 +1,8 @@
 /* global Swiper */
+/* eslint-disable no-unused-vars */
 
 document.addEventListener(`DOMContentLoaded`, () => {
   const mainSlider = new Swiper(`.about`, {
-    autoHeight: true,
     loop: true,
     speed: 500,
     spaceBetween: 10,
