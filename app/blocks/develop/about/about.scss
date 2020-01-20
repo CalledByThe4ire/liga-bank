@@ -1,0 +1,8 @@
+.about {
+  position: relative;
+  display: block;
+
+  &__title {
+    @include visually-hidden();
+  }
+}
