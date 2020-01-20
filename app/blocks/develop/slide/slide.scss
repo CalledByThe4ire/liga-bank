@@ -139,7 +139,7 @@
 
     & #{$slide}__container {
       background: url("img/sprite/bg-image1--desktop.png") no-repeat
-        center/cover;
+        center;
 
       @media #{$retina} {
         background: url("img/sprite/bg-image1--desktop@2x.png") no-repeat
@@ -148,7 +148,7 @@
 
       @include media-breakpoint-down(md) {
         background: url("img/sprite/bg-image1--tablet.png") no-repeat
-          center/cover;
+          center;
 
         @media #{$retina} {
           background: url("img/sprite/bg-image1--tablet@2x.png") no-repeat
@@ -203,7 +203,7 @@
 
     & #{$slide}__container {
       background: url("img/sprite/bg-image2--desktop.png") no-repeat
-        center/cover;
+        center;
 
       @media #{$retina} {
         background: url("img/sprite/bg-image2--desktop@2x.png") no-repeat
@@ -212,7 +212,7 @@
 
       @include media-breakpoint-down(md) {
         background: url("img/sprite/bg-image2--tablet.png") no-repeat
-          center/cover;
+          center;
 
         @media #{$retina} {
           background: url("img/sprite/bg-image2--tablet@2x.png") no-repeat
@@ -237,7 +237,7 @@
 
     & #{$slide}__container {
       background: url("img/sprite/bg-image3--desktop.png") no-repeat
-        center/cover;
+        center;
 
       @media #{$retina} {
         background: url("img/sprite/bg-image3--desktop@2x.png") no-repeat
@@ -246,7 +246,7 @@
 
       @include media-breakpoint-down(md) {
         background: url("img/sprite/bg-image3--tablet.png") no-repeat
-          center/cover;
+          center;
 
         @media #{$retina} {
           background: url("img/sprite/bg-image3--tablet@2x.png") no-repeat
