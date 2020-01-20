@@ -11,6 +11,13 @@ document.addEventListener(`DOMContentLoaded`, () => {
       formLogin = form.elements.login;
     }
 
+    const modal = document.getElementById(target.dataset.modal);
+
+    if (modal) {
+      modal.classList.remove(`modal--invisible`);
+    }
+    document.body.classList.add(`page--overlay`);
+
     if (localStorage.getItem(`loginFormData`)) {
       if (formSubmit) {
         formSubmit.focus();
@@ -20,13 +27,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
         formLogin.focus();
       }
     }
-
-    const modal = document.getElementById(target.dataset.modal);
-
-    if (modal) {
-      modal.classList.remove(`modal--invisible`);
-    }
-    document.body.classList.add(`page--overlay`);
   };
 
   const keydownHandler = ({keyCode}) => {
