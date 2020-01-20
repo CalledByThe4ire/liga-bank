@@ -125,7 +125,7 @@
 
       @include media-breakpoint-down(sm) {
         margin-left: 15px;
-        max-width: 75%;
+        max-width: 60%;
       }
     }
   }
@@ -195,7 +195,8 @@
   }
 
   &--second {
-    background-image: linear-gradient(to right, #dde2ec 25%, #f4fbff 25%);
+    background-color: #dde2ec;
+    background-image: linear-gradient(to right, #dde2ec 50%, #f4fbff 50%);
 
     @include media-breakpoint-down(sm) {
       background-image: linear-gradient(to right, #dde2ec 75%, #f4fbff 75%);
