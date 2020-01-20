@@ -5,41 +5,23 @@
 
   @include make-container();
   display: block;
-  height: initial;
-
-  &__content {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: flex-start;
-
-    @include padding-x(170px);
-    @include padding-y(100px);
-
-    @include media-breakpoint-down(md) {
-      @include padding-x(40px);
-      @include padding-y(64px);
-    }
-
-    @include media-breakpoint-down(sm) {
-      @include padding-x($offset--mobile);
-      @include padding-y(38px);
-    }
-  }
+  min-height: inherit;
 
   &__title,
   &__slogan,
-  &__button {
+  &__link {
     line-height: 1.2;
   }
 
-  &__title {
-    margin-bottom: 8px;
+  &__title,
+  &__slogan {
+    margin: 0;
+    padding: 0;
 
     font-size: 54px;
     font-weight: 700;
 
     @include media-breakpoint-down(md) {
-      margin-bottom: 6px;
       font-size: 46px;
     }
 
@@ -49,25 +31,18 @@
   }
 
   &__slogan {
-    margin-bottom: 34px;
     font-size: 22px;
 
     @include media-breakpoint-down(md) {
-      margin-bottom: 30px;
       font-size: 18px;
     }
 
     @include media-breakpoint-down(sm) {
-      margin-bottom: 28px;
       font-size: 16px;
-
-      & span {
-        display: block;
-      }
     }
   }
 
-  &__button {
+  &__link {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,14 +53,17 @@
     font-size: 18px;
     font-weight: 500;
     white-space: nowrap;
+    text-decoration: $link-decoration;
 
-    border: 0;
     border-radius: 4px;
-    outline: 0;
 
     cursor: pointer;
     transition-duration: 0.3s;
     transition-property: color, background-color;
+
+    &:hover {
+      text-decoration: $link-hover-decoration;
+    }
 
     @include media-breakpoint-down(md) {
       @include padding-x(32px);
@@ -106,8 +84,12 @@
   &__container {
     position: relative;
 
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
     min-width: $min-width;
     max-width: $max-width;
+    min-height: inherit;
 
     @include margin-x(auto);
     @include padding-x($offset--desktop);
@@ -137,7 +119,7 @@
       color: #e0e1ea;
     }
 
-    & #{$slide}__button {
+    & #{$slide}__link {
       color: $body-color;
       background-color: $body-bg;
 
@@ -182,7 +164,7 @@
       color: #2b3c4f;
     }
 
-    & #{$slide}__button {
+    & #{$slide}__link {
       color: $body-bg;
       background-color: $primary;
 
