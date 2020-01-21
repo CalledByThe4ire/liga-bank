@@ -27,6 +27,7 @@
         opacity: 1;
 
         &-active {
+          border: 1px solid $body-color;
           background-color: $body-bg;
         }
 
