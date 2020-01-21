@@ -160,9 +160,17 @@ document.addEventListener(`DOMContentLoaded`, () => {
       state.form.processState = `finished`;
     });
 
-    const showPassword = ({target}) => {
+    const showPassword = (event) => {
+      const {target, type} = event;
       const input = target.previousElementSibling;
-      input.setAttribute(`type`, `text`);
+      if (type === `mousedown`) {
+        input.setAttribute(`type`, `text`);
+      } else if (
+        (type === `keydown` && event.keyCode === 13) ||
+        (type === `keydown` && event.keyCode === 32)
+      ) {
+        input.setAttribute(`type`, `text`);
+      }
     };
 
     const hidePassword = ({target}) => {
@@ -170,12 +178,12 @@ document.addEventListener(`DOMContentLoaded`, () => {
       input.setAttribute(`type`, `password`);
     };
 
-    [`mousedown`, `keydown`].forEach((event) =>
+    [`mousedown`, `keydown`].forEach((event) => {
       fieldElements[`password`].nextElementSibling.addEventListener(
           event,
           showPassword
-      )
-    );
+      );
+    });
 
     [`mouseup`, `keyup`].forEach((event) =>
       fieldElements[`password`].nextElementSibling.addEventListener(
