@@ -46,13 +46,19 @@ document.addEventListener(`DOMContentLoaded`, () => {
       default:
         throw new Error(`Unknown field's name: ${name}`);
     }
-
+    // console.log({...state.form.errors, ...errors});
     return {...state.form.errors, ...errors};
   };
 
-  const updateValidationState = (state, name) => {
+  const updateStateErrors = (state, name) => {
     const errors = validate(state.form.fields, name);
     state.form.errors = errors;
+  };
+
+  const updateValidationState = (errors) => {
+    state.form.valid = Object.keys(errors).every((key) => {
+      return errors[key].length === 0;
+    });
   };
 
   const loginFormData = localStorage.getItem(`loginFormData`)
@@ -69,7 +75,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
         password
       },
       valid: false,
-      errors: {}
+      errors: {
+        login: ``,
+        password: ``
+      }
     }
   };
 
@@ -79,13 +88,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
         element.value = state.form.fields[name];
         element.addEventListener(`input`, (e) => {
           state.form.fields[name] = e.target.value;
-          updateValidationState(state, name);
-        });
-        element.addEventListener(`blur`, () => {
-          state.form.valid = Object.keys(state.form.errors).every(
-              (key) => state.form.errors[key].length === 0
-          );
-          modal.classList.toggle(`modal--invalid`, !state.form.valid);
+          updateStateErrors(state, name);
+          updateValidationState(state.form.errors);
         });
       });
 
@@ -107,7 +111,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
             ) {
               rootElement.classList.remove(`${rootElementClassName}--invalid`);
               feedbackElement.innerHTML = ``;
-              modal.classList.remove(`modal--invalid`);
             }
 
             if (!errorMessage) {
@@ -129,9 +132,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
       watch(state.form, `processState`, () => {
         const {processState} = state.form;
         switch (processState) {
-          case `filling`:
-            submitButton.disabled = false;
-            break;
           case `sending`:
             submitButton.disabled = true;
             break;
