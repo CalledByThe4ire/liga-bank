@@ -1,3 +1,220 @@
 .services {
+  $services: &;
+
   display: block;
+
+  &__title {
+    @include visually-hidden();
+  }
+
+  &__list {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0;
+    padding: 0;
+
+    @include list-unstyled();
+    @include row-cols(4);
+  }
+
+  &__list-item {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition-duration: 0.3s;
+    transition-property: all;
+
+    &:hover,
+    &:focus {
+      & #{$services}__link {
+        color: $primary;
+        text-decoration: $link-hover-decoration;
+      }
+
+      & #{$services}__icon {
+        fill: $body-color;
+      }
+    }
+
+    &--active {
+      background-color: $body-bg;
+    }
+  }
+
+  &__icon {
+    order: -1;
+    margin-right: 10px;
+    fill: $primary;
+  }
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 500;
+    color: $link-color;
+    text-decoration: $link-decoration;
+    outline: none;
+  }
+
+  &__tab {
+    display: none;
+  }
+}
+
+.tab-service {
+  $tab-service: &;
+
+  @include row-cols(2);
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  @include padding-y(50px);
+  padding-left: 70px;
+  padding-right: 50px;
+
+  background-color: $body-bg;
+
+  > picture {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+
+  &__title {
+    max-width: 70%;
+    margin: 0;
+    margin-bottom: 25px;
+    padding: 0;
+
+    font-size: 22px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  &__list {
+    @include list-unstyled();
+    margin: 0;
+    margin-bottom: 35px;
+    padding: 0;
+    max-width: 75%;
+
+    font-size: 18px;
+    line-height: 1.3;
+    color: $body-color;
+  }
+
+  &__item {
+    position: relative;
+    margin-bottom: 15px;
+    padding-left: 20px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6.5px; // parent' line-height / 2
+
+      display: block;
+      width: 15px;
+      height: 10px;
+      background: url("@services/check-mark.svg") no-repeat left center;
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 200px;
+    padding: 16px;
+
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    color: $body-bg;
+    white-space: nowrap;
+    text-decoration: $link-decoration;
+    outline: none;
+    border-radius: 4px;
+    background-color: $primary;
+
+    cursor: pointer;
+    transition-duration: 0.3s;
+    transition-property: color, background-color;
+
+    &:hover {
+      text-decoration: $link-hover-decoration;
+    }
+
+    &:hover,
+    &:focus {
+      color: $body-bg;
+      background-color: $body-color;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    padding: 0;
+    max-width: 70%;
+
+    font-size: 18px;
+    line-height: 1.4;
+
+    & a {
+      font-weight: 700;
+      color: $body-color;
+
+      transition-duration: 0.3s;
+      transition-property: color;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  &__image {
+    display: block;
+    width: 440px;
+    height: 290px;
+  }
+
+  &--active {
+    display: flex;
+  }
+
+  &--investments {
+    & #{$tab-service}__image {
+      object-position: 0 10px;
+    }
+  }
+
+  &--credit {
+    & #{$tab-service}__list {
+      margin-bottom: 30px;
+    }
+  }
+
+  &--investments,
+  &--online {
+    & #{$tab-service}__title {
+      max-width: 80%;
+    }
+  }
 }

@@ -1,3 +1,8 @@
 .main-content {
   display: block;
+
+  &__services {
+    @include padding-x($offset--desktop);
+    @include padding-y(60px);
+  }
 }
