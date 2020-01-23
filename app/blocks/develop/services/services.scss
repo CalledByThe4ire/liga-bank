@@ -3,18 +3,27 @@
 
   display: block;
 
+  &__nav {
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }
+
   &__title {
     @include visually-hidden();
   }
 
   &__list {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     margin: 0;
     padding: 0;
 
     @include list-unstyled();
-    @include row-cols(4);
+
+    > * {
+      flex: 0 0 25%;
+    }
   }
 
   &__list-item {
@@ -68,6 +77,26 @@
 
   &__tab {
     display: none;
+
+    @include media-breakpoint-down(md) {
+      display: block;
+    }
+  }
+
+  .swiper-slide {
+    flex-shrink: initial;
+
+    @include media-breakpoint-down(md) {
+      flex-shrink: 0;
+    }
+  }
+
+  .swiper-pagination {
+    display: none;
+
+    @include media-breakpoint-down(md) {
+      display: block;
+    }
   }
 }
 
