@@ -54,10 +54,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    @include padding-x(36px);
-    @include padding-y(16px);
+    min-width: 200px;
     margin-bottom: 100px;
+    padding: 16px;
 
     font-size: 18px;
     font-weight: 500;
@@ -74,19 +73,17 @@
     }
 
     @include media-breakpoint-down(md) {
-      @include padding-x(32px);
-      @include padding-y(15px);
+      min-width: 175px;
       margin-bottom: 63px;
+      padding: 15px;
 
       font-size: 16px;
     }
 
     @include media-breakpoint-down(sm) {
       min-width: 160px;
-
-      @include padding-x(14px);
-      @include padding-y(14px);
       margin-bottom: 36px;
+      padding: 14px;
 
       font-size: 14px;
     }
@@ -273,7 +270,7 @@
       }
 
       @include media-breakpoint-up(lg) {
-        min-width: 240px;
+        min-width: 215px;
       }
     }
   }
