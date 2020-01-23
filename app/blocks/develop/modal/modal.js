@@ -46,7 +46,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
       default:
         throw new Error(`Unknown field's name: ${name}`);
     }
-    // console.log({...state.form.errors, ...errors});
     return {...state.form.errors, ...errors};
   };
 
