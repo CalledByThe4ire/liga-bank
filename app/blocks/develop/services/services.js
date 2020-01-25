@@ -7,7 +7,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
   const sections = document.querySelectorAll(`#services .tab-service`);
 
   const eventHandler = (event, activeElement) => {
-    const { type, keyCode } = event;
+    const {type, keyCode} = event;
 
     if (type === `click`) {
       event.preventDefault();
@@ -19,24 +19,24 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   };
 
-  [`click`, `keyup`].forEach(event => {
-    links.forEach(link => {
-      link.addEventListener(event, e => eventHandler(e, link));
+  [`click`, `keyup`].forEach((event) => {
+    links.forEach((link) => {
+      link.addEventListener(event, (e) => eventHandler(e, link));
     });
   });
 
   const removeActiveTab = () => {
-    links.forEach(link => {
+    links.forEach((link) => {
       link
         .closest(`.services__list-item`)
         .classList.remove(`services__list-item--active`);
     });
-    sections.forEach(section => {
+    sections.forEach((section) => {
       section.classList.remove(`tab-service--active`);
     });
   };
 
-  const addActiveTab = link => {
+  const addActiveTab = (link) => {
     link
       .closest(`.services__list-item`)
       .classList.add(`services__list-item--active`);
@@ -46,7 +46,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
   };
 
   // slider
-  const breakpoint = window.matchMedia(`only screen and (max-width:1024px)`);
+  const breakpoint = window.matchMedia(`only screen and (max-width: 1023px)`);
   let servicesSlider = null;
 
   const enableSlider = () => {
@@ -77,7 +77,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
       if (servicesSlider) {
         servicesSlider.destroy();
         Array.from(sections).forEach((section, index) =>
-          index === 0 ? section.classList.add(`tab-service--active`) : section
+          index === 0
+            ? section.classList.add(`tab-service--active`)
+            : section.classList.remove(`tab-service--active`)
         );
       }
     }

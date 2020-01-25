@@ -2,7 +2,18 @@
   display: block;
 
   &__services {
-    @include padding-x($offset--desktop);
+    @include make-container($offset--desktop * 2);
     @include padding-y(60px);
+    min-width: $min-width;
+    max-width: $max-width;
+
+    @include media-breakpoint-down(md) {
+      @include make-container($offset--tablet * 2);
+      @include padding-y(55px);
+    }
+
+    @include media-breakpoint-down(sm) {
+      @include make-container($offset--mobile * 2);
+    }
   }
 }

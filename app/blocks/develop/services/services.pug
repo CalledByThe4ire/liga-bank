@@ -21,7 +21,7 @@ mixin services(data)
 									+e('svg').icon(width=20, height=34)
 										use(xlink:href='#services__online')
 
-		div.swiper-wrapper
+		+e('div').wrapper(class='swiper-wrapper')
 			each tab, index in tabs
 				- const tabModifier = data[index]['tab-modifier']
 					+e('section').tab.tab-service__(class=`--${tabModifier}${index === 0 ? ' --active' : ''} swiper-slide`, id=`tab-${tabModifier}`)

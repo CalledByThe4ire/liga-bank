@@ -1,7 +1,10 @@
 .services {
   $services: &;
+  position: relative;
 
-  display: block;
+  @include media-breakpoint-down(md) {
+    background-color: $body-bg;
+  }
 
   &__nav {
     @include media-breakpoint-down(md) {
@@ -16,14 +19,12 @@
   &__list {
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-around;
     margin: 0;
     padding: 0;
 
     @include list-unstyled();
-
-    > * {
-      flex: 0 0 25%;
-    }
+    @include row-cols(4);
   }
 
   &__list-item {
@@ -31,6 +32,7 @@
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+    flex-shrink: 1;
 
     cursor: pointer;
     transition-duration: 0.3s;
@@ -79,56 +81,137 @@
     display: none;
 
     @include media-breakpoint-down(md) {
-      display: block;
+      display: flex;
     }
   }
 
-  .swiper-slide {
-    flex-shrink: initial;
+  & .swiper {
+    &-slide {
+      flex-shrink: initial;
 
-    @include media-breakpoint-down(md) {
-      flex-shrink: 0;
+      @include media-breakpoint-down(md) {
+        flex-shrink: 0;
+      }
+    }
+
+    &-pagination {
+      display: none;
+
+      @include media-breakpoint-down(md) {
+        display: block;
+      }
     }
   }
 
-  .swiper-pagination {
-    display: none;
+  &.swiper {
+    &-container-horizontal > .swiper-pagination-bullets,
+    &-pagination-custom,
+    &-pagination-fraction {
+      @include media-breakpoint-down(md) {
+        bottom: 17px;
+      }
 
-    @include media-breakpoint-down(md) {
-      display: block;
+      @include media-breakpoint-down(sm) {
+        bottom: 7px;
+      }
+
+      .swiper-pagination-bullet {
+        background-color: $primary;
+        opacity: 1;
+
+        &-active {
+          background-color: #e0e0e0;
+        }
+
+        @include media-breakpoint-down(md) {
+          width: 8px;
+          height: 8px;
+        }
+
+        @include media-breakpoint-down(sm) {
+          width: 6px;
+          height: 6px;
+        }
+      }
     }
   }
 }
 
 .tab-service {
   $tab-service: &;
+  position: relative;
 
   @include row-cols(2);
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-
+  @include padding-x(70px);
   @include padding-y(50px);
-  padding-left: 70px;
-  padding-right: 50px;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  min-height: 310px;
 
   background-color: $body-bg;
+  overflow: hidden;
+
+  @include media-breakpoint-down(md) {
+    min-height: initial;
+    align-items: initial;
+  }
 
   > picture {
     display: flex;
-    justify-content: center;
-    align-self: center;
+
+    @include media-breakpoint-down(md) {
+      flex: 0 0 45%;
+      max-width: 45%;
+      align-self: initial;
+    }
+
+    @include media-breakpoint-down(sm) {
+      flex: initial;
+      max-width: initial;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    @include padding-x(initial);
+    @include padding-y(initial);
+    background-color: transparent;
+  }
+
+  &__content {
+    @include media-breakpoint-down(md) {
+      flex: 0 0 55%;
+      max-width: 55%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      z-index: 5;
+      flex: initial;
+      max-width: initial;
+      width: 100%;
+    }
   }
 
   &__title {
-    max-width: 70%;
+    max-width: 80%;
     margin: 0;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     padding: 0;
 
     font-size: 22px;
-    line-height: 1.5;
+    line-height: 1.4;
     font-weight: 500;
+
+    @include media-breakpoint-down(md) {
+      max-width: 100%;
+      margin-bottom: 25px;
+
+      font-size: 18px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
   }
 
   &__list {
@@ -136,17 +219,36 @@
     margin: 0;
     margin-bottom: 35px;
     padding: 0;
-    max-width: 75%;
+    max-width: 80%;
 
     font-size: 18px;
     line-height: 1.3;
     color: $body-color;
+
+    @include media-breakpoint-down(md) {
+      max-width: 100%;
+      margin-bottom: 30px;
+
+      font-size: 16px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      max-width: calc(100% - 100px);
+      padding-right: 25px;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
   }
 
   &__item {
     position: relative;
     margin-bottom: 15px;
     padding-left: 20px;
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 12px;
+      padding-left: 15px;
+    }
 
     &:last-of-type {
       margin-bottom: 0;
@@ -156,12 +258,22 @@
       content: "";
       position: absolute;
       left: 0;
-      top: 6.5px; // parent' line-height / 2
+      top: 6px;
 
       display: block;
       width: 15px;
       height: 10px;
       background: url("@services/check-mark.svg") no-repeat left center;
+
+      @include media-breakpoint-down(md) {
+        width: 11px;
+        height: 8px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        width: 8px;
+        height: 6px;
+      }
     }
   }
 
@@ -169,7 +281,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    min-width: 200px;
+    min-width: 165px;
     padding: 16px;
 
     font-size: 16px;
@@ -195,6 +307,18 @@
       color: $body-bg;
       background-color: $body-color;
     }
+
+    @include media-breakpoint-down(sm) {
+      display: flex;
+      padding: 14px;
+
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 30px;
+    }
   }
 
   &__text {
@@ -204,6 +328,16 @@
 
     font-size: 18px;
     line-height: 1.4;
+
+    @include media-breakpoint-down(md) {
+      max-width: 85%;
+      font-size: 16px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      max-width: calc(100% - 100px);
+      font-size: 14px;
+    }
 
     & a {
       font-weight: 700;
@@ -220,30 +354,33 @@
 
   &__image {
     display: block;
-    width: 440px;
-    height: 290px;
+    align-self: center;
+    height: auto;
+    object-fit: contain;
+    object-position: 10px 10px;
+
+    @include media-breakpoint-down(md) {
+      object-position: initial;
+    }
+
+    @include media-breakpoint-down(sm) {
+      position: absolute;
+      top: 50%;
+      right: 0;
+
+      transform: translateY(calc(-50% - 22px)); // link' height = 44px
+
+      width: auto;
+    }
   }
 
   &--active {
     display: flex;
   }
 
-  &--investments {
-    & #{$tab-service}__image {
-      object-position: 0 10px;
-    }
-  }
-
   &--credit {
     & #{$tab-service}__list {
       margin-bottom: 30px;
-    }
-  }
-
-  &--investments,
-  &--online {
-    & #{$tab-service}__title {
-      max-width: 80%;
     }
   }
 }
