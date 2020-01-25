@@ -6,44 +6,46 @@ document.addEventListener(`DOMContentLoaded`, () => {
   const links = document.querySelectorAll(`#services .services__link`);
   const sections = document.querySelectorAll(`#services .tab-service`);
 
-  const eventHandler = (event, activeElement) => {
-    const {type, keyCode} = event;
+  if (links && sections) {
+    const eventHandler = (event, activeElement) => {
+      const {type, keyCode} = event;
 
-    if (type === `click`) {
-      event.preventDefault();
-      removeActiveTab();
-      addActiveTab(activeElement);
-    } else if (type === `keyup` && keyCode === 9) {
-      removeActiveTab();
-      addActiveTab(activeElement);
-    }
-  };
+      if (type === `click`) {
+        event.preventDefault();
+        removeActiveTab();
+        addActiveTab(activeElement);
+      } else if (type === `keyup` && keyCode === 9) {
+        removeActiveTab();
+        addActiveTab(activeElement);
+      }
+    };
 
-  [`click`, `keyup`].forEach((event) => {
-    links.forEach((link) => {
-      link.addEventListener(event, (e) => eventHandler(e, link));
+    [`click`, `keyup`].forEach((event) => {
+      links.forEach((link) => {
+        link.addEventListener(event, (e) => eventHandler(e, link));
+      });
     });
-  });
 
-  const removeActiveTab = () => {
-    links.forEach((link) => {
+    const removeActiveTab = () => {
+      links.forEach((link) => {
+        link
+          .closest(`.services__list-item`)
+          .classList.remove(`services__list-item--active`);
+      });
+      sections.forEach((section) => {
+        section.classList.remove(`tab-service--active`);
+      });
+    };
+
+    const addActiveTab = (link) => {
       link
         .closest(`.services__list-item`)
-        .classList.remove(`services__list-item--active`);
-    });
-    sections.forEach((section) => {
-      section.classList.remove(`tab-service--active`);
-    });
-  };
-
-  const addActiveTab = (link) => {
-    link
-      .closest(`.services__list-item`)
-      .classList.add(`services__list-item--active`);
-    const href = link.getAttribute(`href`);
-    const matchingSection = document.querySelector(href);
-    matchingSection.classList.add(`tab-service--active`);
-  };
+        .classList.add(`services__list-item--active`);
+      const href = link.getAttribute(`href`);
+      const matchingSection = document.querySelector(href);
+      matchingSection.classList.add(`tab-service--active`);
+    };
+  }
 
   // slider
   const breakpoint = window.matchMedia(`only screen and (max-width: 1023px)`);
@@ -68,19 +70,23 @@ document.addEventListener(`DOMContentLoaded`, () => {
   const breakpointChecker = () => {
     if (breakpoint.matches) {
       enableSlider();
-      Array.from(sections).forEach((section) =>
-        section.classList.contains(`tab-service--active`)
-          ? section.classList.remove(`tab-service--active`)
-          : section
-      );
+      if (sections) {
+        Array.from(sections).forEach((section) =>
+          section.classList.contains(`tab-service--active`)
+            ? section.classList.remove(`tab-service--active`)
+            : section
+        );
+      }
     } else {
       if (servicesSlider) {
         servicesSlider.destroy();
-        Array.from(sections).forEach((section, index) =>
-          index === 0
-            ? section.classList.add(`tab-service--active`)
-            : section.classList.remove(`tab-service--active`)
-        );
+        if (sections) {
+          Array.from(sections).forEach((section, index) =>
+            index === 0
+              ? section.classList.add(`tab-service--active`)
+              : section.classList.remove(`tab-service--active`)
+          );
+        }
       }
     }
   };
