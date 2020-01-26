@@ -73,7 +73,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
         login,
         password
       },
-      valid: false,
+      valid: true,
       errors: {
         login: ``,
         password: ``
@@ -159,6 +159,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
       state.form.processState = `finished`;
     });
 
+
+
+    // show / hide password
     const showPassword = (event) => {
       const {target, type} = event;
       const input = target.previousElementSibling;
@@ -190,6 +193,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
           hidePassword
       )
     );
+
+
 
     // Modal Visibility
     if (modalClose) {
