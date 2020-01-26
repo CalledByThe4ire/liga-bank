@@ -7,18 +7,15 @@ mixin services(data)
 				each item, index in data
 					+e('li').list-item(class=`${index === 0 ? '--active ' : ''}--${item['tab-modifier']}, tabindex= index + 1`)
 						+e('a').link(href=`#tab-${item['tab-modifier']}`) !{item['tab-name']}
-							case item['tab-modifier']
-								when 'investments'
-									+e('svg').icon(width=34, height=33)
+							+e('svg').icon(width=34, height=34)
+								case item['tab-modifier']
+									when 'investments'
 										use(xlink:href='#services__investments')
-								when 'credit'
-									+e('svg').icon(width=34, height=30)
+									when 'credit'
 										use(xlink:href='#services__credit')
-								when 'insurance'
-									+e('svg').icon(width=28, height=34)
+									when 'insurance'
 										use(xlink:href='#services__insurance')
-								when 'online'
-									+e('svg').icon(width=20, height=34)
+									when 'online'
 										use(xlink:href='#services__online')
 
 		+e('div').wrapper(class='swiper-wrapper')
