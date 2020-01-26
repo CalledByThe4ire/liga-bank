@@ -27,7 +27,7 @@
 
     @include media-breakpoint-down(sm) {
       min-height: 455px;
-      width: calc(100% - 30px);
+      width: 290px;
     }
 
     & #{$modal}__content {
