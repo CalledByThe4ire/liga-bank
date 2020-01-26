@@ -131,6 +131,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
       watch(state.form, `processState`, () => {
         const {processState} = state.form;
         switch (processState) {
+          case `filling`:
+            submitButton.disabled = true;
+            break;
           case `sending`:
             submitButton.disabled = true;
             break;
@@ -156,10 +159,25 @@ document.addEventListener(`DOMContentLoaded`, () => {
           `loginFormData`,
           JSON.stringify(Object.fromEntries(formData))
       );
-      state.form.processState = `finished`;
+
+      Object.entries(fieldElements).forEach(([name]) => {
+        updateStateErrors(state, name);
+      });
+      updateValidationState(state.form.errors);
+
+      if (state.form.valid) {
+        state.form.processState = `finished`;
+      } else {
+        const {errors} = state.form;
+        state.form.processState = `filling`;
+        for (const name of Object.keys(errors)) {
+          if (errors[name] !== 0) {
+            fieldElements[name].focus();
+            break;
+          }
+        }
+      }
     });
-
-
 
     // show / hide password
     const showPassword = (event) => {
@@ -193,8 +211,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
           hidePassword
       )
     );
-
-
 
     // Modal Visibility
     if (modalClose) {
