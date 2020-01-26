@@ -7,12 +7,6 @@
     background-color: $body-bg;
   }
 
-  &__nav {
-    @include media-breakpoint-down(md) {
-      display: none;
-    }
-  }
-
   &__title {
     @include visually-hidden();
   }
@@ -26,6 +20,10 @@
 
     @include list-unstyled();
     @include row-cols(4);
+
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
   }
 
   &__list-item {
@@ -58,7 +56,6 @@
 
   &__icon {
     order: -1;
-    min-width: 34px;
     margin-right: 10px;
     fill: $primary;
   }
@@ -77,6 +74,12 @@
     color: $link-color;
     text-decoration: $link-decoration;
     outline: none;
+  }
+
+  &__wrapper {
+    @include list-unstyled();
+    margin: 0;
+    padding: 0;
   }
 
   &__tab {
@@ -142,7 +145,7 @@
   background-color: $body-bg;
   overflow: hidden;
 
-  &__wrapper {
+  &__inner {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
