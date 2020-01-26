@@ -55,10 +55,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
     servicesSlider = new Swiper(`#services`, {
       loop: true,
       speed: 500,
-      spaceBetween: 10,
-      autoplay: {
-        delay: 3000
-      },
+      // spaceBetween: 10,
+      // autoplay: {
+      //   delay: 3000
+      // },
       pagination: {
         el: `.swiper-pagination`,
         type: `bullets`,

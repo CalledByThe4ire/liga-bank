@@ -22,21 +22,22 @@ mixin services(data)
 			each tab, index in tabs
 				- const tabModifier = data[index]['tab-modifier']
 					+e('section').tab.tab-service__(class=`--${tabModifier}${index === 0 ? ' --active' : ''} swiper-slide`, id=`tab-${tabModifier}`)
-						+e('div').content
-							+e('h2').title !{tab['tab-title']}
-							+e('ul').list
-								each item in tab['tab-list']
-									+e.item !{item}
-							- const { modifier: linkModifier, text } = tab['tab-link'];
-							if linkModifier === 'button'
-								+e('a').link(href='#')= text
-							else if linkModifier === 'link'
-								+e('p').text !{text}
-						picture
-							source(type='image/webp', media='(max-width: 768px)', srcset=`@services/tab-${tabModifier}-image--mobile@1x.webp, @services/tab-${tabModifier}-image--mobile@2x.webp 2x`)
-							source(type='image/webp', media='(max-width: 1023px)', srcset=`@services/tab-${tabModifier}-image--tablet@1x.webp, @services/tab-${tabModifier}-image--tablet@2x.webp 2x`)
-							source(type='image/webp', srcset=`@services/tab-${tabModifier}-image--desktop@1x.webp, @services/tab-${tabModifier}-image--desktop@2x.webp 2x`)
-							source(media='(max-width: 768px)', srcset=`@services/tab-${tabModifier}-image--mobile@1x.png, @services/tab-${tabModifier}-image--mobile@2x.png 2x`)
-							source(media='(max-width: 1023px)', srcset=`@services/tab-${tabModifier}-image--tablet@1x.png, @services/tab-${tabModifier}-image--tablet@2x.png 2x`)
-							+e('img').image(src=`@services/tab-${tabModifier}-image--desktop@1x.png`, srcset=`@services/tab-${tabModifier}-image--desktop@2x.png 2x`, width=440, height=290)
+						+e('div').wrapper
+							+e('div').content
+								+e('h2').title !{tab['tab-title']}
+								+e('ul').list
+									each item in tab['tab-list']
+										+e.item !{item}
+								- const { modifier: linkModifier, text } = tab['tab-link'];
+								if linkModifier === 'button'
+									+e('a').link(href='#')= text
+								else if linkModifier === 'link'
+									+e('p').text !{text}
+							picture
+								source(type='image/webp', media='(max-width: 768px)', srcset=`@services/tab-${tabModifier}-image--mobile@1x.webp, @services/tab-${tabModifier}-image--mobile@2x.webp 2x`)
+								source(type='image/webp', media='(max-width: 1023px)', srcset=`@services/tab-${tabModifier}-image--tablet@1x.webp, @services/tab-${tabModifier}-image--tablet@2x.webp 2x`)
+								source(type='image/webp', srcset=`@services/tab-${tabModifier}-image--desktop@1x.webp, @services/tab-${tabModifier}-image--desktop@2x.webp 2x`)
+								source(media='(max-width: 768px)', srcset=`@services/tab-${tabModifier}-image--mobile@1x.png, @services/tab-${tabModifier}-image--mobile@2x.png 2x`)
+								source(media='(max-width: 1023px)', srcset=`@services/tab-${tabModifier}-image--tablet@1x.png, @services/tab-${tabModifier}-image--tablet@2x.png 2x`)
+								+e('img').image(src=`@services/tab-${tabModifier}-image--desktop@1x.png`, srcset=`@services/tab-${tabModifier}-image--desktop@2x.png 2x`, width=440, height=290)
 		div.swiper-pagination
