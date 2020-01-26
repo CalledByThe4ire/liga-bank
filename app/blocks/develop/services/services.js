@@ -3,10 +3,10 @@
 
 document.addEventListener(`DOMContentLoaded`, () => {
   // tab' switch behaviour
-  const links = document.querySelectorAll(`#services .services__link`);
-  const sections = document.querySelectorAll(`#services .tab-service`);
+  const servicesLinks = document.querySelectorAll(`#services .services__link`);
+  const servicesTabs = document.querySelectorAll(`#services .tab-service`);
 
-  if (links && sections) {
+  if (servicesLinks && servicesTabs) {
     const eventHandler = (event, activeElement) => {
       const {type, keyCode} = event;
 
@@ -21,18 +21,18 @@ document.addEventListener(`DOMContentLoaded`, () => {
     };
 
     [`click`, `keyup`].forEach((event) => {
-      links.forEach((link) => {
+      servicesLinks.forEach((link) => {
         link.addEventListener(event, (e) => eventHandler(e, link));
       });
     });
 
     const removeActiveTab = () => {
-      links.forEach((link) => {
+      servicesLinks.forEach((link) => {
         link
           .closest(`.services__list-item`)
           .classList.remove(`services__list-item--active`);
       });
-      sections.forEach((section) => {
+      servicesTabs.forEach((section) => {
         section.classList.remove(`tab-service--active`);
       });
     };
@@ -55,10 +55,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
     servicesSlider = new Swiper(`#services`, {
       loop: true,
       speed: 500,
-      // spaceBetween: 10,
-      // autoplay: {
-      //   delay: 3000
-      // },
+      spaceBetween: 10,
+      autoplay: {
+        delay: 3000
+      },
       pagination: {
         el: `.swiper-pagination`,
         type: `bullets`,
@@ -70,8 +70,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
   const breakpointChecker = () => {
     if (breakpoint.matches) {
       enableSlider();
-      if (sections) {
-        Array.from(sections).forEach((section) =>
+      if (servicesTabs) {
+        Array.from(servicesTabs).forEach((section) =>
           section.classList.contains(`tab-service--active`)
             ? section.classList.remove(`tab-service--active`)
             : section
@@ -80,8 +80,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
     } else {
       if (servicesSlider) {
         servicesSlider.destroy();
-        if (sections) {
-          Array.from(sections).forEach((section, index) =>
+        if (servicesTabs) {
+          Array.from(servicesTabs).forEach((section, index) =>
             index === 0
               ? section.classList.add(`tab-service--active`)
               : section.classList.remove(`tab-service--active`)
