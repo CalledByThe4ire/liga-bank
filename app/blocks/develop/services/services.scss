@@ -13,8 +13,8 @@
 
   &__list {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
+    flex-flow: row wrap;
+    justify-content: flex-start;
     margin: 0;
     padding: 0;
 
@@ -33,25 +33,13 @@
     align-items: center;
     flex-shrink: 1;
 
-    cursor: pointer;
-    transition-duration: 0.3s;
-    transition-property: all;
-
-    &:hover,
-    &:focus {
-      & #{$services}__link {
-        color: $primary;
-        text-decoration: $link-hover-decoration;
-      }
-
-      & #{$services}__icon {
-        fill: $body-color;
-      }
-    }
-
     &--active {
       background-color: $body-bg;
     }
+  }
+
+  &__text {
+    max-width: 70%;
   }
 
   &__icon {
@@ -73,7 +61,26 @@
     font-weight: 500;
     color: $link-color;
     text-decoration: $link-decoration;
+
     outline: none;
+
+    &:hover,
+    &:focus {
+      & #{$services}__text {
+        color: $primary;
+        text-decoration: $link-hover-decoration;
+
+        transition-duration: 0.3s;
+        transition-property: color;
+      }
+
+      & #{$services}__icon {
+        fill: $body-color;
+
+        transition-duration: 0.3s;
+        transition-property: fill;
+      }
+    }
   }
 
   &__wrapper {
