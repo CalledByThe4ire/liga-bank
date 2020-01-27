@@ -5,7 +5,7 @@ mixin services(data)
 		+e('ul').list
 			each item, index in data
 				+e('li').list-item(class=`${index === 0 ? '--active ' : ''}`, tabindex= index + 1)
-					+e('a').link(href=`#tab-${item['tab-modifier']}`)
+					+e('a').link(href='#')
 						+e('span').text !{item['tab-name']}
 						case item['tab-modifier']
 							when 'investments'
@@ -24,7 +24,7 @@ mixin services(data)
 		+e('ul').wrapper(class='swiper-wrapper')
 			each tab, index in tabs
 				- const tabModifier = data[index]['tab-modifier']
-					+e.tab.tab-service__(class=`${index === 0 ? '--active' : ''} swiper-slide`, id=`tab-${tabModifier}`)
+					+e.tab.tab-service__(class=`${index === 0 ? '--active' : ''} swiper-slide`)
 						+e.inner
 							+e('div').content
 								+e('h2').title !{tab['tab-title']}

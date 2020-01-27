@@ -3,26 +3,29 @@
 
 document.addEventListener(`DOMContentLoaded`, () => {
   // tab' switch behaviour
+  const servicesListItems = document.querySelectorAll(
+      `#services .services__list-item`
+  );
   const servicesLinks = document.querySelectorAll(`#services .services__link`);
   const servicesTabs = document.querySelectorAll(`#services .tab-service`);
 
   if (servicesLinks && servicesTabs) {
-    const eventHandler = (event, activeElement) => {
+    const eventHandler = (event, activeElement, activeElementIndex) => {
       const {type, keyCode} = event;
 
       if (type === `click`) {
         event.preventDefault();
         removeActiveTab();
-        addActiveTab(activeElement);
+        addActiveTab(activeElement, activeElementIndex);
       } else if (type === `keyup` && keyCode === 9) {
         removeActiveTab();
-        addActiveTab(activeElement);
+        addActiveTab(activeElement, activeElementIndex);
       }
     };
 
-    [`click`, `keyup`].forEach((event) => {
-      servicesLinks.forEach((link) => {
-        link.addEventListener(event, (e) => eventHandler(e, link));
+    [`click`, `keyup`].forEach((eventName) => {
+      servicesLinks.forEach((link, linkIndex) => {
+        link.addEventListener(eventName, (e) => eventHandler(e, link, linkIndex));
       });
     });
 
@@ -37,13 +40,18 @@ document.addEventListener(`DOMContentLoaded`, () => {
       });
     };
 
-    const addActiveTab = (link) => {
+    const addActiveTab = (link, linkIndex) => {
       link
         .closest(`.services__list-item`)
         .classList.add(`services__list-item--active`);
-      const href = link.getAttribute(`href`);
-      const matchingSection = document.querySelector(href);
-      matchingSection.classList.add(`tab-service--active`);
+      const tabIndex = Array.from(servicesTabs).findIndex(
+          (tab, index) => index === linkIndex
+      );
+      servicesTabs.forEach((tab, index) => {
+        if (index === tabIndex) {
+          tab.classList.add(`tab-service--active`);
+        }
+      });
     };
   }
 
@@ -67,25 +75,36 @@ document.addEventListener(`DOMContentLoaded`, () => {
     });
   };
 
+  const removeActveClass = (list, cls) => {
+    list.forEach((item) =>
+      item.classList.contains(`${cls}`)
+        ? item.classList.remove(`${cls}`)
+        : item
+    );
+  };
+
+  const makeFirstElementActive = (list, cls) => {
+    list.forEach((item, index) =>
+      index === 0
+        ? item.classList.add(`${cls}`)
+        : item.classList.remove(`${cls}`)
+    );
+  };
+
   const breakpointChecker = () => {
     if (breakpoint.matches) {
       enableSlider();
-      if (servicesTabs) {
-        Array.from(servicesTabs).forEach((section) =>
-          section.classList.contains(`tab-service--active`)
-            ? section.classList.remove(`tab-service--active`)
-            : section
-        );
+      if (servicesTabs && servicesListItems) {
+        removeActveClass(servicesTabs, `tab-service--active`);
+        removeActveClass(servicesListItems, `services__list-item--active`);
       }
     } else {
       if (servicesSlider) {
         servicesSlider.destroy();
-        if (servicesTabs) {
-          Array.from(servicesTabs).forEach((section, index) =>
-            index === 0
-              ? section.classList.add(`tab-service--active`)
-              : section.classList.remove(`tab-service--active`)
-          );
+
+        if (servicesTabs && servicesListItems) {
+          makeFirstElementActive(servicesTabs, `tab-service--active`);
+          makeFirstElementActive(servicesListItems, `services__list-item--active`);
         }
       }
     }
