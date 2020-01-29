@@ -1,0 +1,172 @@
+mixin calculator(data)
+	+b('section').calculator(id='calculator')&attributes(attributes)
+		- const { creditSelection, credits, creditRegistration, creditOffer } = data;
+		- const num2str=(t,n)=>{let r=(t=Math.abs(t)%100)%10;return t>10&&t<20?n[2]:r>1&&r<5?n[1]:1===r?n[0]:n[2]};
+		- const nounRublePlurals = ['рубль', 'рубля', 'рублей'];
+		- const nounYearPlurals = ['год', 'года', 'лет'];
+
+		+e('div').container
+			+e('h2').title Кредитный калькулятор
+			+e('div').row
+				+e('div').col--left
+					+e('div').credit-form--selection
+						form(id=`credit-${creditSelection.modifier}`, name=`credit-${creditSelection.modifier}`)
+							fieldset
+								legend Шаг&nbsp;1. Цель кредита
+								+e('div').form-field
+									input(
+										type='text',
+										value='Выберите цель кредита',
+										name=`credit-${creditSelection.modifier}-title`,
+										readonly=true
+									)
+									button(type='button', name=`credit-${creditSelection.modifier}-arrow`, aria-label='Show options')
+										svg(width=16, height=8)
+											use(xlink:href='#calculator__arrow')
+
+								+e('ul').forms-list
+									each item in creditSelection.list
+										+e.forms-list-item(data-credit-type= item.type)= item.value
+
+					each credit in credits
+						+e('div').credit-form--calculation
+							- const {cost = {}, initialPayment = {}, period = {}, addon = []} = credit;
+							form(id=`credit-${credit.modifier}`, name=`credit-${credit.modifier}`, hidden= true)
+								fieldset
+									legend Шаг&nbsp;2. Введите параметры кредита
+									label(
+										for=`${credit.modifier}-credit-${cost.modifier}`
+									)= cost.label
+									+e('div').form-field
+										button(type='button', name='minus', aria-label='Decrease value')
+											svg(width=16, height=16)
+												use(xlink:href='#calculator__minus')
+										input(
+											type='text',
+											id=`${credit.modifier}-credit-${cost.modifier}`,
+											name=`${credit.modifier}-credit-${cost.modifier}`,
+											value= `${cost.value.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(cost.value, nounRublePlurals)}`,
+											data-min= cost.min
+											data-max= cost.max
+											data-step= cost.step
+										)
+										button(type='button', name='plus', aria-label='Increase value')
+											svg(width=16, height=16)
+												use(xlink:href='#calculator__plus')
+									+e('p').form-range-output
+										| От&nbsp;
+										output(name=`${credit.modifier}-credit-${cost.modifier}-output-min`)= `${cost.min.toLocaleString('en-US').replace(/,/g, ' ')}`
+										| &nbsp;до&nbsp;
+										output(name=`${credit.modifier}-credit-${cost.modifier}-output-max`)= `${cost.max.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(period.max, nounRublePlurals)}`
+									if Object.keys(initialPayment).length !== 0
+										label(
+											for=`${credit.modifier}-credit-${initialPayment.modifier}-currency`
+										)= initialPayment.label
+										input(
+											type='text',
+											id=`${credit.modifier}-credit-${initialPayment.modifier}-currency`,
+											name=`${credit.modifier}-credit-${initialPayment.modifier}-currency`,
+											value=`${(cost.value * initialPayment.factor).toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(cost.value * initialPayment.factor, nounRublePlurals)}`
+										)
+										input(
+											type='range',
+											id=`${credit.modifier}-credit-${initialPayment.modifier}-range`,
+											name=`${credit.modifier}-credit-${initialPayment.modifier}-range`,
+											min= initialPayment.min,
+											max= initialPayment.max,
+											step= initialPayment.step,
+											value= initialPayment.min
+										)
+										input(
+											type='text',
+											id=`${credit.modifier}-credit-${initialPayment.modifier}-percent`,
+											name=`${credit.modifier}-credit-${initialPayment.modifier}-percent`,
+											value=`${initialPayment.factor * 100}%`
+										)
+									label(
+										for=`${credit.modifier}-credit-${period.modifier}`
+									)= period.label
+									input(
+										type='text',
+										id=`${credit.modifier}-credit-${period.modifier}`,
+										name=`${credit.modifier}-credit-${period.modifier}`,
+										value=`${period.min.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(period.min, nounYearPlurals)}`
+									)
+									input(
+										type='range',
+										id=`${credit.modifier}-credit-${period.modifier}-range`,
+										name=`${credit.modifier}-credit-${period.modifier}-range`,
+										min= period.min,
+										max= period.max,
+										step= period.step,
+										value= period.min
+									)
+									+e('p').form-range-output
+										output(name=`${credit.modifier}-credit-${period.modifier}-output-min`)= `${period.min.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(period.min, nounYearPlurals)}`
+										output(name=`${credit.modifier}-credit-${period.modifier}-output-max`)= `${period.max.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(period.max, nounYearPlurals)}`
+									each item in addon
+										input(
+											type='checkbox',
+											id=`${credit.modifier}-credit-${item.modifier}`,
+											name=`${credit.modifier}-credit-${item.modifier}`,
+											checked= true
+										)
+										label(
+											for=`${credit.modifier}-credit-${item.modifier}`
+										) !{item.label}
+
+				+e('div').col--right
+					+e('div').credit-form--offering
+						form(id=`credit-${creditOffer.modifier}`, name=`credit-${creditOffer.modifier}`, hidden= false)
+							fieldset
+								legend Наше предложение
+							each field in creditOffer.content
+								- let creditOfferValue;
+								if field.modifier === 'percentage-rate'
+									- creditOfferValue= `${field.value.toLocaleString('en-US', {minimumFractionDigits: 2})}%`;
+								else
+									- creditOfferValue= `${field.value.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(field.value, nounRublePlurals)}`;
+								+e('div').form-field
+									input(
+										type='text',
+										id=`credit-${creditOffer.modifier}-${field.modifier}`,
+										name=`credit-${creditOffer.modifier}-${field.modifier}`,
+										value= creditOfferValue,
+										readonly= true
+									)
+									label !{field.label}
+							button(type='submit') Оформить заявку
+
+			+e('div').credit-form--registration
+				form(id=`credit-${creditRegistration.modifier}`, name=`credit-${creditRegistration.modifier}`, hidden= false)
+					fieldset
+						legend Шаг&nbsp;3. Оформление заявки
+					- const { readOnly, editable } = creditRegistration.content
+					each field in readOnly
+						- let creditRegistrationValue;
+						if field.modifier === 'application-number'
+							- creditRegistrationValue= `№ ${field.value.toLocaleString('en-US', {minimumIntegerDigits: 4}).replace(/,/g, '')}`
+						else if field.modifier === 'credit-period'
+							- creditRegistrationValue= `${field.value.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(field.value, nounYearPlurals)}`
+						else if field.modifier === 'credit-purpose'
+							- creditRegistrationValue= field.value
+						else
+							- creditRegistrationValue= `${field.value.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(field.value, nounRublePlurals)}`
+						+e('div').form-field
+							label(for=`credit-${creditRegistration.modifier}-${field.modifier}`)= field.label
+							input(
+								type='text',
+								id=`credit-${creditRegistration.modifier}-${field.modifier}`,
+								name=`credit-${creditRegistration.modifier}-${field.modifier}`,
+								value= creditRegistrationValue,
+								readonly= true
+							)
+
+					each field in editable
+						input(
+							type= field.type,
+							id=`credit-${creditRegistration.modifier}-${field.modifier}`,
+							name=`credit-${creditRegistration.modifier}-${field.modifier}`,
+							placeholder= field.placeholder,
+						)
+					button(type='submit') Отправить

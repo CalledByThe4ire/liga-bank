@@ -9,7 +9,8 @@
     }
   }
 
-  &__services {
+  &__services,
+  &__calculator {
     min-width: $min-width;
     max-width: $max-width;
 

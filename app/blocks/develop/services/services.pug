@@ -27,7 +27,7 @@ mixin services(data)
 					+e.tab.tab-service__(class=`${index === 0 ? '--active' : ''} swiper-slide`)
 						+e.inner
 							+e('div').content
-								+e('h2').title !{tab['tab-title']}
+								+e('h3').title !{tab['tab-title']}
 								+e('ul').list
 									each item in tab['tab-list']
 										+e.item !{item}

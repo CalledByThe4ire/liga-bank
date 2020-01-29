@@ -1,0 +1,189 @@
+{
+  "creditSelection": {
+    "modifier": "selection",
+    "list": [
+      {
+        "value": "Ипотечное кредитование",
+        "type": "credit-mortgage"
+      },
+      {
+        "value": "Автомобильное кредитование",
+        "type": "credit-auto"
+      },
+      {
+        "value": "Потребительский кредит",
+        "type": "credit-personal"
+      }
+    ]
+  },
+  "credits": [
+    {
+      "modifier": "mortgage",
+      "cost": {
+        "modifier": "cost",
+        "label": "Стоимость недвижимости",
+        "value": 2000000,
+        "min": 1200000,
+        "max": 25000000,
+        "step": 100000
+      },
+      "initialPayment": {
+        "modifier": "initial-payment",
+        "label": "Первоначальный взнос",
+        "factor": 0.1,
+        "min": 0.1,
+        "max": 1,
+        "step": 0.05
+      },
+      "period": {
+        "modifier": "period",
+        "label": "Срок кредитования",
+        "min": 5,
+        "max": 30,
+        "step": 1
+      },
+      "addon": [
+        {
+          "modifier": "maternity-capital",
+          "label": "Использовать материнский капитал"
+        }
+      ]
+    },
+    {
+      "modifier": "auto",
+      "cost": {
+        "modifier": "cost",
+        "label": "Стоимость автомобиля",
+        "value": 1000000,
+        "min": 500000,
+        "max": 5000000,
+        "step": 50000
+      },
+      "initialPayment": {
+        "modifier": "initial-payment",
+        "label": "Первоначальный взнос",
+        "factor": 0.2,
+        "min": 0.1,
+        "max": 1,
+        "step": 0.05
+      },
+      "period": {
+        "modifier": "period",
+        "label": "Срок кредитования",
+        "min": 1,
+        "max": 5,
+        "step": 1
+      },
+      "addon": [
+        {
+          "modifier": "car-insurance",
+          "label": "Оформить КАСКО в&nbsp;нашем банке"
+        },
+        {
+          "modifier": "life-insurance",
+          "label": "Оформить Страхование жизни в&nbsp;нашем банке"
+        }
+      ]
+    },
+    {
+      "modifier": "personal",
+      "cost": {
+        "modifier": "cost",
+        "label": "Сумма потребительского кредита",
+        "value": 1000000,
+        "min": 50000,
+        "max": 3000000,
+        "step": 50000
+      },
+      "period": {
+        "modifier": "period",
+        "label": "Срок кредитования",
+        "min": 1,
+        "max": 7,
+        "step": 1
+      },
+      "addon": [
+        {
+          "modifier": "project-member",
+          "label": "Участник зарплатного проекта нашего банка"
+        }
+      ]
+    }
+  ],
+  "creditRegistration": {
+    "modifier": "registration",
+    "content": {
+      "readOnly": {
+        "applicationNumber": {
+          "modifier": "application-number",
+          "label": "Номер заявки",
+          "value": 0
+        },
+        "creditPurpose": {
+          "modifier": "credit-purpose",
+          "label": "Цель кредита",
+          "value": "Ипотека"
+        },
+        "cost": {
+          "modifier": "cost",
+          "label": "Стоимость недвижимости",
+          "value": 2000000
+        },
+        "initialPayment": {
+          "modifier": "initial-payment",
+          "label": "Первоначальный взнос",
+          "value": 200000,
+          "disable": "false",
+          "hidden": "false"
+        },
+        "creditPeriod": {
+          "modifier": "credit-period",
+          "label": "Срок кредитования",
+          "value": 5
+        }
+      },
+      "editable": {
+        "fullName": {
+          "modifier": "full-name",
+          "type": "text",
+          "placeholder": "ФИО"
+        },
+        "tel": {
+          "modifier": "tel",
+          "type": "tel",
+          "placeholder": "Телефон"
+        },
+        "email": {
+          "modifier": "email",
+          "type": "email",
+          "placeholder": "E-mail"
+        }
+      }
+    }
+  },
+  "creditOffer": {
+    "modifier": "offer",
+    "content": {
+      "applicationNumber": {
+        "modifier": "total-cost",
+        "label": "Сумма ипотеки",
+        "value": 1330000
+      },
+      "creditPurpose": {
+        "modifier": "percentage-rate",
+        "label": "Процентная ставка",
+        "value": 9.4
+      },
+      "cost": {
+        "modifier": "monthly-payment",
+        "label": "Ежемесячный платеж",
+        "value": 27868
+      },
+      "initialPayment": {
+        "modifier": "minimal-income",
+        "label": "Необходимый&nbsp;доход",
+        "value": 61929
+      }
+    }
+  }
+}
