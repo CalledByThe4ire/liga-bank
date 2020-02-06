@@ -18,7 +18,8 @@ mixin calculator(data)
 										type='text',
 										value='Выберите цель кредита',
 										name=`credit-${creditSelection.modifier}-title`,
-										readonly=true
+										readonly=true,
+										tabindex= -1
 									)
 									button(type='button', name=`credit-${creditSelection.modifier}-arrow`, aria-label='Show options')
 										svg(width=16, height=8)
@@ -26,7 +27,7 @@ mixin calculator(data)
 
 								+e('ul').forms-list
 									each item in creditSelection.list
-										+e.forms-list-item(data-credit-type= item.type)= item.value
+										+e.forms-list-item(data-credit-type= item.type, tabindex= 0)= item.value
 
 					each credit in credits
 						+e('div').credit-form--calculation
@@ -35,9 +36,10 @@ mixin calculator(data)
 								fieldset
 									legend Шаг&nbsp;2. Введите параметры кредита
 									label(
-										for=`${credit.modifier}-credit-${cost.modifier}`
+										for=`${credit.modifier}-credit-${cost.modifier}`,
+										tabindex= 0
 									)= cost.label
-									+e('div').form-field
+									+e('div').form-field(tabindex= 0)
 										button(type='button', name='minus', aria-label='Decrease value')
 											svg(width=16, height=16)
 												use(xlink:href='#calculator__minus')
@@ -45,7 +47,7 @@ mixin calculator(data)
 											type='text',
 											id=`${credit.modifier}-credit-${cost.modifier}`,
 											name=`${credit.modifier}-credit-${cost.modifier}`,
-											value= `${cost.value.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(cost.value, nounRublePlurals)}`,
+											value= cost.min,
 											data-min= cost.min
 											data-max= cost.max
 											data-step= cost.step
@@ -60,14 +62,19 @@ mixin calculator(data)
 										output(name=`${credit.modifier}-credit-${cost.modifier}-output-max`)= `${cost.max.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(period.max, nounRublePlurals)}`
 									if Object.keys(initialPayment).length !== 0
 										label(
-											for=`${credit.modifier}-credit-${initialPayment.modifier}-currency`
+											for=`${credit.modifier}-credit-${initialPayment.modifier}`,
+											tabindex= 0
 										)= initialPayment.label
-										input(
-											type='text',
-											id=`${credit.modifier}-credit-${initialPayment.modifier}-currency`,
-											name=`${credit.modifier}-credit-${initialPayment.modifier}-currency`,
-											value=`${(cost.value * initialPayment.factor).toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(cost.value * initialPayment.factor, nounRublePlurals)}`
-										)
+										+e('div').form-field
+											input(
+												type='text',
+												id=`${credit.modifier}-credit-${initialPayment.modifier}`,
+												name=`${credit.modifier}-credit-${initialPayment.modifier}`,
+												value= cost.min * (initialPayment.min / 100),
+												data-min= initialPayment.min
+												data-max= initialPayment.max,
+												data-step= initialPayment.step,
+											)
 										input(
 											type='range',
 											id=`${credit.modifier}-credit-${initialPayment.modifier}-range`,
@@ -75,23 +82,24 @@ mixin calculator(data)
 											min= initialPayment.min,
 											max= initialPayment.max,
 											step= initialPayment.step,
-											value= initialPayment.min
+											value= initialPayment.min,
 										)
+										+e('p').form-range-output
+											output(name=`${credit.modifier}-credit-${initialPayment.modifier}-output-min`)= `${initialPayment.min}%`
+									label(
+										for=`${credit.modifier}-credit-${period.modifier}`,
+										tabindex= 0
+									)= period.label
+									+e('div').form-field
 										input(
 											type='text',
-											id=`${credit.modifier}-credit-${initialPayment.modifier}-percent`,
-											name=`${credit.modifier}-credit-${initialPayment.modifier}-percent`,
-											value=`${initialPayment.factor * 100}%`
+											id=`${credit.modifier}-credit-${period.modifier}`,
+											name=`${credit.modifier}-credit-${period.modifier}`,
+											value= period.min,
+											data-min= period.min,
+											data-max= period.max,
+											data-step= period.step,
 										)
-									label(
-										for=`${credit.modifier}-credit-${period.modifier}`
-									)= period.label
-									input(
-										type='text',
-										id=`${credit.modifier}-credit-${period.modifier}`,
-										name=`${credit.modifier}-credit-${period.modifier}`,
-										value=`${period.min.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(period.min, nounYearPlurals)}`
-									)
 									input(
 										type='range',
 										id=`${credit.modifier}-credit-${period.modifier}-range`,
@@ -99,7 +107,7 @@ mixin calculator(data)
 										min= period.min,
 										max= period.max,
 										step= period.step,
-										value= period.min
+										value= period.min,
 									)
 									+e('p').form-range-output
 										output(name=`${credit.modifier}-credit-${period.modifier}-output-min`)= `${period.min.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(period.min, nounYearPlurals)}`
@@ -112,7 +120,8 @@ mixin calculator(data)
 											checked= true
 										)
 										label(
-											for=`${credit.modifier}-credit-${item.modifier}`
+											for=`${credit.modifier}-credit-${item.modifier}`,
+											tabindex= 0
 										) !{item.label}
 
 				+e('div').col--right

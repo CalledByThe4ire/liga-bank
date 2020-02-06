@@ -148,6 +148,14 @@
 
         border: 1px solid $body-color;
         border-radius: 4px;
+        outline: 0;
+
+        transition-property: border;
+        transition-duration: 0.3s;
+
+        &:focus {
+          border: 1px solid $primary;
+        }
 
         & > input[type="text"] {
           @include padding-x(initial);
@@ -170,23 +178,47 @@
           @include padding-x(25px);
 
           background-color: transparent;
-          border: 0;
+          border: none;
           fill: $body-color;
           outline: none;
 
           cursor: pointer;
+          transition-property: all;
+          transition-duration: 0.3s;
 
           @include media-breakpoint-down(sm) {
             padding-left: 25px;
             padding-right: 15px;
           }
+
+          svg {
+            pointer-events: none;
+            stroke: $body-color;
+            transition-property: all;
+            transition-duration: 0.3s;
+          }
+
+          &:hover,
+          &:focus {
+            background-color: $primary;
+
+            svg {
+              stroke: $body-bg;
+            }
+          }
+
+          &:active {
+            background-color: $body-color;
+          }
+
+          &:disabled {
+            cursor: not-allowed;
+          }
         }
 
         &--open {
-          input {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-          }
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
 
           button {
             svg {
@@ -201,6 +233,33 @@
             border-top-width: 0;
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
+
+            outline: 0;
+          }
+
+          &#{$calculator}__form-field--focus {
+            + #{$calculator}__forms-list {
+              border: 1px solid $primary;
+              border-top-width: 0;
+            }
+          }
+        }
+
+        &--focus {
+          border: 1px solid $primary;
+        }
+
+        &--invalid {
+          border: 1px solid $danger;
+
+          input[type="text"] {
+            color: $danger;
+          }
+
+          button {
+            &:hover:disabled {
+              background-color: $danger;
+            }
           }
         }
       }
@@ -213,7 +272,7 @@
 
         font-size: 14px;
         line-height: 1.4;
-        color: #707c87;
+        color: $inactive;
 
         @include media-breakpoint-down(md) {
           margin-bottom: 13px;
@@ -247,6 +306,8 @@
         color: $body-color;
 
         background-color: transparent;
+        outline: 0;
+
         transition-property: background-color;
         transition-duration: 0.3s;
 
@@ -256,7 +317,8 @@
           border-bottom: 1px solid #c1c2ca;
         }
 
-        &:hover {
+        &:hover,
+        &:focus {
           background-color: rgba($body-color, 0.05);
         }
       }
@@ -276,6 +338,8 @@
         }
 
         label {
+          $label: &;
+
           display: flex;
           width: inherit;
           margin-bottom: 10px;
@@ -284,9 +348,18 @@
           line-height: 1.4;
 
           cursor: pointer;
+          outline: none;
+
+          transition-property: color;
+          transition-duration: 0.3s;
 
           @include media-breakpoint-down(sm) {
             margin-bottom: 9px;
+          }
+
+          &:hover,
+          &:focus {
+            color: $primary;
           }
         }
 
@@ -301,9 +374,13 @@
             color: $body-color;
 
             background-color: transparent;
-            border: 1px solid $body-color;
+            border: 1px solid transparent;
             border-radius: 4px;
             outline: none;
+
+            &:disabled {
+              cursor: not-allowed;
+            }
           }
 
           &[type="range"] {
@@ -313,12 +390,21 @@
             margin-top: 12px;
             margin-bottom: 4px;
 
-            cursor: pointer;
+            &:disabled {
+              &::-webkit-slider-thumb {
+                background: $inactive;
+                cursor: not-allowed;
+              }
 
-            &::-webkit-slider-thumb,
-            &::-moz-range-thumb,
-            &::-ms-thumb {
-              cursor: pointer;
+              &::-moz-range-thumb {
+                background-color: $inactive;
+                cursor: not-allowed;
+              }
+
+              &::-ms-thumb {
+                background-color: $inactive;
+                cursor: not-allowed;
+              }
             }
 
             + input[type="text"] {
@@ -327,10 +413,11 @@
 
               font-size: 14px;
               line-height: 1.4;
-              color: #707c87;
+              color: $inactive;
               text-align: left;
 
               border: 0;
+              transition: width 0.3s;
 
               @include media-breakpoint-down(md) {
                 margin-bottom: 13px;
@@ -340,12 +427,18 @@
                 margin-bottom: 10px;
               }
             }
+
+            &:focus {
+              border: 1px solid $primary;
+            }
           }
 
           &[type="checkbox"] {
             display: none;
 
             + label {
+              $label: &;
+
               position: relative;
 
               padding-left: 25px;
@@ -375,6 +468,11 @@
             }
 
             &:checked + label::before {
+              background: url("@calculator/check-mark.svg") no-repeat center/6px
+                auto $primary;
+            }
+
+            &:focus:checked + label::before {
               background: url("@calculator/check-mark.svg") no-repeat center/6px
                 auto $primary;
             }
@@ -419,6 +517,18 @@
         button {
           left: initial;
           right: 0;
+
+          cursor: pointer;
+
+          &:hover,
+          &:focus,
+          &:active {
+            background-color: transparent;
+
+            svg {
+              stroke: $body-color;
+            }
+          }
         }
       }
     }
