@@ -50,7 +50,9 @@ mixin calculator(data)
 											value= cost.min,
 											data-min= cost.min
 											data-max= cost.max
-											data-step= cost.step
+											data-step= cost.step,
+											data-unit= `currency`,
+											data-format= `integer`,
 										)
 										button(type='button', name='plus', aria-label='Increase value')
 											svg(width=16, height=16)
@@ -74,6 +76,8 @@ mixin calculator(data)
 												data-min= initialPayment.min
 												data-max= initialPayment.max,
 												data-step= initialPayment.step,
+												data-unit= `currency`,
+												data-format= `integer`,
 											)
 										input(
 											type='range',
@@ -83,6 +87,8 @@ mixin calculator(data)
 											max= initialPayment.max,
 											step= initialPayment.step,
 											value= initialPayment.min,
+											data-unit= `empty`
+											data-format= `integer`,
 										)
 										+e('p').form-range-output
 											output(name=`${credit.modifier}-credit-${initialPayment.modifier}-output-min`)= `${initialPayment.min}%`
@@ -99,6 +105,8 @@ mixin calculator(data)
 											data-min= period.min,
 											data-max= period.max,
 											data-step= period.step,
+											data-unit= `period`,
+											data-format= `integer`,
 										)
 									input(
 										type='range',
@@ -108,6 +116,8 @@ mixin calculator(data)
 										max= period.max,
 										step= period.step,
 										value= period.min,
+										data-unit= `empty`
+										data-format= `integer`,
 									)
 									+e('p').form-range-output
 										output(name=`${credit.modifier}-credit-${period.modifier}-output-min`)= `${period.min.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(period.min, nounYearPlurals)}`
@@ -129,22 +139,20 @@ mixin calculator(data)
 						form(id=`credit-${creditOffer.modifier}`, name=`credit-${creditOffer.modifier}`, hidden= false)
 							fieldset
 								legend Наше предложение
-							each field in creditOffer.content
-								- let creditOfferValue;
-								if field.modifier === 'percentage-rate'
-									- creditOfferValue= `${field.value.toLocaleString('en-US', {minimumFractionDigits: 2})}%`;
-								else
-									- creditOfferValue= `${field.value.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(field.value, nounRublePlurals)}`;
-								+e('div').form-field
-									input(
-										type='text',
-										id=`credit-${creditOffer.modifier}-${field.modifier}`,
-										name=`credit-${creditOffer.modifier}-${field.modifier}`,
-										value= creditOfferValue,
-										readonly= true
-									)
-									label !{field.label}
-							button(type='submit') Оформить заявку
+								+e('div').form-field-wrapper
+									each field in creditOffer.content
+										+e('div').form-field
+											input(
+												type='text',
+												id=`credit-${creditOffer.modifier}-${field.modifier}`,
+												name=`credit-${creditOffer.modifier}-${field.modifier}`,
+												value= field.value,
+												readonly= true,
+												data-unit= `${field.modifier === `interest-rate` ? 'percent' : 'currency'}`,
+												data-format= `${field.modifier === `interest-rate` ? 'fractional' : 'integer'}`,
+											)
+											label(for= `credit-${creditOffer.modifier}-${field.modifier}`) !{field.label}
+									button(type='button') Оформить заявку
 
 			+e('div').credit-form--registration
 				form(id=`credit-${creditRegistration.modifier}`, name=`credit-${creditRegistration.modifier}`, hidden= false)

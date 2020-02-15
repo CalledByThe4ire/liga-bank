@@ -545,10 +545,6 @@
       }
 
       form {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-        align-items: flex-start;
         min-width: 500px;
         padding: 60px;
 
@@ -612,7 +608,7 @@
           color: #394959;
         }
 
-        button[type="submit"] {
+        button {
           display: flex;
           width: 100%;
           justify-content: center;
@@ -658,7 +654,18 @@
           }
         }
 
-        & #{$calculator}__form-field {
+        #{$calculator}__form-field-wrapper {
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-between;
+          align-items: flex-start;
+
+          @include media-breakpoint-down(md) {
+            justify-content: flex-start;
+          }
+        }
+
+        #{$calculator}__form-field {
           display: flex;
           flex-flow: row wrap;
           margin-bottom: 30px;
@@ -668,6 +675,7 @@
           }
 
           @include media-breakpoint-down(sm) {
+            flex-flow: column wrap;
             margin-bottom: 13px;
           }
 

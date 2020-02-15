@@ -160,24 +160,24 @@
     "modifier": "offer",
     "content": {
       "applicationNumber": {
-        "modifier": "total-cost",
+        "modifier": "credit-sum",
         "label": "Сумма ипотеки",
-        "value": 1330000
+        "value": 610000
       },
       "creditPurpose": {
-        "modifier": "percentage-rate",
+        "modifier": "interest-rate",
         "label": "Процентная ставка",
         "value": 9.4
       },
       "cost": {
-        "modifier": "monthly-payment",
+        "modifier": "annuity-payment",
         "label": "Ежемесячный платеж",
-        "value": 27868
+        "value": 12781
       },
       "initialPayment": {
-        "modifier": "minimal-income",
+        "modifier": "required-income",
         "label": "Необходимый&nbsp;доход",
-        "value": 61929
+        "value": 28403
       }
     }
   }
