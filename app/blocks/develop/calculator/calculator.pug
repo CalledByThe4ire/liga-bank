@@ -136,7 +136,7 @@ mixin calculator(data)
 
 				+e('div').col--right
 					+e('div').credit-form--offering
-						form(id=`credit-${creditOffer.modifier}`, name=`credit-${creditOffer.modifier}`)
+						form(id=`credit-${creditOffer.modifier}`, name=`credit-${creditOffer.modifier}`, hidden= true)
 							fieldset
 								legend Наше предложение
 								+e('div').form-field-wrapper
@@ -159,35 +159,54 @@ mixin calculator(data)
 								+e('p').content !{message.content}
 
 			+e('div').credit-form--registration
-				form(id=`credit-${creditRegistration.modifier}`, name=`credit-${creditRegistration.modifier}`, hidden= false)
+				form(id=`credit-${creditRegistration.modifier}`, name=`credit-${creditRegistration.modifier}`, hidden= true)
 					fieldset
 						legend Шаг&nbsp;3. Оформление заявки
-					- const { readOnly, editable } = creditRegistration.content
-					each field in readOnly
-						- let creditRegistrationValue;
-						if field.modifier === 'application-number'
-							- creditRegistrationValue= `№ ${field.value.toLocaleString('en-US', {minimumIntegerDigits: 4}).replace(/,/g, '')}`
-						else if field.modifier === 'credit-period'
-							- creditRegistrationValue= `${field.value.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(field.value, nounYearPlurals)}`
-						else if field.modifier === 'credit-purpose'
-							- creditRegistrationValue= field.value
-						else
-							- creditRegistrationValue= `${field.value.toLocaleString('en-US').replace(/,/g, ' ')} ${num2str(field.value, nounRublePlurals)}`
-						+e('div').form-field
-							label(for=`credit-${creditRegistration.modifier}-${field.modifier}`)= field.label
-							input(
-								type='text',
-								id=`credit-${creditRegistration.modifier}-${field.modifier}`,
-								name=`credit-${creditRegistration.modifier}-${field.modifier}`,
-								value= creditRegistrationValue,
-								readonly= true
-							)
+						- const { readOnly, editable } = creditRegistration.content
+						+e('div').form-field-wrapper
+							each field in readOnly
+								- let unit;
+								- let format;
+								if field.modifier === 'application-number'
+									- unit = 'empty'
+									- format = '4-digit integer'
+								else if field.modifier === 'period'
+									- unit = 'period'
+									- format = 'integer'
+								else if field.modifier === 'purpose'
+									- unit = 'empty'
+									- format = 'string'
+								else
+									- unit = 'currency'
+									- format = 'integer'
+								+e('div').form-field
+									label(for=`credit-${creditRegistration.modifier}-${field.modifier}`)= field.label
+									input(
+										type='text',
+										id=`credit-${creditRegistration.modifier}-${field.modifier}`,
+										name=`credit-${creditRegistration.modifier}-${field.modifier}`,
+										value= field.value,
+										readonly= true,
+										data-unit= unit,
+										data-format= format,
+									)
 
-					each field in editable
-						input(
-							type= field.type,
-							id=`credit-${creditRegistration.modifier}-${field.modifier}`,
-							name=`credit-${creditRegistration.modifier}-${field.modifier}`,
-							placeholder= field.placeholder,
-						)
-					button(type='submit') Отправить
+							each field in editable
+								- let format;
+								if field.modifier === 'full-name'
+									- format = 'string'
+								else if field.modifier === 'tel'
+									- format = 'tel'
+								else if field.modifier === 'email'
+									- format = 'email'
+								input(
+									type= field.type,
+									id=`credit-${creditRegistration.modifier}-${field.modifier}`,
+									name=`credit-${creditRegistration.modifier}-${field.modifier}`,
+									placeholder= field.placeholder,
+									required= true,
+									pattern= field.pattern,
+									data-unit= 'empty',
+									data-format= format,
+								)
+							button(type='submit') Отправить

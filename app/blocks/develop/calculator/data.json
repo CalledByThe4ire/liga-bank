@@ -137,27 +137,27 @@
         "applicationNumber": {
           "modifier": "application-number",
           "label": "Номер заявки",
-          "value": 0
+          "value": 1
         },
         "creditPurpose": {
-          "modifier": "credit-purpose",
+          "modifier": "purpose",
           "label": "Цель кредита",
           "value": "Ипотека"
         },
         "cost": {
           "modifier": "cost",
           "label": "Стоимость недвижимости",
-          "value": 2000000
+          "value": 1200000
         },
         "initialPayment": {
           "modifier": "initial-payment",
           "label": "Первоначальный взнос",
-          "value": 200000,
+          "value": 120000,
           "disable": "false",
           "hidden": "false"
         },
         "creditPeriod": {
-          "modifier": "credit-period",
+          "modifier": "period",
           "label": "Срок кредитования",
           "value": 5
         }
@@ -166,17 +166,20 @@
         "fullName": {
           "modifier": "full-name",
           "type": "text",
-          "placeholder": "ФИО"
+          "placeholder": "ФИО",
+          "pattern": "^[a-zA-Zа-яА-ЯёЁ ]+$"
         },
         "tel": {
           "modifier": "tel",
           "type": "tel",
-          "placeholder": "Телефон"
+          "placeholder": "Телефон",
+          "pattern": ".{16,}"
         },
         "email": {
           "modifier": "email",
           "type": "email",
-          "placeholder": "E-mail"
+          "placeholder": "E-mail",
+          "pattern": "^\\S*@?\\S*$"
         }
       }
     }

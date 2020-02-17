@@ -47,9 +47,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   }
 
-  // remove after code completion
-  creditCalculationForms[0].hidden = false;
-
   const toggleFocus = (element, parentElement, selector) => {
     element.addEventListener(`focus`, () => {
       if (!parentElement.classList.contains(`${selector}--focus`)) {
@@ -138,6 +135,12 @@ document.addEventListener(`DOMContentLoaded`, () => {
             }
           }
         };
+      case `4-digit integer`:
+        return {
+          mask: /^\d+$/,
+          commit: (value, masked) =>
+            (masked._value = value.padStart(4, `0`))
+        };
       case `fractional`:
         return {
           mask: `VALUE${unit}`,
@@ -154,10 +157,24 @@ document.addEventListener(`DOMContentLoaded`, () => {
         };
       case `string`:
         return {
-          mask: `VALUE${unit}`,
+          mask: `VALUE`,
           blocks: {
             VALUE: {
               mask: String
+            }
+          }
+        };
+      case `tel`:
+        return {
+          mask: `+{7}(000) 000-00-00`,
+          lazy: true
+        };
+      case `email`:
+        return {
+          mask: `VALUE`,
+          blocks: {
+            VALUE: {
+              mask: /^\S*@?\S*$/
             }
           }
         };
@@ -173,10 +190,12 @@ document.addEventListener(`DOMContentLoaded`, () => {
   // Шаг 1 (Цель кредита)
   if (creditSelectionFormField) {
     creditSelectionFormField.addEventListener(`click`, (evt) => {
+      event.stopPropagation();
       const {currentTarget} = evt;
       currentTarget.classList.toggle(`calculator__form-field--open`);
 
       document.addEventListener(`click`, (event) => {
+        event.stopImmediatePropagation();
         const rect = currentTarget.getBoundingClientRect();
         const isInFormField =
           rect.top <= event.clientY &&
@@ -209,6 +228,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
                 form.dispatchEvent(new Event(`change`));
               }
             });
+          }
+          if (creditRegistrationForm) {
+            creditRegistrationForm.hidden = true;
           }
           if (creditSelectionTitle) {
             creditSelectionTitle.value = target.textContent;
@@ -271,7 +293,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
               maskedInputNewValue = Number(mask.unmaskedValue) - Number(step);
             }
             mask.value = `${maskedInputNewValue}`;
-            mask.el.input.dispatchEvent(new Event(`change`));
+            mask.el.input.dispatchEvent(new Event(`change`, {bubbles: true}));
 
             if (
               Number(mask.unmaskedValue) < Number(min) ||
@@ -436,7 +458,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
           if (initialPayment) {
             initialPayment.value = `${Number(cost.unmaskedValue) *
               (Number(mask.unmaskedValue) / 100)}`;
-            initialPayment.el.input.dispatchEvent(new Event(`change`));
+            initialPayment.el.input.dispatchEvent(
+                new Event(`change`, {bubbles: true})
+            );
           }
           break;
 
@@ -468,7 +492,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
         case `period-range`:
           if (period) {
             period.value = `${Number(mask.unmaskedValue)}`;
-            period.el.input.dispatchEvent(new Event(`change`));
+            period.el.input.dispatchEvent(
+                new Event(`change`, {bubbles: true})
+            );
           }
           break;
 
@@ -538,6 +564,13 @@ document.addEventListener(`DOMContentLoaded`, () => {
         masks.push(IMask(input, getMaskOptions(unit, input.dataset.format)));
       });
     }
+    creditOfferingForm
+      .querySelector(`button`)
+      .addEventListener(`click`, (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        creditRegistrationForm.hidden = false;
+      });
   }
 
   const fillInCreditOfferingForm = (elements, data) => {
@@ -666,9 +699,13 @@ document.addEventListener(`DOMContentLoaded`, () => {
               interestRate = 16;
             } else if (Number(cost.unmaskedValue) > costThreshold) {
               interestRate = 15;
-            } else if (carInsurance.checked || lifeInsurance.checked) {
+            }
+
+            if (carInsurance.checked || lifeInsurance.checked) {
               interestRate = 8.5;
-            } else if (carInsurance.checked && lifeInsurance.checked) {
+            }
+
+            if (carInsurance.checked && lifeInsurance.checked) {
               interestRate = 3.5;
             }
 
@@ -740,9 +777,201 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   };
 
-  if (creditCalculationForms) {
-    creditCalculationForms.forEach((form) =>
-      form.addEventListener(`change`, renderCreditOfferingFormData)
+  // Шаг 3 (оформление заявки)
+  if (creditRegistrationForm) {
+    const formRegistrationName = creditRegistrationForm.name;
+    const inputs = creditRegistrationForm.querySelectorAll(`input`);
+
+    if (inputs) {
+      inputs.forEach((input) => {
+        const unit = getUnitPluralForm(input.dataset.unit, input.value);
+        masks.push(IMask(input, getMaskOptions(unit, input.dataset.format)));
+      });
+    }
+
+    const [creditRegistrationFullNameInput] = masks.filter((mask) => {
+      return mask.el.input.name === `${formRegistrationName}-full-name`;
+    });
+
+    const [creditRegistrationEmailInput] = masks.filter((mask) => {
+      return mask.el.input.name === `${formRegistrationName}-email`;
+    });
+
+    const [creditRegistrationTelInput] = masks.filter((mask) => {
+      return mask.el.input.name === `${formRegistrationName}-tel`;
+    });
+
+    const [formRegistrationApplicationNumber] = masks.filter((mask) => {
+      return (
+        mask.el.input.name === `${formRegistrationName}-application-number`
+      );
+    });
+
+    const registrationFormData = localStorage.getItem(`registrationFormData`)
+      ? JSON.parse(localStorage.getItem(`registrationFormData`))
+      : {
+        counter: Number(formRegistrationApplicationNumber.unmaskedValue) || 0,
+        fullName: creditRegistrationFullNameInput.unmaskedValue || ``,
+        tel: Number(creditRegistrationTelInput.unmaskedValue) || ``,
+        email: creditRegistrationEmailInput.unmaskedValue || ``
+      };
+    const {counter, fullName, tel, email} = registrationFormData;
+
+    if (creditRegistrationFullNameInput) {
+      creditRegistrationFullNameInput.value = fullName;
+    }
+
+    if (creditRegistrationEmailInput) {
+      creditRegistrationEmailInput.value = email;
+    }
+
+    if (creditRegistrationTelInput) {
+      creditRegistrationTelInput.value = tel;
+    }
+
+    if (formRegistrationApplicationNumber) {
+      formRegistrationApplicationNumber.value = `${counter}`;
+    }
+  }
+
+  const renderCreditRegistrationFormData = ({currentTarget}) => {
+    const updateMask = (mask) => {
+      const {unit, format} = mask.el.input.dataset;
+      const maskUnit = getUnitPluralForm(unit, mask.unmaskedValue);
+      mask.updateOptions(getMaskOptions(maskUnit, format));
+    };
+    // поля формы с параметрами кредита
+    const divider = `-credit-`;
+    const [, formCalculationModifier] = currentTarget.name.split(`-`);
+
+    const [creditRegistrationCostMask] = masks.filter((mask) => {
+      return mask.el.input.name === `${formCalculationModifier}${divider}cost`;
+    });
+    const [creditRegistrationInitialPaymentMask] = masks.filter(
+        (mask) =>
+          mask.el.input.name ===
+        `${formCalculationModifier}${divider}initial-payment`
     );
+    const [creditRegistrationPeriodMask] = masks.filter(
+        (mask) =>
+          mask.el.input.name === `${formCalculationModifier}${divider}period`
+    );
+
+    // поля формы оформления заявки
+    const formRegistrationName =
+      creditRegistrationForm && creditRegistrationForm.name;
+
+    const [formRegistrationPurposeInput] = masks.filter((mask) => {
+      return mask.el.input.name === `${formRegistrationName}-purpose`;
+    });
+
+    const formRegistrationCostLabel =
+      creditRegistrationForm &&
+      creditRegistrationForm.querySelector(`[for="credit-registration-cost"]`);
+    const [costInput] = masks.filter((mask) => {
+      return mask.el.input.name === `${formRegistrationName}-cost`;
+    });
+
+    const [formRegistrationInitialPaymentInput] = masks.filter((mask) => {
+      return mask.el.input.name === `${formRegistrationName}-initial-payment`;
+    });
+    const creditRegistrationInitialPaymentGroup =
+      creditRegistrationForm &&
+      creditRegistrationForm
+        .querySelector(`input[name="${formRegistrationName}-initial-payment"]`)
+        .closest(`.calculator__form-field`);
+
+    const [formRegistrationPeriodInput] = masks.filter((mask) => {
+      return mask.el.input.name === `${formRegistrationName}-period`;
+    });
+
+    switch (formCalculationModifier) {
+      case `mortgage`:
+        formRegistrationPurposeInput.value = `Ипотека`;
+        if (creditRegistrationCostMask) {
+          formRegistrationCostLabel.textContent = `Стоимость недвижимости`;
+        }
+        break;
+
+      case `auto`:
+        formRegistrationPurposeInput.value = `Автокредит`;
+        if (creditRegistrationCostMask) {
+          formRegistrationCostLabel.textContent = `Стоимость автомобиля`;
+        }
+        break;
+
+      case `personal`:
+        formRegistrationPurposeInput.value = `Потребительский кредит`;
+        if (creditRegistrationCostMask) {
+          formRegistrationCostLabel.textContent = `Сумма кредита`;
+        }
+        break;
+
+      default:
+        throw new Error(`Unknown modifier: ${formCalculationModifier}`);
+    }
+
+    if (creditRegistrationCostMask) {
+      costInput.value = creditRegistrationCostMask.unmaskedValue;
+      updateMask(costInput);
+    }
+    if (creditRegistrationInitialPaymentMask) {
+      formRegistrationInitialPaymentInput.value =
+        creditRegistrationInitialPaymentMask.unmaskedValue;
+      creditRegistrationInitialPaymentGroup.classList.remove(
+          `calculator__form-field--invisible`
+      );
+      updateMask(formRegistrationInitialPaymentInput);
+    } else {
+      creditRegistrationInitialPaymentGroup.classList.add(
+          `calculator__form-field--invisible`
+      );
+    }
+
+    if (creditRegistrationPeriodMask) {
+      formRegistrationPeriodInput.value =
+        creditRegistrationPeriodMask.unmaskedValue;
+      updateMask(formRegistrationPeriodInput);
+    }
+  };
+
+  if (creditCalculationForms) {
+    creditCalculationForms.forEach((form) => {
+      form.addEventListener(`change`, renderCreditOfferingFormData);
+      form.addEventListener(`change`, renderCreditRegistrationFormData);
+    });
+  }
+
+  if (creditRegistrationForm) {
+    creditRegistrationForm.addEventListener(`submit`, (event) => {
+      event.preventDefault();
+      const {target} = event;
+
+      const formRegistrationName = creditRegistrationForm.name;
+
+      let counter = localStorage.getItem(`registrationFormData`)
+        ? JSON.parse(localStorage.getItem(`registrationFormData`))[`counter`]
+        : 1;
+      const [formRegistrationApplicationNumber] = masks.filter((mask) => {
+        return (
+          mask.el.input.name === `${formRegistrationName}-application-number`
+        );
+      });
+      counter += 1;
+      const formData = Object.fromEntries(new FormData(target));
+
+      localStorage.setItem(
+          `registrationFormData`,
+          JSON.stringify({
+            fullName: formData[`${formRegistrationName}-full-name`],
+            email: formData[`${formRegistrationName}-email`],
+            tel: formData[`${formRegistrationName}-tel`],
+            counter
+          })
+      );
+
+      formRegistrationApplicationNumber.unmaskedValue = `${counter}`;
+      creditRegistrationForm.hidden = true;
+    });
   }
 });

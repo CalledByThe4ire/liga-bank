@@ -725,11 +725,6 @@
       }
 
       form {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-        align-items: flex-start;
-
         width: 770px;
         margin: auto;
 
@@ -810,6 +805,13 @@
             line-height: 16px;
           }
         }
+      }
+
+      & #{$calculator}__form-field-wrapper {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: flex-start;
 
         > input {
           flex-grow: initial;
@@ -895,6 +897,10 @@
           @include media-breakpoint-down(md) {
             margin-bottom: 30px;
           }
+        }
+
+        &--invisible {
+          display: none;
         }
       }
     }
