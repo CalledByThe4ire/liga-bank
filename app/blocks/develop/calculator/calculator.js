@@ -2,12 +2,18 @@
 /* eslint-disable no-unused-vars, new-cap, max-nested-callbacks */
 document.addEventListener(`DOMContentLoaded`, () => {
   const calculator = document.querySelector(`#calculator`);
+
   let creditSelectionForm = null;
   let creditSelectionTitle = null;
   let creditSelectionFormField = null;
+
   let creditCalculationForms = null;
   let creditOfferingForm = null;
   let creditRegistrationForm = null;
+
+  let messages = null;
+  let rejectMessage = null;
+  let errorMessage = null;
 
   if (calculator) {
     creditSelectionForm = calculator.querySelector(`#credit-selection`);
@@ -23,6 +29,22 @@ document.addEventListener(`DOMContentLoaded`, () => {
     );
     creditOfferingForm = calculator.querySelector(`#credit-offer`);
     creditRegistrationForm = calculator.querySelector(`#credit-registration`);
+
+    messages = calculator.querySelectorAll(`.calculator__message`);
+    if (messages) {
+      [rejectMessage] = Array.from(messages).filter((item) => {
+        if (item.classList.contains(`calculator__message--reject`)) {
+          return item;
+        }
+        return false;
+      });
+      [errorMessage] = Array.from(messages).filter((item) => {
+        if (item.classList.contains(`calculator__message--error`)) {
+          return item;
+        }
+        return false;
+      });
+    }
   }
 
   // remove after code completion
@@ -473,6 +495,35 @@ document.addEventListener(`DOMContentLoaded`, () => {
     Number((interestRate / 100 / 12).toFixed(5));
   const calcPeriods = (period) => period * 12;
 
+  const toggleMessage = (type, currentValue, minValue) => {
+    const creditSumMinThreshold = 200000;
+    const modifiers = new Map([
+      [`mortgage`, `ипотечные`],
+      [`auto`, `автомобильные`],
+      [`personal`, `потребительские`]
+    ]);
+    if (currentValue < minValue) {
+      const messageData = rejectMessage.querySelectorAll(`span`);
+      const [modifier, value] = messageData;
+      modifier.textContent = modifiers.get(`${type}`);
+      value.textContent = `${minValue
+        .toLocaleString(`en-US`)
+        .replace(/,/g, ` `)} ${num2str(minValue, nounRublePlurals)}`;
+      rejectMessage.classList.remove(`calculator__message--invisible`);
+      creditOfferingForm.hidden = true;
+    } else {
+      rejectMessage.classList.add(`calculator__message--invisible`);
+      creditOfferingForm.hidden = false;
+    }
+
+    if (Number.isNaN(currentValue)) {
+      errorMessage.classList.remove(`calculator__message--invisible`);
+      creditOfferingForm.hidden = true;
+    } else {
+      errorMessage.classList.add(`calculator__message--invisible`);
+    }
+  };
+
   const creditTypeNames = new Map([
     [`mortgage`, `Сумма ипотеки`],
     [`auto`, `Сумма автокредита`],
@@ -584,6 +635,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
                 periods
             );
             const requiredIncome = calcRequiredIncome(annuityPayment);
+
+            toggleMessage(formModifier, creditSum, 500000);
+
             fillInCreditOfferingForm(filteredMasks, {
               creditSum,
               interestRate,
@@ -625,6 +679,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
                 periods
             );
             const requiredIncome = calcRequiredIncome(annuityPayment);
+
+            toggleMessage(formModifier, creditSum, 200000);
+
             fillInCreditOfferingForm(filteredMasks, {
               creditSum,
               interestRate,
@@ -665,6 +722,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
                 periods
             );
             const requiredIncome = calcRequiredIncome(annuityPayment);
+
+            toggleMessage(formModifier, creditSum, 0);
+
             fillInCreditOfferingForm(filteredMasks, {
               creditSum,
               interestRate,

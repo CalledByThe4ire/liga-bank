@@ -136,7 +136,7 @@ mixin calculator(data)
 
 				+e('div').col--right
 					+e('div').credit-form--offering
-						form(id=`credit-${creditOffer.modifier}`, name=`credit-${creditOffer.modifier}`, hidden= false)
+						form(id=`credit-${creditOffer.modifier}`, name=`credit-${creditOffer.modifier}`)
 							fieldset
 								legend Наше предложение
 								+e('div').form-field-wrapper
@@ -154,7 +154,7 @@ mixin calculator(data)
 											label(for= `credit-${creditOffer.modifier}-${field.modifier}`) !{field.label}
 									button(type='button') Оформить заявку
 						each message in messages
-							+e('div').message--invisible.message-calculator__
+							+e('div').message--invisible(class=`--${message.modifier}`).message-calculator__
 								+e('h3').title !{message.title}
 								+e('p').content !{message.content}
 
