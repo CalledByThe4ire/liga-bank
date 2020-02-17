@@ -105,6 +105,31 @@
       ]
     }
   ],
+  "creditOffer": {
+    "modifier": "offer",
+    "content": {
+      "applicationNumber": {
+        "modifier": "credit-sum",
+        "label": "Сумма ипотеки",
+        "value": 610000
+      },
+      "creditPurpose": {
+        "modifier": "interest-rate",
+        "label": "Процентная ставка",
+        "value": 9.4
+      },
+      "cost": {
+        "modifier": "annuity-payment",
+        "label": "Ежемесячный платеж",
+        "value": 12781
+      },
+      "initialPayment": {
+        "modifier": "required-income",
+        "label": "Необходимый&nbsp;доход",
+        "value": 28403
+      }
+    }
+  },
   "creditRegistration": {
     "modifier": "registration",
     "content": {
@@ -156,29 +181,14 @@
       }
     }
   },
-  "creditOffer": {
-    "modifier": "offer",
-    "content": {
-      "applicationNumber": {
-        "modifier": "credit-sum",
-        "label": "Сумма ипотеки",
-        "value": 610000
-      },
-      "creditPurpose": {
-        "modifier": "interest-rate",
-        "label": "Процентная ставка",
-        "value": 9.4
-      },
-      "cost": {
-        "modifier": "annuity-payment",
-        "label": "Ежемесячный платеж",
-        "value": 12781
-      },
-      "initialPayment": {
-        "modifier": "required-income",
-        "label": "Необходимый&nbsp;доход",
-        "value": 28403
-      }
+  "messages": [
+    {
+      "title": "Наш банк не&nbsp;выдаёт <span>ипотечные</span> кредиты меньше&nbsp;200&nbsp;000&nbsp;рублей.",
+      "content": "Попробуйте использовать другие параметры для&nbsp;расчёта."
+    },
+    {
+      "title": "Введены некорректные данные",
+      "content": "Попробуйте использовать другие параметры для&nbsp;расчёта."
     }
-  }
+  ]
 }

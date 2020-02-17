@@ -899,4 +899,31 @@
       }
     }
   }
+
+  &__message {
+    display: block;
+    min-width: 500px;
+
+    @include padding-x(60px);
+    @include padding-y(55px);
+
+    border-radius: 4px;
+    background-color: $body-bg;
+
+    @include media-breakpoint-down(md) {
+      min-width: initial;
+
+      @include padding-x(60px);
+      @include padding-y(55px);
+    }
+
+    @include media-breakpoint-down(sm) {
+      @include padding-x(16px);
+      @include padding-y(36px);
+    }
+
+    &--invisible {
+      display: none;
+    }
+  }
 }

@@ -381,21 +381,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
           break;
 
         case `initial-payment`:
-          let maternityCapitalSum = 0;
-          creditCalculationForms.forEach((form) => {
-            if (form.name.endsWith(`${formModifier}`) && !form.hidden) {
-              const [maternityCapital] = Array.from(form.elements).filter(
-                  (element) =>
-                    element.name === `${formModifier}${divider}maternity-capital`
-              );
-              maternityCapitalSum = maternityCapital.checked ? 470000 : 0;
-            }
-          });
-          if (
-            Number(mask.unmaskedValue) >=
-            Number(cost.unmaskedValue) - maternityCapitalSum
-          ) {
-            mask.value = `${Number(cost.unmaskedValue) - maternityCapitalSum}`;
+          if (Number(mask.unmaskedValue) >= Number(cost.unmaskedValue)) {
+            mask.value = `${Number(cost.unmaskedValue)}`;
             if (initialPaymentRange) {
               initialPaymentRange.value = `${max}`;
             }
@@ -559,7 +546,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
 
     let periods = calcPeriods(Number(period.unmaskedValue));
-    const filteredMasks = Array.from(masks).filter((mask) => mask.el.input.name.includes(`offer`));
+    const filteredMasks = Array.from(masks).filter((mask) =>
+      mask.el.input.name.includes(`offer`)
+    );
 
     if (cost && period) {
       switch (formModifier) {

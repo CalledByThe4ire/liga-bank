@@ -1,6 +1,6 @@
 mixin calculator(data)
 	+b('section').calculator(id='calculator')&attributes(attributes)
-		- const { creditSelection, credits, creditRegistration, creditOffer } = data;
+		- const { creditSelection, credits, creditOffer, creditRegistration, messages } = data;
 		- const num2str=(t,n)=>{let r=(t=Math.abs(t)%100)%10;return t>10&&t<20?n[2]:r>1&&r<5?n[1]:1===r?n[0]:n[2]};
 		- const nounRublePlurals = ['рубль', 'рубля', 'рублей'];
 		- const nounYearPlurals = ['год', 'года', 'лет'];
@@ -153,6 +153,10 @@ mixin calculator(data)
 											)
 											label(for= `credit-${creditOffer.modifier}-${field.modifier}`) !{field.label}
 									button(type='button') Оформить заявку
+						each message in messages
+							+e('div').message--invisible.message-calculator__
+								+e('h3').title !{message.title}
+								+e('p').content !{message.content}
 
 			+e('div').credit-form--registration
 				form(id=`credit-${creditRegistration.modifier}`, name=`credit-${creditRegistration.modifier}`, hidden= false)
