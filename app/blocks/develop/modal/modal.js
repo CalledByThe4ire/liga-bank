@@ -3,10 +3,10 @@ const {watch} = WatchJS;
 
 document.addEventListener(`DOMContentLoaded`, () => {
   // Modal Form Validation (Observer Pattern, MVC)
-  const modal = document.querySelector(`#modal-page-header`);
-  const modalClose = modal.querySelector(`.modal__trigger`);
+  const modalPageHeader = document.querySelector(`#modal-page-header`);
+  const modalCloseButtons = document.querySelectorAll(`.modal__trigger`);
 
-  const form = modal.querySelector(`form`);
+  const form = modalPageHeader.querySelector(`form`);
   const fieldElements = {
     login: form.querySelector(`.login-modal-form-field input`),
     password: form.querySelector(`.password-modal-form-field input`)
@@ -81,7 +81,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   };
 
-  if (modal && form) {
+  if (modalPageHeader && form) {
     if (fieldElements[`login`] && fieldElements[`password`]) {
       Object.entries(fieldElements).forEach(([name, element]) => {
         element.value = state.form.fields[name];
@@ -138,7 +138,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
             submitButton.disabled = true;
             break;
           case `finished`:
-            modal.classList.add(`modal--invisible`);
+            modalPageHeader.classList.add(`modal--invisible`);
             break;
           default:
             throw new Error(`Unknown state: ${processState}`);
@@ -213,24 +213,26 @@ document.addEventListener(`DOMContentLoaded`, () => {
     );
 
     // Modal Visibility
-    if (modalClose) {
+    if (modalCloseButtons) {
       [`mousedown`, `keydown`].forEach((event) =>
-        modalClose.addEventListener(event, (e) => {
-          const {type, target} = e;
-          if (type === `keydown`) {
-            if (e.keyCode === 32 || e.keyCode === 13) {
+        modalCloseButtons.forEach((modalCloseButton) =>
+          modalCloseButton.addEventListener(event, (e) => {
+            const {type, target} = e;
+            if (type === `keydown`) {
+              if (e.keyCode === 32 || e.keyCode === 13) {
+                target
+                  .closest(`#${target.dataset.modal}`)
+                  .classList.add(`modal--invisible`);
+                document.body.classList.add(`page--overlay`);
+              }
+            } else {
               target
                 .closest(`#${target.dataset.modal}`)
                 .classList.add(`modal--invisible`);
               document.body.classList.add(`page--overlay`);
             }
-          } else {
-            target
-              .closest(`#${target.dataset.modal}`)
-              .classList.add(`modal--invisible`);
-            document.body.classList.add(`page--overlay`);
-          }
-        })
+          })
+        )
       );
     }
   }

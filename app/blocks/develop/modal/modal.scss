@@ -16,7 +16,6 @@
   &--page-header {
     width: 544px;
     min-height: 493px;
-    max-height: 100%;
 
     background-color: $body-bg;
     border: 4px solid $primary;
@@ -30,7 +29,7 @@
       width: 290px;
     }
 
-    & #{$modal}__content {
+    & #{$modal}__inner {
       display: flex;
       flex-flow: column wrap;
       padding: 55px;
