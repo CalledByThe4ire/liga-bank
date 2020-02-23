@@ -70,26 +70,6 @@
     & #{$modal}__trigger {
       display: flex;
       align-self: flex-start;
-
-      stroke: $body-color;
-      stroke-width: 2;
-
-      transition-property: stroke;
-      transition-duration: 0.3s;
-      cursor: pointer;
-
-      &:hover,
-      &:focus {
-        stroke: $primary;
-      }
-
-      &:focus {
-        outline: none;
-      }
-
-      > * {
-        pointer-events: none;
-      }
     }
 
     form {
@@ -177,6 +157,14 @@
     background-color: $body-bg;
     border-radius: 4px;
 
+    @include media-breakpoint-down(md) {
+      width: 678px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 290px;
+    }
+
     & #{$modal}__inner {
       display: block;
       width: 100%;
@@ -186,12 +174,7 @@
 
       text-align: center;
 
-      border-radius: 4px;
-      background-color: $body-bg;
-
       @include media-breakpoint-down(md) {
-        min-width: initial;
-
         @include padding-x(60px);
         @include padding-y(55px);
       }
@@ -207,24 +190,14 @@
       top: 25px;
       right: 25px;
 
-      stroke: $body-color;
-      stroke-width: 2;
-
-      transition-property: stroke;
-      transition-duration: 0.3s;
-      cursor: pointer;
-
-      &:hover,
-      &:focus {
-        stroke: $primary;
+      @include media-breakpoint-down(md) {
+        top: 30px;
+        right: 30px;
       }
 
-      &:focus {
-        outline: none;
-      }
-
-      > * {
-        pointer-events: none;
+      @include media-breakpoint-down(sm) {
+        top: 10px;
+        right: 10px;
       }
     }
 
@@ -237,13 +210,10 @@
       line-height: 1.4;
       font-weight: 500;
 
-      @include media-breakpoint-down(md) {
-        max-width: 75%;
-      }
-
       @include media-breakpoint-down(sm) {
-        max-width: initial;
-        margin-bottom: 15px;
+        @include margin-x(auto);
+        max-width: 85%;
+
         font-size: 18px;
       }
     }
@@ -257,7 +227,8 @@
       color: #394959;
 
       @include media-breakpoint-down(md) {
-        max-width: 50%;
+        @include margin-x(auto);
+        max-width: 70%;
       }
 
       @include media-breakpoint-down(sm) {
@@ -266,180 +237,28 @@
     }
   }
 
-  .login-modal-form-field,
-  .password-modal-form-field {
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    margin-bottom: 8px;
+  &__trigger {
+    width: 16px;
+    height: 16px;
 
-    @include media-breakpoint-down(md) {
-      margin-bottom: 7px;
+    stroke: $body-color;
+    stroke-width: 2;
+
+    transition-property: stroke;
+    transition-duration: 0.3s;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      stroke: $primary;
     }
 
-    @include media-breakpoint-down(sm) {
-      margin-bottom: 0;
-    }
-
-    & label {
-      margin-bottom: 8px;
-
-      font-size: 16px;
-      line-height: 1;
-
-      cursor: pointer;
-    }
-
-    & input {
-      width: 100%;
-      min-height: 60px;
-      padding: 10px;
-
-      font-size: 12px;
-      color: $body-color;
-
-      background-color: transparent;
-      border: 1px solid $body-color;
-      border-radius: 4px;
-
-      transition-property: all;
-      transition-duration: 0.3s;
-
-      &:hover,
-      &:focus {
-        outline: none;
-        border: 1px solid $primary;
-      }
-
-      @include media-breakpoint-down(sm) {
-        font-size: 14px;
-      }
-    }
-
-    &--invalid {
-      & input,
-      & input:hover,
-      & input:focus {
-        border-color: $danger;
-      }
-    }
-
-    &__feedback {
-      display: flex;
-      flex-flow: row wrap;
-      width: 100%;
-      min-height: 10px;
-
-      font-size: 12px;
-      line-height: 1;
-    }
-
-    &__error-message {
-      align-self: flex-end;
-      font-size: 10px;
-      color: $danger;
-    }
-  }
-
-  .login-modal-form-field {
-    & input {
-      margin-bottom: 10px;
-    }
-  }
-
-  .password-modal-form-field {
-    &__feedback {
-      width: 75%;
-    }
-
-    &__inner {
-      position: relative;
-      width: 100%;
-      margin-bottom: 10px;
-
-      @include media-breakpoint-down(md) {
-        margin-bottom: 7px;
-      }
-
-      & input {
-        padding-right: 65px;
-      }
-
-      & button {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        z-index: 5;
-
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: center;
-        align-items: center;
-        width: 65px;
-        height: 60px;
-        padding: 0;
-        padding-right: 5px;
-        margin: 0;
-
-        fill: $body-color;
-        cursor: pointer;
-        transition-property: fill;
-        transition-duration: 0.3s;
-
-        &:hover,
-        &:focus {
-          fill: $primary;
-        }
-
-        > * {
-          pointer-events: none;
-        }
-
-        @include media-breakpoint-down(sm) {
-          width: 50px;
-          padding-right: initial;
-        }
-      }
-    }
-
-    &--invalid {
-      & button:hover {
-        fill: $danger;
-      }
-    }
-
-    & a {
-      display: flex;
-      flex-flow: row nowrap;
-      align-self: flex-start;
-      width: initial;
-      margin-left: auto;
-
-      font-size: 12px;
-      line-height: 1;
-      color: #707c87;
-      text-decoration: $link-decoration;
-
+    &:focus {
       outline: none;
+    }
 
-      transition-property: color;
-      transition-duration: 0.3s;
-
-      &:hover,
-      &:focus {
-        color: $link-hover-color;
-        text-decoration: $link-hover-decoration;
-      }
-
-      @include media-breakpoint-down(sm) {
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-
-        font-size: 14px;
-
-        transform: translateX(-50%);
-      }
+    > * {
+      pointer-events: none;
     }
   }
 }

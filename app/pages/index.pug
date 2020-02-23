@@ -40,7 +40,7 @@ block content
 						a(href='#') Забыли&nbsp;пароль?
 					button(type='submit') Войти
 		+modal(`page-header`)(class='--calculator', id='modal-calculator')
-			+e('a').trigger(aria-label='Close modal', data-modal='modal-calculator')
+			+e('a').trigger(aria-label='Close modal', data-modal='modal-calculator', tabindex= 0)
 				+e('svg').icon(width=16, height=16)
 					use(xlink:href='#modal__close')
 			+e('header').title
