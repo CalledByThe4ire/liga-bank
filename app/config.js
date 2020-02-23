@@ -30,8 +30,10 @@ module.exports = {
       "node_modules/bootstrap/scss/mixins/_breakpoints.scss",
       "node_modules/bootstrap/scss/mixins/_grid.scss",
       "node_modules/bootstrap/scss/mixins/_lists.scss",
+      "app/blocks/develop/page/base/common.scss",
       "app/blocks/develop/page/base/variables.scss",
       "app/blocks/develop/page/base/mixins.scss",
+      "app/blocks/develop/page/base/fonts.scss",
     ],
     HTMLRoot: "./"
   },
