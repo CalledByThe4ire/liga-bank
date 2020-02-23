@@ -67,6 +67,7 @@
     "input-range-scss": "^1.5.2",
     "js-beautify": "^1.8.9",
     "melanke-watchjs": "^1.5.0",
+    "node-sass-alias-importer": "^1.0.0",
     "normalize.scss": "^0.1.0",
     "npm": "^6.13.7",
     "plugin-error": "^1.0.1",

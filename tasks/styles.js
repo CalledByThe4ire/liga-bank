@@ -1,20 +1,20 @@
-'use strict';
+"use strict";
 
 // Compile styles
 
 module.exports = {
   build: 2,
-  name: 'compile:styles',
+  name: "compile:styles",
 
   run(done) {
     const styles = (this.store.styles = {});
-    const checkFiles = require(this.paths.core('checkFiles'));
+    const checkFiles = require(this.paths.core("checkFiles"));
 
-    checkFiles('styles', this); // Check styles before compile
+    checkFiles("styles", this); // Check styles before compile
 
     // Compile
 
-    if (this.isDev || !this.config.build.bundles.includes('css')) {
+    if (this.isDev || !this.config.build.bundles.includes("css")) {
       const files = styles[this.mainBundle] || [];
 
       return this.compileBundle(files, this.mainBundle, done);
@@ -27,7 +27,7 @@ module.exports = {
     if (files.length === 0) return done();
 
     const options = {
-      sourcemaps: this.config.build.sourcemaps.includes('css')
+      sourcemaps: this.config.build.sourcemaps.includes("css")
     };
 
     return this.gulp
@@ -42,51 +42,57 @@ module.exports = {
       .pipe(this.cssnano())
       .pipe(this.rename())
       .pipe(this.minifyDest(options.sourcemaps))
-      .on('end', done);
+      .on("end", done);
   },
 
   watch() {
     const extname = this.config.use.styles;
     return {
-      files: this.paths.blocks('**', `*{.css,${extname}}`),
+      files: this.paths.blocks("**", `*{.css,${extname}}`),
       tasks: this.name
     };
   },
 
   dest(sourcemaps) {
     return this.gulp.dest(this.paths._styles, {
-      sourcemaps: sourcemaps ? '.' : false
+      sourcemaps: sourcemaps ? "." : false
     });
   },
 
   compile() {
     let extname = this.config.use.styles.slice(1);
 
-    if (extname === 'scss') extname = 'sass';
+    if (extname === "scss") extname = "sass";
 
-    if (typeof this[extname] === 'function') return this[extname]();
+    if (typeof this[extname] === "function") return this[extname]();
 
     return this.css();
   },
 
   styl() {
-    return require('gulp-stylus')({
-      'include css': true,
+    return require("gulp-stylus")({
+      "include css": true,
       define: {
-        url: require('stylus').resolver()
+        url: require("stylus").resolver()
       }
     });
   },
 
   less() {
-    return require('gulp-less')({
-      rewriteUrls: 'all'
+    return require("gulp-less")({
+      rewriteUrls: "all"
     });
   },
 
   sass() {
-    return require('gulp-sass')({
-      importer: require(this.paths.core('sassResolver'))
+    const aliasImporter = require("node-sass-alias-importer");
+    return require("gulp-sass")({
+      importer: [
+        aliasImporter({
+          develop: "./app/blocks/develop/"
+        }),
+        require(this.paths.core("sassResolver"))
+      ]
     });
   },
 
@@ -96,7 +102,7 @@ module.exports = {
   },
 
   concat(bundle) {
-    return require('gulp-concat')({
+    return require("gulp-concat")({
       path: this.path.join(this.paths._root, `${bundle}.css`)
     });
   },
@@ -113,35 +119,35 @@ module.exports = {
       zindex: false,
       calc: false
     };
-    return require('gulp-if')(
+    return require("gulp-if")(
       this.forMinify.bind(this),
-      require('gulp-cssnano')(config)
+      require("gulp-cssnano")(config)
     );
   },
 
   rename() {
-    return require('gulp-if')(
+    return require("gulp-if")(
       this.forMinify.bind(this),
-      require('gulp-rename')({ suffix: '.min' })
+      require("gulp-rename")({ suffix: ".min" })
     );
   },
 
   minifyDest(sourcemaps) {
-    return require('gulp-if')(!this.isDev, this.dest(sourcemaps));
+    return require("gulp-if")(!this.isDev, this.dest(sourcemaps));
   },
 
   forMinify(file) {
-    return !this.isDev && this.path.extname(file.path) === '.css';
+    return !this.isDev && this.path.extname(file.path) === ".css";
   },
 
   postcss(bundle) {
-    const postcss = require('gulp-postcss');
+    const postcss = require("gulp-postcss");
     const plugins = [];
 
     // Main plugins always used
 
     plugins.push(
-      require('autoprefixer')({
+      require("autoprefixer")({
         remove: false,
         browsers: this.config.build.autoprefixer
       })
@@ -153,8 +159,8 @@ module.exports = {
       plugins.push(
         this.generateSprites(bundle),
 
-        require('stylefmt')({
-          configFile: this.paths.root('.stylelintrc')
+        require("stylefmt")({
+          configFile: this.paths.root(".stylelintrc")
         })
       );
 
@@ -162,13 +168,13 @@ module.exports = {
   },
 
   generateSprites(bundle) {
-    return require('postcss-sprites')({
+    return require("postcss-sprites")({
       spriteName: bundle,
       spritePath: this.paths._img,
       stylesheetPath: this.paths._styles,
       spritesmith: {
         padding: 1,
-        algorithm: 'binary-tree'
+        algorithm: "binary-tree"
       },
       svgsprite: {
         shape: {
@@ -187,17 +193,17 @@ module.exports = {
   },
 
   checkIsSprite(image) {
-    if (image.url.indexOf(this.path.join('img', 'sprite')) !== -1)
+    if (image.url.indexOf(this.path.join("img", "sprite")) !== -1)
       return Promise.resolve();
 
     return Promise.reject();
   },
 
   onSaveSpritesheet(config, spritesheet) {
-    if (spritesheet.groups.length === 0) spritesheet.groups.push('');
+    if (spritesheet.groups.length === 0) spritesheet.groups.push("");
 
     const basename = `sprite_${config.spriteName}`;
-    const extname = spritesheet.groups.concat(spritesheet.extension).join('.');
+    const extname = spritesheet.groups.concat(spritesheet.extension).join(".");
 
     return this.path.join(config.spritePath, basename + extname);
   },
@@ -206,20 +212,20 @@ module.exports = {
     if (!this.config.build.globalStyles) return this.pipe();
 
     return this.pipe(
-      require(this.paths.core('injectHelper')),
+      require(this.paths.core("injectHelper")),
       this,
-      'injectHelper'
+      "injectHelper"
     );
   },
 
   parseURLs() {
-    const parseCssUrl = require(this.paths.core('parseCssUrl'));
+    const parseCssUrl = require(this.paths.core("parseCssUrl"));
 
     if (!this.store.imgs) this.store.imgs = [];
     if (!this.store.fonts) this.store.fonts = [];
 
-    return require('gulp-postcss')([
-      require('postcss-url')({
+    return require("gulp-postcss")([
+      require("postcss-url")({
         url: parseCssUrl.bind(this)
       })
     ]);
