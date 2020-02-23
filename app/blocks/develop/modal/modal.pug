@@ -1,12 +1,9 @@
 include ../logo/logo
 
 mixin modal(data)
-	+b('div').modal.--invisible&attributes(attributes)
+	+b('div').modal&attributes(attributes)
 		+e('div').inner
-			+e('header').header
-				block modal-header
-			+e('div').content
-				block modal-content
+			block
 
 
 
