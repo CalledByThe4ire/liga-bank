@@ -213,23 +213,24 @@ document.addEventListener(`DOMContentLoaded`, () => {
     );
 
     // Modal Visibility
+    const hideModal = (modal) => {
+      modal.classList.add(`modal--invisible`);
+      if (document.body.classList.contains(`page--overlay`)) {
+        document.body.classList.remove(`page--overlay`);
+      }
+    };
+
     if (modalCloseButtons) {
-      [`mousedown`, `keydown`].forEach((event) =>
+      [`click`, `keydown`].forEach((event) =>
         modalCloseButtons.forEach((modalCloseButton) =>
           modalCloseButton.addEventListener(event, (e) => {
             const {type, target} = e;
             if (type === `keydown`) {
               if (e.keyCode === 32 || e.keyCode === 13) {
-                target
-                  .closest(`#${target.dataset.modal}`)
-                  .classList.add(`modal--invisible`);
-                document.body.classList.add(`page--overlay`);
+                hideModal(target.closest(`#${target.dataset.modal}`));
               }
-            } else {
-              target
-                .closest(`#${target.dataset.modal}`)
-                .classList.add(`modal--invisible`);
-              document.body.classList.add(`page--overlay`);
+            } else if (type === `click`) {
+              hideModal(target.closest(`#${target.dataset.modal}`));
             }
           })
         )

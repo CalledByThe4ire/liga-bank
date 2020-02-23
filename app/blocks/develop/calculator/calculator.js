@@ -138,8 +138,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       case `4-digit integer`:
         return {
           mask: /^\d+$/,
-          commit: (value, masked) =>
-            (masked._value = value.padStart(4, `0`))
+          commit: (value, masked) => (masked._value = value.padStart(4, `0`))
         };
       case `fractional`:
         return {
@@ -970,8 +969,27 @@ document.addEventListener(`DOMContentLoaded`, () => {
           })
       );
 
-      formRegistrationApplicationNumber.unmaskedValue = `${counter}`;
+      if (formRegistrationApplicationNumber) {
+        formRegistrationApplicationNumber.unmaskedValue = `${counter}`;
+      }
+
       creditRegistrationForm.hidden = true;
+      document
+        .querySelector(`.modal--calculator`)
+        .classList.remove(`modal--invisible`);
+      document.body.classList.add(`page--overlay`);
+
+      if (creditCalculationForms) {
+        creditCalculationForms.forEach((form) => {
+          if (!form.hidden) {
+            form.hidden = !form.hidden;
+          }
+        });
+      }
+
+      if (creditOfferingForm) {
+        creditOfferingForm.hidden = true;
+      }
     });
   }
 });

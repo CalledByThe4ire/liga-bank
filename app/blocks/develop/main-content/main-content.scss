@@ -1,5 +1,7 @@
 .main-content {
   display: block;
+  min-height: 100vh;
+  overflow: hidden;
 
   &__about {
     margin-bottom: 60px;

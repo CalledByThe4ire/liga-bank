@@ -29,27 +29,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   };
 
-  const keydownHandler = ({keyCode}) => {
-    if (keyCode === 27) {
-      const modal = document.querySelector(`#modal-page-header`);
-
-      if (modal) {
-        modal.classList.add(`modal--invisible`);
-      }
-
-      document.body.classList.remove(`page--overlay`);
-    }
-  };
 
   if (pageHeaderLogin) {
     pageHeaderLogin.addEventListener(`click`, clickHandler);
   }
-
-  document.addEventListener(`keydown`, keydownHandler);
-  document.addEventListener(`click`, ({target}) => {
-    if (target.classList.contains(`page--overlay`)) {
-      target.classList.remove(`page--overlay`);
-      target.querySelector(`.modal`).classList.add(`modal--invisible`);
-    }
-  });
 });

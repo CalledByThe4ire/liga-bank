@@ -170,6 +170,102 @@
     }
   }
 
+  &--calculator {
+    width: 500px;
+    min-height: 193px;
+
+    background-color: $body-bg;
+    border-radius: 4px;
+
+    & #{$modal}__inner {
+      display: block;
+      width: 100%;
+
+      @include padding-x(60px);
+      @include padding-y(55px);
+
+      text-align: center;
+
+      border-radius: 4px;
+      background-color: $body-bg;
+
+      @include media-breakpoint-down(md) {
+        min-width: initial;
+
+        @include padding-x(60px);
+        @include padding-y(55px);
+      }
+
+      @include media-breakpoint-down(sm) {
+        @include padding-x(16px);
+        @include padding-y(36px);
+      }
+    }
+
+    & #{$modal}__trigger {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+
+      stroke: $body-color;
+      stroke-width: 2;
+
+      transition-property: stroke;
+      transition-duration: 0.3s;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        stroke: $primary;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      > * {
+        pointer-events: none;
+      }
+    }
+
+    & #{$modal}__title {
+      margin: 0;
+      margin-bottom: 10px;
+      padding: 0;
+
+      font-size: 22px;
+      line-height: 1.4;
+      font-weight: 500;
+
+      @include media-breakpoint-down(md) {
+        max-width: 75%;
+      }
+
+      @include media-breakpoint-down(sm) {
+        max-width: initial;
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+    }
+
+    & #{$modal}__content {
+      margin: 0;
+      padding: 0;
+
+      font-size: 16px;
+      line-height: 1.4;
+      color: #394959;
+
+      @include media-breakpoint-down(md) {
+        max-width: 50%;
+      }
+
+      @include media-breakpoint-down(sm) {
+        max-width: initial;
+      }
+    }
+  }
+
   .login-modal-form-field,
   .password-modal-form-field {
     display: flex;

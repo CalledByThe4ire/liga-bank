@@ -20,7 +20,7 @@ block content
 		+modal(`page-header`)(class='--page-header', id='modal-page-header')
 			+e('header').header
 				+logo({mod: 'extended', width: 150, height: 30})(class='__logo')
-				+e('a').trigger(aria-label='Close modal', data-modal='modal-page-header')
+				+e('a').trigger(tabindex= 0, aria-label='Close modal', data-modal='modal-page-header')
 					+e('svg').icon(width=16, height=16)
 						use(xlink:href='#modal__close')
 			+e('div').content
@@ -39,10 +39,12 @@ block content
 						+e('div').feedback
 						a(href='#') Забыли&nbsp;пароль?
 					button(type='submit') Войти
-		//- +modal(`page-header`)(class='--calculator', id='modal-calculator')
-		//- 	+e('header').header
-		//- 		+e('a').trigger(aria-label='Close modal', data-modal='modal-page-header')
-		//- 			+e('svg').icon(width=16, height=16)
-		//- 				use(xlink:href='#modal__close')
-		//- 	+e('div').content
+		+modal(`page-header`)(class='--calculator', id='modal-calculator')
+			+e('a').trigger(aria-label='Close modal', data-modal='modal-calculator')
+				+e('svg').icon(width=16, height=16)
+					use(xlink:href='#modal__close')
+			+e('header').title
+				| Спасибо за&nbsp;обращение в&nbsp;наш банк.
+			+e('div').content
+				| Наш менеджер скоро свяжется с&nbsp;вами по&nbsp;указанному номеру телефона.
 
