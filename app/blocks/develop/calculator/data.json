@@ -22,6 +22,7 @@
       "cost": {
         "modifier": "cost",
         "label": "Стоимость недвижимости",
+        "length": 17,
         "min": 1200000,
         "max": 25000000,
         "step": 100000
@@ -29,6 +30,7 @@
       "initialPayment": {
         "modifier": "initial-payment",
         "label": "Первоначальный взнос",
+        "length": 17,
         "min": 10,
         "max": 100,
         "step": 5
@@ -36,6 +38,7 @@
       "period": {
         "modifier": "period",
         "label": "Срок кредитования",
+        "length": 7,
         "min": 5,
         "max": 30,
         "step": 1

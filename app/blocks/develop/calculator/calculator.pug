@@ -52,6 +52,7 @@ mixin calculator(data)
 											data-min= cost.min
 											data-max= cost.max
 											data-step= cost.step,
+											maxlength= cost.length,
 											data-unit= `currency`,
 											data-format= `integer`,
 										)
@@ -77,6 +78,7 @@ mixin calculator(data)
 												data-min= initialPayment.min
 												data-max= initialPayment.max,
 												data-step= initialPayment.step,
+												maxlength= initialPayment.length,
 												data-unit= `currency`,
 												data-format= `integer`,
 											)
@@ -106,6 +108,7 @@ mixin calculator(data)
 											data-min= period.min,
 											data-max= period.max,
 											data-step= period.step,
+											maxlength= period.length,
 											data-unit= `period`,
 											data-format= `integer`,
 										)
