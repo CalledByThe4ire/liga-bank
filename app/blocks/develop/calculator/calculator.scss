@@ -1,3 +1,6 @@
+@import "develop/page/vendor/input-range-scss/_variables.scss";
+@import "node_modules/input-range-scss/_inputrange.scss";
+
 .calculator {
   $calculator: &;
 
