@@ -27,7 +27,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
     creditCalculationForms = calculator.querySelectorAll(
         `.calculator__credit-form--calculation form`
     );
-    creditCalculationForms[0].hidden = false;
     creditOfferingForm = calculator.querySelector(`#credit-offer`);
     creditRegistrationForm = calculator.querySelector(`#credit-registration`);
 
@@ -416,9 +415,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
             ) {
               formField.classList.add(`calculator__form-field--invalid`);
             }
-            // if (buttons) {
-            //   buttons.forEach(button => (button.disabled = true));
-            // }
+
             if (initialPayment && initialPaymentRange) {
               makeInactive([initialPayment, initialPaymentRange]);
             }
@@ -961,11 +958,50 @@ document.addEventListener(`DOMContentLoaded`, () => {
   }
 
   if (creditRegistrationForm) {
-    creditRegistrationForm.addEventListener(`submit`, (event) => {
+    const formRegistrationName = creditRegistrationForm.name;
+
+    const fullName =
+      creditRegistrationForm[`${formRegistrationName}-full-name`];
+    const tel = creditRegistrationForm[`${formRegistrationName}-tel`];
+    const email = creditRegistrationForm[`${formRegistrationName}-email`];
+
+    const toggleInvalid = (element, state) => {
+      const parent = element.parentElement;
+      const [parentclassName] = parent.classList;
+      if (state === `valid`) {
+        if (
+          parent &&
+          parent.classList.contains(`${parentclassName}--invalid`)
+        ) {
+          parent.classList.remove(`${parentclassName}--invalid`);
+        }
+      } else if (state === `invalid`) {
+        if (
+          parent &&
+          !parent.classList.contains(`${parentclassName}--invalid`)
+        ) {
+          parent.classList.add(`${parentclassName}--invalid`);
+        }
+      }
+    };
+
+    const clickHandler = (event) => {
+      event.stopPropagation();
+      const {currentTarget} = event;
+
+      const isValid = [fullName, tel, email].every(
+          (input) => input.validity.valid
+      );
+      if (!isValid) {
+        toggleInvalid(currentTarget, `invalid`);
+        fullName.focus();
+      }
+    };
+
+    const submitHandler = (event) => {
       event.preventDefault();
       const {target} = event;
-
-      const formRegistrationName = creditRegistrationForm.name;
+      toggleInvalid(target, `valid`);
       const [formRegistrationApplicationNumber] = masks.filter((mask) => {
         return (
           mask.el.input.name === `${formRegistrationName}-application-number`
@@ -1005,6 +1041,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
       if (creditOfferingForm) {
         creditOfferingForm.hidden = true;
       }
-    });
+    };
+
+    creditRegistrationForm.addEventListener(`click`, clickHandler);
+    creditRegistrationForm.addEventListener(`submit`, submitHandler);
   }
 });
