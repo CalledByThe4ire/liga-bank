@@ -13,21 +13,22 @@ mixin calculator(data)
 						form(id=`credit-${creditSelection.modifier}`, name=`credit-${creditSelection.modifier}`)
 							fieldset
 								legend Шаг&nbsp;1. Цель кредита
-								+e('div').form-field
-									input(
-										type='text',
-										value='Выберите цель кредита',
-										name=`credit-${creditSelection.modifier}-title`,
-										readonly=true,
-										tabindex= -1
-									)
-									button(type='button', name=`credit-${creditSelection.modifier}-arrow`, aria-label='Show options')
-										svg(width=16, height=8)
-											use(xlink:href='#calculator__arrow')
+								+e('div').inner
+									+e('div').form-field
+										input(
+											type='text',
+											value='Выберите цель кредита',
+											name=`credit-${creditSelection.modifier}-title`,
+											readonly=true,
+											tabindex= -1
+										)
+										button(type='button', name=`credit-${creditSelection.modifier}-arrow`, aria-label='Show options')
+											svg(width=16, height=8)
+												use(xlink:href='#calculator__arrow')
 
-								+e('ul').forms-list
-									each item in creditSelection.list
-										+e.forms-list-item(data-credit-type= item.type, tabindex= 0)= item.value
+									+e('ul').forms-list
+										each item in creditSelection.list
+											+e.forms-list-item(data-credit-type= item.type, tabindex= 0)= item.value
 
 					each credit in credits
 						+e('div').credit-form--calculation

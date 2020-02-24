@@ -309,7 +309,7 @@
         line-height: 1.4;
         color: $body-color;
 
-        background-color: transparent;
+        background-color: #ffffff;
         outline: 0;
 
         transition-property: background-color;
@@ -323,7 +323,7 @@
 
         &:hover,
         &:focus {
-          background-color: rgba($body-color, 0.05);
+          background-color: $body-bg;
         }
       }
 
@@ -504,6 +504,18 @@
             margin-bottom: 15px;
           }
         }
+      }
+
+      #{$calculator}__inner {
+        position: relative;
+      }
+
+      #{$calculator}__forms-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+
+        width: 100%;
       }
 
       #{$calculator}__form-field {
