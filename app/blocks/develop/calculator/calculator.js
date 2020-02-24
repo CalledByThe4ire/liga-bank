@@ -27,6 +27,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
     creditCalculationForms = calculator.querySelectorAll(
         `.calculator__credit-form--calculation form`
     );
+    creditCalculationForms[0].hidden = false;
     creditOfferingForm = calculator.querySelector(`#credit-offer`);
     creditRegistrationForm = calculator.querySelector(`#credit-registration`);
 
@@ -284,7 +285,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       }
 
       if (buttons) {
-        buttons.forEach((button, index, btns) => {
+        buttons.forEach((button) => {
           button.addEventListener(`click`, (event) => {
             const {target} = event;
             const formField = target.closest(`.calculator__form-field`);
@@ -293,31 +294,39 @@ document.addEventListener(`DOMContentLoaded`, () => {
                 (item) => item.el.input.id === formField.querySelector(`input`).id
             );
             const {
-              dataset: {min = ``, max = ``, step = ``, format = ``}
+              dataset: {min = ``, max = ``, step = ``, unit = ``, format = ``}
             } = mask.el.input;
 
-            let maskedInputNewValue = ``;
-            if (name === `plus`) {
-              maskedInputNewValue = Number(mask.unmaskedValue) + Number(step);
-            } else if (name === `minus`) {
-              maskedInputNewValue = Number(mask.unmaskedValue) - Number(step);
-            }
-            mask.value = `${maskedInputNewValue}`;
-            mask.el.input.dispatchEvent(new Event(`change`, {bubbles: true}));
-
-            if (
-              Number(mask.unmaskedValue) < Number(min) ||
-              Number(mask.unmaskedValue) > Number(max)
-            ) {
-              mask.updateOptions(getMaskOptions(``, mask.format));
-              mask.value = `Некорректное значение`;
+            if (Number.isNaN(Number(mask.unmaskedValue))) {
+              const maskUnit = getUnitPluralForm(unit, mask.unmaskedValue);
+              mask.updateOptions(getMaskOptions(maskUnit, format));
+              mask.value = `${Number(min)}`;
+              mask.el.input.dispatchEvent(
+                  new Event(`change`, {bubbles: true})
+              );
               if (
                 formField &&
-                !formField.classList.contains(`calculator__form-field--invalid`)
+                formField.classList.contains(`calculator__form-field--invalid`)
               ) {
-                formField.classList.add(`calculator__form-field--invalid`);
+                formField.classList.remove(`calculator__form-field--invalid`);
               }
-              btns.forEach((btn) => (btn.disabled = true));
+            } else {
+              let maskedInputNewValue = 0;
+              if (name === `plus`) {
+                maskedInputNewValue = Number(mask.unmaskedValue) + Number(step);
+                if (maskedInputNewValue > Number(max)) {
+                  maskedInputNewValue = `${Number(max)}`;
+                }
+              } else if (name === `minus`) {
+                maskedInputNewValue = Number(mask.unmaskedValue) - Number(step);
+                if (maskedInputNewValue < Number(min)) {
+                  maskedInputNewValue = `${Number(min)}`;
+                }
+              }
+              mask.value = `${maskedInputNewValue}`;
+              mask.el.input.dispatchEvent(
+                  new Event(`change`, {bubbles: true})
+              );
             }
           });
         });
@@ -407,9 +416,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
             ) {
               formField.classList.add(`calculator__form-field--invalid`);
             }
-            if (buttons) {
-              buttons.forEach((button) => (button.disabled = true));
-            }
+            // if (buttons) {
+            //   buttons.forEach(button => (button.disabled = true));
+            // }
             if (initialPayment && initialPaymentRange) {
               makeInactive([initialPayment, initialPaymentRange]);
             }

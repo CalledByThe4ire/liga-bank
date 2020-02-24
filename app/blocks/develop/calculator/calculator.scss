@@ -204,15 +204,9 @@
 
           &:hover,
           &:focus {
-            background-color: $primary;
-
             svg {
-              stroke: $body-bg;
+              stroke: $primary;
             }
-          }
-
-          &:active {
-            background-color: $body-color;
           }
 
           &:disabled {
@@ -258,12 +252,6 @@
 
           input[type="text"] {
             color: $danger;
-          }
-
-          button {
-            &:hover:disabled {
-              background-color: $danger;
-            }
           }
         }
       }
@@ -393,6 +381,21 @@
             height: 14px;
             margin-top: 12px;
             margin-bottom: 4px;
+
+            &::-webkit-slider-thumb {
+              background: $inactive;
+              cursor: pointer;
+            }
+
+            &::-moz-range-thumb {
+              background-color: $inactive;
+              cursor: pointer;
+            }
+
+            &::-ms-thumb {
+              background-color: $inactive;
+              cursor: pointer;
+            }
 
             &:disabled {
               &::-webkit-slider-thumb {
