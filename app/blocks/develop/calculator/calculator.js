@@ -150,7 +150,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
               scale: 2,
               signed: false,
               padFractionalZeros: true,
-              radix: `.`
+              radix: `,`
             }
           }
         };
