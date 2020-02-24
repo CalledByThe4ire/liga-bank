@@ -102,8 +102,13 @@ document.addEventListener(`DOMContentLoaded`, () => {
       case `currency`:
         unit = ` ${num2str(Number(value), nounRublePlurals)}`;
         break;
+
       case `percent`:
         unit = `%`;
+        break;
+
+      case `numero-sign`:
+        unit = `№`;
         break;
 
       case `period`:
@@ -137,8 +142,14 @@ document.addEventListener(`DOMContentLoaded`, () => {
         };
       case `4-digit integer`:
         return {
-          mask: /^\d+$/,
-          commit: (value, masked) => (masked._value = value.padStart(4, `0`))
+          mask: `${unit} VALUE`,
+          blocks: {
+            VALUE: {
+              mask: /^\d+$/,
+              commit: (value, masked) =>
+                (masked._value = value.padStart(4, `0`))
+            }
+          }
         };
       case `fractional`:
         return {
@@ -809,12 +820,11 @@ document.addEventListener(`DOMContentLoaded`, () => {
     const registrationFormData = localStorage.getItem(`registrationFormData`)
       ? JSON.parse(localStorage.getItem(`registrationFormData`))
       : {
-        counter: Number(formRegistrationApplicationNumber.unmaskedValue) || 0,
         fullName: creditRegistrationFullNameInput.unmaskedValue || ``,
         tel: Number(creditRegistrationTelInput.unmaskedValue) || ``,
         email: creditRegistrationEmailInput.unmaskedValue || ``
       };
-    const {counter, fullName, tel, email} = registrationFormData;
+    const {fullName, tel, email} = registrationFormData;
 
     if (creditRegistrationFullNameInput) {
       creditRegistrationFullNameInput.value = fullName;
@@ -829,7 +839,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
 
     if (formRegistrationApplicationNumber) {
-      formRegistrationApplicationNumber.value = `${counter}`;
+      formRegistrationApplicationNumber.value = `1`;
     }
   }
 
@@ -947,16 +957,11 @@ document.addEventListener(`DOMContentLoaded`, () => {
       const {target} = event;
 
       const formRegistrationName = creditRegistrationForm.name;
-
-      let counter = localStorage.getItem(`registrationFormData`)
-        ? JSON.parse(localStorage.getItem(`registrationFormData`))[`counter`]
-        : 1;
       const [formRegistrationApplicationNumber] = masks.filter((mask) => {
         return (
           mask.el.input.name === `${formRegistrationName}-application-number`
         );
       });
-      counter += 1;
       const formData = Object.fromEntries(new FormData(target));
 
       localStorage.setItem(
@@ -964,13 +969,14 @@ document.addEventListener(`DOMContentLoaded`, () => {
           JSON.stringify({
             fullName: formData[`${formRegistrationName}-full-name`],
             email: formData[`${formRegistrationName}-email`],
-            tel: formData[`${formRegistrationName}-tel`],
-            counter
+            tel: formData[`${formRegistrationName}-tel`]
           })
       );
 
       if (formRegistrationApplicationNumber) {
-        formRegistrationApplicationNumber.unmaskedValue = `${counter}`;
+        formRegistrationApplicationNumber.unmaskedValue = `${Number(
+            formRegistrationApplicationNumber.unmaskedValue
+        ) + 1}`;
       }
 
       creditRegistrationForm.hidden = true;
