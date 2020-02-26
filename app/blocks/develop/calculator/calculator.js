@@ -826,11 +826,11 @@ document.addEventListener(`DOMContentLoaded`, () => {
     const registrationFormData = localStorage.getItem(`registrationFormData`)
       ? JSON.parse(localStorage.getItem(`registrationFormData`))
       : {
-        fullName: creditRegistrationFullNameInput.unmaskedValue || ``,
-        tel: Number(creditRegistrationTelInput.unmaskedValue) || ``,
-        email: creditRegistrationEmailInput.unmaskedValue || ``
+        fullName: creditRegistrationFullNameInput.unmaskedValue,
+        tel: Number(creditRegistrationTelInput.unmaskedValue),
+        email: creditRegistrationEmailInput.unmaskedValue
       };
-    const {fullName, tel, email} = registrationFormData;
+    const {fullName = ``, tel = ``, email = ``} = registrationFormData;
 
     if (creditRegistrationFullNameInput) {
       creditRegistrationFullNameInput.value = fullName;
