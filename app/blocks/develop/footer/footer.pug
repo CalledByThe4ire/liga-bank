@@ -2,7 +2,7 @@ include ../logo/logo
 
 mixin footer(data)
 	- const { output, nav, contacts, socials } = data;
-	+b('section').footer&attributes(attributes)
+	+b('footer').footer&attributes(attributes)
 		+e('h2').title Контакты
 		+e('div').container
 			+e('div').row
