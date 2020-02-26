@@ -1,0 +1,156 @@
+.footer {
+  @include make-container();
+  display: block;
+
+  @include padding-x($offset--desktop);
+  @include padding-y(50px);
+
+  @include media-breakpoint-down(md) {
+    @include padding-x($offset--tablet);
+  }
+
+  @include media-breakpoint-down(sm) {
+    @include padding-x($offset--mobile);
+    @include padding-y(30px);
+  }
+
+  background-color: $body-bg;
+
+  &__title {
+    @include visually-hidden();
+  }
+
+  &__container {
+    min-width: $min-width;
+    max-width: $max-width;
+
+    @include media-breakpoint-down(md) {
+      padding-bottom: 50px;
+    }
+  }
+
+  &__row {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__col {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    @include media-breakpoint-down(md) {
+      flex-flow: column wrap;
+      justify-content: flex-start;
+    }
+
+    &--left {
+      width: 42%;
+
+      @include media-breakpoint-down(md) {
+        width: 50%;
+        margin-right: 2%;
+      }
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+        margin-right: initial;
+        margin-bottom: 20px;
+      }
+    }
+
+    &--right {
+      width: 52%;
+
+      @include media-breakpoint-down(md) {
+        width: 48%;
+      }
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+      }
+    }
+  }
+
+  &__nav,
+  &__contacts-list,
+  &__socials-list {
+    @include list-unstyled();
+    margin: 0;
+    padding: 0;
+  }
+
+  &__nav {
+    padding-right: 15px;
+
+    @include media-breakpoint-down(md) {
+      padding-right: initial;
+      margin-bottom: 25px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: initial;
+    }
+  }
+
+  &__contacts-list {
+    width: 72%;
+    padding-top: 5px;
+
+    @include media-breakpoint-down(md) {
+      padding-top: 10px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      padding-top: initial;
+    }
+  }
+
+  &__socials-list {
+    padding-top: 10px;
+
+    @include media-breakpoint-down(md) {
+      padding-top: initial;
+    }
+  }
+
+  &__logo {
+    margin-bottom: 10px;
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__logo,
+  &__output {
+    padding-right: 15px;
+  }
+
+  &__output {
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #707c87;
+
+    @include media-breakpoint-down(md) {
+      position: absolute;
+      left: 0;
+      bottom: -50px;
+
+      width: 48%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.socials-footer-list {
+  $root: &;
+  display: flex;
+  flex-flow: row nowrap;
+
+  &__item:not(:last-of-type) {
+    padding-right: 15px;
+
+    @include media-breakpoint-down(md) {
+      padding-right: 20px;
+    }
+  }
+
+  &__link {
+    transition-duration: 0.3s;
+    transition-property: all;
+
+    &:hover,
+    &:focus {
+      color: $link-hover-color;
+      text-decoration: $link-hover-decoration;
+
+      #{$root}__icon {
+        fill: $primary;
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &__icon {
+    transition-duration: inherit;
+    transition-property: inherit;
+    fill: $body-color;
+  }
+}

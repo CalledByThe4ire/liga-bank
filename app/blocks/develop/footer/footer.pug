@@ -1,0 +1,32 @@
+include ../logo/logo
+
+mixin footer(data)
+	- const { output, nav, contacts, socials } = data;
+	+b('section').footer&attributes(attributes)
+		+e('h2').title Контакты
+		+e('div').container
+			+e('div').row
+				+e('div').col--left
+					+e('div').info
+						+logo(class='__logo')
+						+e('div').output
+							each item in output
+								p !{item}
+					+e('ul').nav.nav-footer__
+						each item in nav
+							+e('li').item
+								+e('a').link(href='#') !{item}
+				+e('div').col--right
+					+e('ul').contacts-list.contacts-footer-list__
+						each contact in contacts
+							- const {icon: contactIcon, number, annotation} = contact
+							+e('li').item(class=`--${contactIcon}`)
+								+e('div').number !{number}
+								+e('p').annotation !{annotation}
+					+e('ul').socials-list.socials-footer-list__
+						each social in socials
+							- const {icon: socialIcon, width: socialWidth, height: socialHeight} = social
+							+e('li').item
+								+e('a').link(href='#')
+									+e('svg').icon(width= socialWidth, height= socialHeight)
+										use(xlink:href=`#footer__${socialIcon}`)
