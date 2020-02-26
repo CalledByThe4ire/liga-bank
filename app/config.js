@@ -22,6 +22,7 @@ module.exports = {
 
     pugMap: "app/blocks/map.pug",
     globalStyles: [
+      "node_modules/normalize.scss/normalize.scss",
       "app/blocks/develop/page/vendor/input-range-scss/variables.scss",
       "app/blocks/develop/page/vendor/input-range-scss/_inputrange.scss",
       "node_modules/bootstrap/scss/_functions.scss",
