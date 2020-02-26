@@ -88,9 +88,7 @@ module.exports = {
     const aliasImporter = require("node-sass-alias-importer");
     return require("gulp-sass")({
       importer: [
-        aliasImporter({
-          develop: "./app/blocks/develop/"
-        }),
+        aliasImporter({}),
         require(this.paths.core("sassResolver"))
       ]
     });

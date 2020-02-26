@@ -1,6 +1,6 @@
 @import "./node_modules/normalize.scss/normalize.scss";
-@import "develop/page/base/common.scss";
-@import "develop/page/base/fonts.scss";
+@import "app/blocks/develop/page/base/common.scss";
+@import "app/blocks/develop/page/base/fonts.scss";
 
 .page {
   $page: &;
