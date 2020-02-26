@@ -112,6 +112,20 @@
     form {
       width: 100%;
 
+      input {
+        transition-property: all;
+        transition-duration: 0.3s;
+
+        &:required:active,
+        &:required:focus {
+          border-color: $primary;
+        }
+
+        &:required:valid {
+          border-color: $body-color;
+        }
+      }
+
       fieldset {
         width: 100%;
         margin: 0;
@@ -138,6 +152,14 @@
 
         @include media-breakpoint-down(sm) {
           font-size: 16px;
+        }
+      }
+    }
+
+    &--invalid {
+      input {
+        &:required:invalid {
+          border-color: $danger;
         }
       }
     }
@@ -771,6 +793,7 @@
 
         input {
           flex-grow: 1;
+
           border: none;
           background-color: transparent;
           outline: 0;
@@ -926,13 +949,6 @@
         }
       }
     }
-
-    &--invalid {
-      form {
-        animation-name: shaking;
-        animation-duration: 0.3s;
-      }
-    }
   }
 
   &__message {
@@ -960,27 +976,5 @@
     &--invisible {
       display: none;
     }
-  }
-}
-
-@keyframes shaking {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(-10px);
-  }
-
-  20%,
-  40%,
-  60%,
-  80% {
-    transform: translateX(10px);
   }
 }

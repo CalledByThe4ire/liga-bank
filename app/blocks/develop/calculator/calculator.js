@@ -974,6 +974,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
           parent.classList.contains(`${parentclassName}--invalid`)
         ) {
           parent.classList.remove(`${parentclassName}--invalid`);
+          parent.classList.remove(`animated`, `shake`);
         }
       } else if (state === `invalid`) {
         if (
@@ -981,6 +982,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
           !parent.classList.contains(`${parentclassName}--invalid`)
         ) {
           parent.classList.add(`${parentclassName}--invalid`);
+          parent.classList.add(`animated`, `shake`);
         }
       }
     };
@@ -994,7 +996,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
       );
       if (!isValid) {
         toggleInvalid(currentTarget, `invalid`);
-        fullName.focus();
+        const [first] = [fullName, tel, email].filter(
+            (input) => !input.validity.valid
+        );
+        first.focus();
       }
     };
 

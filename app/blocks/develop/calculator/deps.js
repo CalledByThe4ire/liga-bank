@@ -8,6 +8,10 @@ module.exports = {
       from: `node_modules/input-range-scss`,
       import: [`_inputrange.scss`],
     },
+    {
+      from: `node_modules/animate.css`,
+      import: [`animate.min.css`],
+    },
   ],
 
 };
