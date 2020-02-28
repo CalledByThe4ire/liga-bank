@@ -29,6 +29,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
     );
     creditOfferingForm = calculator.querySelector(`#credit-offer`);
     creditRegistrationForm = calculator.querySelector(`#credit-registration`);
+    creditRegistrationForm.hidden = false;
 
     messages = calculator.querySelectorAll(`.calculator__message`);
     if (messages) {

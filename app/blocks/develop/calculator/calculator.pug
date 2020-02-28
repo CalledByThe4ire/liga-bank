@@ -167,7 +167,7 @@ mixin calculator(data)
 					fieldset
 						legend Шаг&nbsp;3. Оформление заявки
 						- const { readOnly, editable } = creditRegistration.content
-						+e('div').form-field-wrapper
+						+e('div').form-field-inner--readonly
 							each field in readOnly
 								- let unit;
 								- let format;
@@ -195,22 +195,25 @@ mixin calculator(data)
 										data-format= format,
 									)
 
-							each field in editable
-								- let format;
-								if field.modifier === 'full-name'
-									- format = 'string'
-								else if field.modifier === 'tel'
-									- format = 'tel'
-								else if field.modifier === 'email'
-									- format = 'email'
+					+e('div').form-field-inner--editable
+						each field in editable
+							- let format;
+							if field.modifier === 'full-name'
+								- format = 'string'
+							else if field.modifier === 'tel'
+								- format = 'tel'
+							else if field.modifier === 'email'
+								- format = 'email'
+
+							+e('div').form-field
 								input(
 									type= field.type,
 									id=`credit-${creditRegistration.modifier}-${field.modifier}`,
 									name=`credit-${creditRegistration.modifier}-${field.modifier}`,
 									placeholder= field.placeholder,
-									pattern= field.pattern,
 									data-unit= 'empty',
 									data-format= format,
-									required= true
+									required= true,
+									maxlength= field.type === 'tel' ? 17 : ''
 								)
-							button(type='submit') Отправить
+					button(type='submit') Отправить

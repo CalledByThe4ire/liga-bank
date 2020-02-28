@@ -169,20 +169,17 @@
         "fullName": {
           "modifier": "full-name",
           "type": "text",
-          "placeholder": "ФИО",
-          "pattern": "^[a-zA-Zа-яА-ЯёЁ ]+$"
+          "placeholder": "ФИО"
         },
         "tel": {
           "modifier": "tel",
           "type": "tel",
-          "placeholder": "Телефон",
-          "pattern": ".{16,}"
+          "placeholder": "Телефон"
         },
         "email": {
           "modifier": "email",
           "type": "email",
-          "placeholder": "E-mail",
-          "pattern": "^\\S*@?\\S*$"
+          "placeholder": "E-mail"
         }
       }
     }
