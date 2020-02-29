@@ -29,7 +29,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
     );
     creditOfferingForm = calculator.querySelector(`#credit-offer`);
     creditRegistrationForm = calculator.querySelector(`#credit-registration`);
-    creditRegistrationForm.hidden = false;
 
     messages = calculator.querySelectorAll(`.calculator__message`);
     if (messages) {
@@ -177,17 +176,16 @@ document.addEventListener(`DOMContentLoaded`, () => {
         };
       case `tel`:
         return {
-          mask: `+{7}(000) 000-00-00`,
-          lazy: true
+          mask: `+{7}(000)000-00-00`,
+          lazy: true,
+        };
+      case `full-name`:
+        return {
+          mask: /^[a-zA-Zа-яА-ЯёЁ ]+$/
         };
       case `email`:
         return {
-          mask: `VALUE`,
-          blocks: {
-            VALUE: {
-              mask: /^\S*@?\S*$/
-            }
-          }
+          mask: /^\S*@?\S*$/
         };
       default:
         throw new Error(`Unknown mask's format: ${format}`);
@@ -361,7 +359,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       }
     };
 
-    const inputHandler = ({target}) => {
+    const creditCalculationFormInputHandler = ({target}) => {
       const maskUnit = getUnitPluralForm(
           input.dataset.unit,
           mask.unmaskedValue
@@ -369,7 +367,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       mask.updateOptions(getMaskOptions(maskUnit, input.dataset.format));
     };
 
-    const changeHandler = ({target}) => {
+    const creditCalculationFormChangeHandler = ({target}) => {
       const {
         dataset: {min = ``, max = ``, step = ``, unit = ``, format = ``}
       } = target;
@@ -520,8 +518,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
       }
     };
 
-    input.addEventListener(`input`, inputHandler);
-    input.addEventListener(`change`, changeHandler);
+    input.addEventListener(`input`, creditCalculationFormInputHandler);
+    input.addEventListener(`change`, creditCalculationFormChangeHandler);
     input.addEventListener(`focus`, focusHandler);
   });
 
@@ -961,10 +959,17 @@ document.addEventListener(`DOMContentLoaded`, () => {
   if (creditRegistrationForm) {
     const formRegistrationName = creditRegistrationForm.name;
 
-    const fullName =
-      creditRegistrationForm[`${formRegistrationName}-full-name`];
-    const tel = creditRegistrationForm[`${formRegistrationName}-tel`];
-    const email = creditRegistrationForm[`${formRegistrationName}-email`];
+    const [fullName] = masks.filter((mask) => {
+      return mask.el.input.name === `${formRegistrationName}-full-name`;
+    });
+
+    const [tel] = masks.filter((mask) => {
+      return mask.el.input.name === `${formRegistrationName}-tel`;
+    });
+
+    const [email] = masks.filter((mask) => {
+      return mask.el.input.name === `${formRegistrationName}-email`;
+    });
 
     const toggleInvalid = (element, state) => {
       const parent = element.parentElement;
@@ -988,21 +993,26 @@ document.addEventListener(`DOMContentLoaded`, () => {
       }
     };
 
-    const clickHandler = (event) => {
-      event.stopPropagation();
-      const {currentTarget} = event;
-
-      const isValid = [fullName, tel, email].every(
-          (input) => input.validity.valid
-      );
-      if (!isValid) {
-        toggleInvalid(currentTarget, `invalid`);
-        const [first] = [fullName, tel, email].filter(
-            (input) => !input.validity.valid
-        );
-        first.focus();
+    const creditRegistrationFormInvalidHandler = ({target}) => {
+      if (!target.validity.valid) {
+        toggleInvalid(target, `invalid`);
       }
     };
+
+    const creditRegistrationFormInputHandler = ({target}) => {
+      toggleInvalid(target, `valid`);
+    };
+
+    [fullName, email, tel].forEach((mask) => {
+      mask.el.input.addEventListener(
+          `invalid`,
+          creditRegistrationFormInvalidHandler
+      );
+      mask.el.input.addEventListener(
+          `input`,
+          creditRegistrationFormInputHandler
+      );
+    });
 
     const submitHandler = (event) => {
       event.preventDefault();
@@ -1049,7 +1059,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
       }
     };
 
-    creditRegistrationForm.addEventListener(`click`, clickHandler);
     creditRegistrationForm.addEventListener(`submit`, submitHandler);
   }
 });

@@ -199,7 +199,7 @@ mixin calculator(data)
 						each field in editable
 							- let format;
 							if field.modifier === 'full-name'
-								- format = 'string'
+								- format = 'full-name'
 							else if field.modifier === 'tel'
 								- format = 'tel'
 							else if field.modifier === 'email'
@@ -214,6 +214,6 @@ mixin calculator(data)
 									data-unit= 'empty',
 									data-format= format,
 									required= true,
-									maxlength= field.type === 'tel' ? 17 : ''
+									pattern= field.pattern
 								)
 					button(type='submit') Отправить
