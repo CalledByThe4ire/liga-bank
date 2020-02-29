@@ -19,14 +19,19 @@ mixin footer(data)
 				+e('div').col--right
 					+e('ul').contacts-list.contacts-footer-list__
 						each contact in contacts
-							- const {icon: contactIcon, number, annotation} = contact
-							+e('li').item(class=`--${contactIcon}`)
-								+e('div').number !{number}
+							- const {icon: contactIcon, tel, annotation} = contact;
+							- const {name: contactIconName, width: contactIconWidth, height: contactIconHeight} = contactIcon;
+							+e('li').item
+								- const {data, text} = tel;
+								+e('a').link(href= `tel:${data}`)
+									+e('svg').icon(width= contactIconWidth, height= contactIconHeight)
+										use(xlink:href=`#footer__${contactIconName}`)
+									+e('span').text !{text}
 								+e('p').annotation !{annotation}
 					+e('ul').socials-list.socials-footer-list__
 						each social in socials
 							- const {icon: socialIcon, width: socialWidth, height: socialHeight} = social
 							+e('li').item
-								+e('a').link(href='#')
+								+e('a').link(href='#', title= socialIcon)
 									+e('svg').icon(width= socialWidth, height= socialHeight)
 										use(xlink:href=`#footer__${socialIcon}`)

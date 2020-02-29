@@ -2,32 +2,74 @@
   $root: &;
 
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: space-between;
+  min-width: 70%;
 
   @include media-breakpoint-down(md) {
     flex-flow: column wrap;
   }
 
-  &__number {
+  &__item {
     position: relative;
-    padding-left: 30px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+
+    @include media-breakpoint-down(md) {
+      &:last-of-type {
+        padding-bottom: 30px;
+
+        @include media-breakpoint-down(sm) {
+          padding-bottom: 25px;
+        }
+      }
+    }
+  }
+
+  &__link {
+    position: relative;
 
     font-size: 16px;
     font-weight: 500;
     line-height: 1.4;
     color: $link-color;
+    text-decoration: $link-decoration;
     white-space: nowrap;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
+    transition-duration: 0.3s;
+    transition-property: all;
 
-      display: block;
-      transform: translateY(-50%);
+    &:hover,
+    &:focus {
+      color: $link-hover-color;
+      text-decoration: $link-hover-decoration;
+
+      #{$root}__icon {
+        fill: $primary;
+      }
     }
+
+    &:focus {
+      outline: none;
+    }
+
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    transition-duration: inherit;
+    transition-property: inherit;
+    fill: $body-color;
+  }
+
+  &__text {
+    padding-left: 30px;
   }
 
   &__annotation {
@@ -39,57 +81,5 @@
     font-weight: 400;
     line-height: 1.4;
     color: #707c87;
-  }
-
-  &__item {
-    &:not(:last-of-type) {
-      padding-right: 15px;
-    }
-
-    @include media-breakpoint-down(md) {
-      padding-right: initial;
-
-      &:not(:last-of-type) {
-        padding-bottom: 25px;
-
-        @include media-breakpoint-down(sm) {
-          padding-bottom: 20px;
-        }
-      }
-
-      &:last-of-type {
-        padding-bottom: 30px;
-
-        @include media-breakpoint-down(sm) {
-          padding-bottom: 25px;
-        }
-      }
-    }
-
-    &--online {
-      #{$root}__number {
-        &::before {
-          width: 10px;
-          height: 16px;
-          background: url("@contacts-footer-list/online.svg") no-repeat center;
-        }
-      }
-    }
-
-    &--tel {
-      #{$root}__number {
-        padding-left: 35px;
-
-        &::before {
-          width: 16px;
-          height: 16px;
-          background: url("@contacts-footer-list/tel.svg") no-repeat center;
-        }
-      }
-
-      #{$root}__annotation {
-        padding-left: 35px;
-      }
-    }
   }
 }

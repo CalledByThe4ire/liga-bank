@@ -1,10 +1,19 @@
 .socials-footer-list {
   $root: &;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 105px;
 
-  &__item:not(:last-of-type) {
+  @include media-breakpoint-down(md) {
+    justify-content: flex-start;
+    max-width: initial;
+  }
+
+  &__item:not(:nth-of-type(4n)) {
     padding-right: 15px;
+    padding-bottom: 15px;
 
     @include media-breakpoint-down(md) {
       padding-right: 20px;

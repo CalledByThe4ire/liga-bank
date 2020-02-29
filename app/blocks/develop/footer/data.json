@@ -7,13 +7,27 @@
   "nav": ["Услуги", "Рассчитать кредит", "Контакты", "Задать вопрос"],
   "contacts": [
     {
-      "icon": "online",
-      "number": "*0904",
+      "icon": {
+        "name": "online",
+        "width": 10,
+        "height": 16
+      },
+      "tel": {
+        "data": "0904",
+        "text": "*0904"
+      },
       "annotation": "Бесплатно для&nbsp;абонентов<br>МТС, Билайн, Мегафон, Теле2"
     },
     {
-      "icon": "tel",
-      "number": "8&nbsp;800&nbsp;111 22&nbsp;33",
+      "icon": {
+        "name": "tel",
+        "width": 16,
+        "height": 16
+      },
+      "tel": {
+        "data": "88001112233",
+        "text": "8&nbsp;800&nbsp;111 22&nbsp;33"
+      },
       "annotation": "Бесплатный для всех<br>городов России"
     }
   ],
