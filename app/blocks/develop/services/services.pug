@@ -4,7 +4,7 @@ mixin services(data)
 		- const tabs = data.map(item => item['tab-content']);
 		+e('ul').list
 			each item, index in data
-				+e('li').list-item(class=`${index === 0 ? '--active ' : ''}`, tabindex= index + 1)
+				+e('li').list-item(class=`${index === 0 ? '--active ' : ''}`, tabindex= -1)
 					+e('a').link(href='#')
 						+e('span').text !{item['tab-name']}
 						case item['tab-modifier']
