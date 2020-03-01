@@ -12,6 +12,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
           if (!modal.classList.contains(`modal--invisible`)) {
             modal.classList.add(`modal--invisible`);
           }
+          document.body.style.cssText = `padding-right: ''; overflow: ''`;
         });
       }
 
@@ -28,6 +29,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
         if (!modal.classList.contains(`modal--invisible`)) {
           modal.classList.add(`modal--invisible`);
         }
+        document.body.style.cssText = `padding-right: ''; overflow: ''`;
       });
     }
   });

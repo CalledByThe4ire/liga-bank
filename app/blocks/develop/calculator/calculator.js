@@ -96,6 +96,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
     return Math.floor(x / multiplier) * multiplier + multiplier;
   };
 
+  const getScrollbarWidth = () =>
+    window.innerWidth - document.documentElement.clientWidth;
+
   // маски
   const getUnitPluralForm = (unit, value) => {
     switch (unit) {
@@ -480,7 +483,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
                 new Event(`change`, {bubbles: true})
             );
             if (initialPaymentPercent) {
-              initialPaymentPercent.textContent = `${Number(mask.unmaskedValue)}%`;
+              initialPaymentPercent.textContent = `${Number(
+                  mask.unmaskedValue
+              )}%`;
             }
           }
           break;
@@ -1029,6 +1034,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       event.preventDefault();
       const {target} = event;
       toggleInvalid(target, `valid`);
+      const modalCalculator = document.querySelector(`.modal--calculator`);
       const [formRegistrationApplicationNumber] = masks.filter((mask) => {
         return (
           mask.el.input.name === `${formRegistrationName}-application-number`
@@ -1052,10 +1058,12 @@ document.addEventListener(`DOMContentLoaded`, () => {
       }
 
       creditRegistrationForm.hidden = true;
-      document
-        .querySelector(`.modal--calculator`)
-        .classList.remove(`modal--invisible`);
+      if (modalCalculator.classList.contains(`modal--invisible`)) {
+        modalCalculator.classList.remove(`modal--invisible`);
+      }
+      const scrollbarWidth = getScrollbarWidth();
       document.body.classList.add(`page--overlay`);
+      document.body.style.cssText = `background-color: #f6f7ff; padding-right: ${scrollbarWidth}px; overflow: hidden`;
 
       if (creditCalculationForms) {
         creditCalculationForms.forEach((form) => {

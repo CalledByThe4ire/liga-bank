@@ -1,6 +1,9 @@
 document.addEventListener(`DOMContentLoaded`, () => {
   const pageHeaderLogin = document.querySelector(`#page-header-login`);
 
+  const getScrollbarWidth = () =>
+    window.innerWidth - document.documentElement.clientWidth;
+
   const clickHandler = ({target}) => {
     const form = document.querySelector(`#${target.dataset.modal} form`);
     let formSubmit = null;
@@ -16,7 +19,11 @@ document.addEventListener(`DOMContentLoaded`, () => {
     if (modal) {
       modal.classList.remove(`modal--invisible`);
     }
-    document.body.classList.add(`page--overlay`);
+    if (!document.body.classList.contains(`page--overlay`)) {
+      document.body.classList.add(`page--overlay`);
+    }
+    const scrollbarWidth = getScrollbarWidth();
+    document.body.style.cssText = `background-color: #f6f7ff; padding-right: ${scrollbarWidth}px; overflow: hidden`;
 
     if (localStorage.getItem(`loginFormData`)) {
       if (formSubmit) {
@@ -28,7 +35,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
       }
     }
   };
-
 
   if (pageHeaderLogin) {
     pageHeaderLogin.addEventListener(`click`, clickHandler);

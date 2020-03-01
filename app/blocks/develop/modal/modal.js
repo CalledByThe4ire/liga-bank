@@ -218,6 +218,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       if (document.body.classList.contains(`page--overlay`)) {
         document.body.classList.remove(`page--overlay`);
       }
+      document.body.style.cssText = `background-color: ''; padding-right: ''; overflow: ''`;
     };
 
     if (modalCloseButtons) {
@@ -230,6 +231,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
                 hideModal(target.closest(`#${target.dataset.modal}`));
               }
             } else if (type === `click`) {
+              console.log(`click`);
               hideModal(target.closest(`#${target.dataset.modal}`));
             }
           })
