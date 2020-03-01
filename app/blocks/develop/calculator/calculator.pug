@@ -15,13 +15,14 @@ mixin calculator(data)
 								legend Шаг&nbsp;1. Цель кредита
 								+e('div').inner
 									+e('div').form-field
-										input(
-											type='text',
-											value='Выберите цель кредита',
-											name=`credit-${creditSelection.modifier}-title`,
-											readonly=true,
-											tabindex= -1
-										)
+										label
+											input(
+												type='text',
+												value='Выберите цель кредита',
+												name=`credit-${creditSelection.modifier}-title`,
+												readonly=true,
+												tabindex= -1
+											)
 										button(type='button', name=`credit-${creditSelection.modifier}-arrow`, aria-label='Show options')
 											svg(width=16, height=8)
 												use(xlink:href='#calculator__arrow')
@@ -94,7 +95,10 @@ mixin calculator(data)
 											data-format= `integer`,
 										)
 										+e('p').form-range-output
-											output(name=`${credit.modifier}-credit-${initialPayment.modifier}-output-min`)= `${initialPayment.min}%`
+											output(
+												name=`${credit.modifier}-credit-${initialPayment.modifier}-percent`,
+												id=`${credit.modifier}-credit-${initialPayment.modifier}-percent`
+											)= `${initialPayment.min}%`
 									label(
 										for=`${credit.modifier}-credit-${period.modifier}`,
 										tabindex= 0

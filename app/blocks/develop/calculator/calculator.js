@@ -177,7 +177,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       case `tel`:
         return {
           mask: `+{7}(000)000-00-00`,
-          lazy: true,
+          lazy: true
         };
       case `full-name`:
         return {
@@ -350,7 +350,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       buttons = formField.querySelectorAll(`button`);
     }
 
-    const focusHandler = ({target}) => {
+    const focusHandler = () => {
       if (
         formField &&
         formField.classList.contains(`calculator__form-field--invalid`)
@@ -359,7 +359,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       }
     };
 
-    const creditCalculationFormInputHandler = ({target}) => {
+    const creditCalculationFormInputHandler = () => {
       const maskUnit = getUnitPluralForm(
           input.dataset.unit,
           mask.unmaskedValue
@@ -386,6 +386,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
           (item) =>
             item.el.input.name ===
           `${formModifier}${divider}initial-payment-range`
+      );
+      const initialPaymentPercent = document.querySelector(
+          `#${formModifier}${divider}initial-payment-percent`
       );
 
       const [period] = masks.filter(
@@ -476,6 +479,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
             initialPayment.el.input.dispatchEvent(
                 new Event(`change`, {bubbles: true})
             );
+            if (initialPaymentPercent) {
+              initialPaymentPercent.textContent = `${Number(mask.unmaskedValue)}%`;
+            }
           }
           break;
 
@@ -515,6 +521,11 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
         default:
           throw new Error(`Unknown field's modifier: ${fieldModifier}`);
+      }
+      if (creditRegistrationForm) {
+        if (!creditRegistrationForm.hidden) {
+          creditRegistrationForm.hidden = true;
+        }
       }
     };
 

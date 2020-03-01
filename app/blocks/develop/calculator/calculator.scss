@@ -351,32 +351,6 @@
           }
         }
 
-        label {
-          $label: &;
-
-          display: flex;
-          width: inherit;
-          margin-bottom: 10px;
-
-          font-size: 16px;
-          line-height: 1.4;
-
-          cursor: pointer;
-          outline: none;
-
-          transition-property: color;
-          transition-duration: 0.3s;
-
-          @include media-breakpoint-down(sm) {
-            margin-bottom: 9px;
-          }
-
-          &:hover,
-          &:focus {
-            color: $primary;
-          }
-        }
-
         input {
           &[type="text"] {
             @include padding-x(24px);
@@ -546,7 +520,12 @@
       #{$calculator}__form-field {
         margin-bottom: initial;
 
+        label {
+          width: 100%;
+        }
+
         input[type="text"] {
+          width: 100%;
           padding-left: 24px;
 
           font-size: 16px;
@@ -569,6 +548,36 @@
             svg {
               stroke: $body-color;
             }
+          }
+        }
+      }
+    }
+
+    &--calculation {
+      form {
+        label {
+          $label: &;
+
+          display: flex;
+          width: inherit;
+          margin-bottom: 10px;
+
+          font-size: 16px;
+          line-height: 1.4;
+
+          cursor: pointer;
+          outline: none;
+
+          transition-property: color;
+          transition-duration: 0.3s;
+
+          @include media-breakpoint-down(sm) {
+            margin-bottom: 9px;
+          }
+
+          &:hover,
+          &:focus {
+            color: $primary;
           }
         }
       }
