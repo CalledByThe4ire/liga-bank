@@ -55,12 +55,10 @@
 
   &__col {
     display: flex;
-    flex-flow: row wrap;
     justify-content: space-between;
     align-items: flex-start;
 
     @include media-breakpoint-down(md) {
-      flex-flow: column wrap;
       justify-content: flex-start;
     }
 
@@ -84,8 +82,10 @@
 
     &--right {
       width: 52%;
+      flex-flow: row nowrap;
 
       @include media-breakpoint-down(md) {
+        flex-flow: column wrap;
         width: 48%;
       }
 

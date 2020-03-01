@@ -35,3 +35,4 @@ mixin footer(data)
 								+e('a').link(href='#', title= socialIcon)
 									+e('svg').icon(width= socialWidth, height= socialHeight)
 										use(xlink:href=`#footer__${socialIcon}`)
+									+e('span').text !{socialIcon}

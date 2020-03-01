@@ -8,14 +8,18 @@
 
   @include media-breakpoint-down(md) {
     flex-flow: column wrap;
+    min-width: 100%;
   }
 
   &__item {
     position: relative;
+
     padding-right: 15px;
     padding-bottom: 15px;
+    max-width: 50%;
 
     @include media-breakpoint-down(md) {
+      max-width: 100%;
       &:last-of-type {
         padding-bottom: 30px;
 
@@ -29,12 +33,14 @@
   &__link {
     position: relative;
 
+    display: flex;
+    flex-flow: row wrap;
+
     font-size: 16px;
     font-weight: 500;
     line-height: 1.4;
     color: $link-color;
     text-decoration: $link-decoration;
-    white-space: nowrap;
 
     transition-duration: 0.3s;
     transition-property: all;

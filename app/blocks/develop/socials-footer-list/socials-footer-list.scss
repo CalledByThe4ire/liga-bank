@@ -2,16 +2,18 @@
   $root: &;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-start;
-  max-width: 105px;
+  min-width: 120px;
+  max-width: 20%;
 
   @include media-breakpoint-down(md) {
     justify-content: flex-start;
+    min-width: 100%;
     max-width: initial;
   }
 
-  &__item:not(:nth-of-type(4n)) {
+  &__item {
     padding-right: 15px;
     padding-bottom: 15px;
 
@@ -47,5 +49,9 @@
     transition-duration: inherit;
     transition-property: inherit;
     fill: $body-color;
+  }
+
+  &__text {
+    @include visually-hidden;
   }
 }
