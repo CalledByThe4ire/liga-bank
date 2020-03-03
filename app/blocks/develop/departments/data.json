@@ -1,0 +1,17 @@
+[
+  {
+    "modifier": "russia",
+    "label": "Россия",
+    "checked": true
+  },
+  {
+    "modifier": "nis",
+    "label": "СНГ",
+    "checked": true
+  },
+  {
+    "modifier": "europe",
+    "label": "Европа",
+    "checked": false
+  }
+]

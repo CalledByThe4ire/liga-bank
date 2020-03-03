@@ -1,0 +1,9 @@
+include ../mapping/mapping
+include ../form-departments/form-departments
+
+mixin departments(data)
+	+b('section').departments&attributes(attributes)
+		+e('h2').title Отделения Лига Банка
+		+form-departments(data)(class='__form')
+		+mapping(global.jsons.mapping)(class='__mapping')
+		block

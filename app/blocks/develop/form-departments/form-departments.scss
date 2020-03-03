@@ -1,0 +1,100 @@
+.form-departments {
+  background-color: $body-bg;
+
+  form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    padding-top: 35px;
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #c1c2ca;
+
+    @include media-breakpoint-down(md) {
+      @include padding-y(30px);
+    }
+
+    @include media-breakpoint-down(sm) {
+      @include padding-y(20px);
+    }
+  }
+
+  &__form-field {
+    &:not(:last-of-type) {
+      margin-right: 35px;
+
+      @include media-breakpoint-down(sm) {
+        margin-right: 20px;
+      }
+    }
+
+    input {
+      &[type="checkbox"] {
+        display: none;
+
+        + label {
+          $label: &;
+
+          position: relative;
+
+          padding-left: 25px;
+          margin-bottom: initial;
+
+          cursor: pointer;
+
+          &::before {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            top: 50%;
+
+            display: block;
+            width: 16px;
+            height: 16px;
+
+            border: 1px solid $primary;
+            border-radius: 2px;
+
+            transform: translateY(-50%);
+            transition-property: all;
+            transition-duration: 0.3s;
+          }
+
+          @include media-breakpoint-down(md) {
+            font-size: 14px;
+          }
+        }
+
+        &:checked + label::before {
+          background: url("@form-departments/check-mark.svg") no-repeat
+            center/6px auto $primary;
+        }
+
+        &:focus:checked + label::before {
+          background: url("@form-departments/check-mark.svg") no-repeat
+            center/6px auto $primary;
+        }
+      }
+    }
+
+    label {
+      display: flex;
+      width: inherit;
+
+      font-size: 16px;
+      line-height: 1.4;
+
+      cursor: pointer;
+      outline: none;
+
+      transition-property: all;
+      transition-duration: 0.3s;
+
+      &:hover,
+      &:focus {
+        color: $primary;
+      }
+    }
+  }
+}
