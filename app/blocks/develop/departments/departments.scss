@@ -29,6 +29,7 @@
     }
 
     @include media-breakpoint-down(sm) {
+      @include padding-x($offset--mobile);
       margin-bottom: 30px;
       font-size: 22px;
     }
