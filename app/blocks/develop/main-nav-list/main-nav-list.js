@@ -13,7 +13,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
           .querySelector(`use`)
           .setAttribute(`xlink:href`, `#main-nav__close`);
         if (nav) {
-          nav.classList.remove(`main-nav-list--hidden`);
+          nav.classList.remove(`main-nav-list--hidden`, `fadeOut`);
+          nav.classList.add(`animated`, `fadeIn`);
         }
         break;
       case `open`:
@@ -25,7 +26,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
           .querySelector(`use`)
           .setAttribute(`xlink:href`, `#main-nav__menu`);
         if (nav) {
-          nav.classList.add(`main-nav-list--hidden`);
+          nav.classList.add(`main-nav-list--hidden`, `fadeOut`);
+          nav.classList.remove(`main-nav-list--hidden`, `fadeIn`);
         }
         break;
       default:

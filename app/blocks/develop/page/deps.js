@@ -5,7 +5,7 @@ module.exports = {
       import: [`animate.min.css`],
     },
     {
-      from: `node_modules/smooth-scroll`,
+      from: `node_modules/smooth-scroll/dist`,
       inject: [`smooth-scroll.polyfills.min.js`],
     },
   ],

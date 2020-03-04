@@ -1,8 +1,8 @@
 mixin slide(data)
 	+b('li').slide&attributes(attributes)(class=`--${data.modifier}`)
-		- const { slogan, caption } = data;
+		- const { slogan, caption, link } = data;
 		+e('div').container
 			+e('h2').title Лига Банк
 			+e('p').slogan= slogan
 			if caption !== ''
-				+e('a').link(href='#')= caption
+				+e('a').link(href= link)= caption

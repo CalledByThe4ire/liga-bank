@@ -2,7 +2,7 @@ include ../logo/logo
 
 mixin footer(data)
 	- const { output, nav, contacts, socials } = data;
-	+b('footer').footer&attributes(attributes)
+	+b('footer').footer(id=`contacts`)&attributes(attributes)
 		+e('h2').title Контакты
 		+e('div').container
 			+e('div').row
@@ -14,8 +14,9 @@ mixin footer(data)
 								p !{item}
 					+e('ul').nav.nav-footer__
 						each item in nav
+							- const {name: navItemName, link: navItemLink} = item;
 							+e('li').item
-								+e('a').link(href='#') !{item}
+								+e('a').link(href=`${navItemLink}`) !{navItemName}
 				+e('div').col--right
 					+e('ul').contacts-list.contacts-footer-list__
 						each contact in contacts

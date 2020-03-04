@@ -1059,7 +1059,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
       creditRegistrationForm.hidden = true;
       if (modalCalculator.classList.contains(`modal--invisible`)) {
-        modalCalculator.classList.remove(`modal--invisible`);
+        modalCalculator.classList.remove(`modal--invisible`, `fadeOut`);
+        modalCalculator.classList.add(`animated`, `fadeIn`);
       }
       const scrollbarWidth = getScrollbarWidth();
       document.body.classList.add(`page--overlay`);

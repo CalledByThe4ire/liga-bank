@@ -17,7 +17,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
     const modal = document.getElementById(target.dataset.modal);
 
     if (modal) {
-      modal.classList.remove(`modal--invisible`);
+      modal.classList.remove(`modal--invisible`, `fadeOut`);
+      modal.classList.add(`animated`, `fadeIn`);
     }
     if (!document.body.classList.contains(`page--overlay`)) {
       document.body.classList.add(`page--overlay`);

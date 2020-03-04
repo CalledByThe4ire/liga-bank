@@ -214,7 +214,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
     // Modal Visibility
     const hideModal = (modal) => {
-      modal.classList.add(`modal--invisible`);
+      modal.classList.add(`modal--invisible`, `fadeOut`);
+      modal.classList.remove(`fadeIn`);
       if (document.body.classList.contains(`page--overlay`)) {
         document.body.classList.remove(`page--overlay`);
       }
