@@ -138,7 +138,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
             submitButton.disabled = true;
             break;
           case `finished`:
-            modalPageHeader.classList.add(`modal--invisible`);
+            modalPageHeader.classList.add(`modal--invisible`, `fadeOut`);
+            modalPageHeader.classList.remove(`fadeIn`);
+            document.body.style.cssText = `padding-right: ''; overflow: ''`;
+            document.body.classList.remove(`page--overlay`);
             break;
           default:
             throw new Error(`Unknown state: ${processState}`);
@@ -232,7 +235,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
                 hideModal(target.closest(`#${target.dataset.modal}`));
               }
             } else if (type === `click`) {
-              console.log(`click`);
               hideModal(target.closest(`#${target.dataset.modal}`));
             }
           })
