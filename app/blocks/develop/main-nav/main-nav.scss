@@ -1,5 +1,6 @@
 .main-nav {
   position: relative;
+
   display: flex;
   flex-basis: 100%;
   flex-flow: row nowrap;
@@ -11,6 +12,7 @@
 
   @include media-breakpoint-down(sm) {
     order: -1;
+    min-height: inherit;
   }
 
   &__logo {
@@ -28,13 +30,17 @@
   }
 
   &__trigger {
+    z-index: 10;
+
     display: none;
+    min-height: inherit;
+
     background-color: transparent;
     border: 0;
+    stroke: $body-color;
+
     transition-duration: 0.3s;
     transition-property: stroke;
-    stroke: $body-color;
-    z-index: 10;
 
     @include media-breakpoint-down(sm) {
       display: flex;
