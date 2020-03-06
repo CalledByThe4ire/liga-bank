@@ -5584,7 +5584,8 @@ body {
     min-height: 60px;
     padding: 10px;
     margin-bottom: 10px;
-    font-size: 12px;
+    font-size: 16px;
+    line-height: 1;
     color: #1f1e25;
     background-color: transparent;
     border: 1px solid #1f1e25;
@@ -5648,7 +5649,8 @@ body {
     width: 100%;
     min-height: 60px;
     padding: 10px;
-    font-size: 12px;
+    font-size: 16px;
+    line-height: 1;
     color: #1f1e25;
     background-color: transparent;
     border: 1px solid #1f1e25;
