@@ -226,6 +226,19 @@ document.addEventListener(`DOMContentLoaded`, () => {
   }
 
   if (creditSelectionForm) {
+    const calculatorCols =
+      calculator && calculator.querySelectorAll(`.calculator__col`);
+    const toggleCalculatorColVisibility = () => {
+      calculatorCols.forEach((col) => {
+        if (
+          col.classList.contains(`calculator__col--right`) &&
+          col.classList.contains(`calculator__col--invisible`)
+        ) {
+          col.classList.remove(`calculator__col--invisible`);
+        }
+      });
+    };
+
     creditSelectionForm
       .querySelectorAll(`.calculator__forms-list-item`)
       .forEach((item) => {
@@ -237,6 +250,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
                 form.hidden = true;
               } else {
                 form.hidden = false;
+                toggleCalculatorColVisibility();
                 form.dispatchEvent(new Event(`change`));
               }
             });

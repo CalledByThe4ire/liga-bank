@@ -3905,7 +3905,13 @@ body {
     cursor: not-allowed; }
 
 .calculator {
-  margin-bottom: 95px; }
+  margin-bottom: 65px; }
+  @media (max-width: 1023.98px) {
+    .calculator {
+      margin-bottom: 35px; } }
+  @media (max-width: 768.98px) {
+    .calculator {
+      margin-bottom: 10px; } }
   .calculator form fieldset {
     width: 100%;
     margin: 0;
@@ -4002,6 +4008,8 @@ body {
       @media (max-width: 1023.98px) {
         .calculator__col--right {
           width: 100%; } }
+    .calculator__col--invisible {
+      display: none; }
   .calculator__credit-form {
     width: 100%; }
     .calculator__credit-form form {
@@ -4278,7 +4286,7 @@ body {
       .calculator__credit-form--selection form input[type="checkbox"]:focus:checked + label::before, .calculator__credit-form--calculation form input[type="checkbox"]:focus:checked + label::before {
         background: url("img/calculator_check-mark.svg") no-repeat center/6px auto #2c36f2; }
     .calculator__credit-form--selection {
-      margin-bottom: 35px; }
+      margin-bottom: 30px; }
       @media (max-width: 768.98px) {
         .calculator__credit-form--selection {
           margin-bottom: 25px; } }
@@ -4293,6 +4301,7 @@ body {
       .calculator__credit-form--selection .calculator__inner {
         position: relative; }
       .calculator__credit-form--selection .calculator__forms-list {
+        z-index: 5;
         position: absolute;
         top: 100%;
         left: 0;
@@ -4318,31 +4327,36 @@ body {
             background-color: transparent; }
             .calculator__credit-form--selection .calculator__form-field button:hover svg, .calculator__credit-form--selection .calculator__form-field button:focus svg, .calculator__credit-form--selection .calculator__form-field button:active svg {
               stroke: #1f1e25; }
-    .calculator__credit-form--calculation form label {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      width: inherit;
-      margin-bottom: 10px;
-      font-size: 16px;
-      line-height: 1.4;
-      cursor: pointer;
-      outline: none;
-      -webkit-transition-property: color;
-      -o-transition-property: color;
-      transition-property: color;
-      -webkit-transition-duration: 0.3s;
-           -o-transition-duration: 0.3s;
-              transition-duration: 0.3s; }
-      @media (max-width: 768.98px) {
-        .calculator__credit-form--calculation form label {
-          margin-bottom: 9px; } }
-      .calculator__credit-form--calculation form label:hover, .calculator__credit-form--calculation form label:focus {
-        color: #2c36f2; }
+    .calculator__credit-form--calculation form {
+      margin-bottom: 30px; }
+      @media (max-width: 1023.98px) {
+        .calculator__credit-form--calculation form {
+          margin-bottom: initial; } }
+      .calculator__credit-form--calculation form label {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        width: inherit;
+        margin-bottom: 10px;
+        font-size: 16px;
+        line-height: 1.4;
+        cursor: pointer;
+        outline: none;
+        -webkit-transition-property: color;
+        -o-transition-property: color;
+        transition-property: color;
+        -webkit-transition-duration: 0.3s;
+             -o-transition-duration: 0.3s;
+                transition-duration: 0.3s; }
+        @media (max-width: 768.98px) {
+          .calculator__credit-form--calculation form label {
+            margin-bottom: 9px; } }
+        .calculator__credit-form--calculation form label:hover, .calculator__credit-form--calculation form label:focus {
+          color: #2c36f2; }
     @media (max-width: 1023.98px) {
       .calculator__credit-form--offering {
         margin-top: 40px;
-        margin-bottom: 60px; } }
+        margin-bottom: 40px; } }
     @media (max-width: 768.98px) {
       .calculator__credit-form--offering {
         margin-top: 30px;
@@ -4510,85 +4524,94 @@ body {
           @media (max-width: 768.98px) {
             .calculator__credit-form--offering form .calculator__form-field:nth-last-of-type(-n + 2) {
               margin-bottom: 13px; } }
-    .calculator__credit-form--registration {
-      margin-top: 70px; }
+    .calculator__credit-form--registration form {
+      width: 770px;
+      margin: auto;
+      padding: 70px;
+      padding-top: 60px;
+      border-radius: 4px;
+      background-color: #f6f7ff; }
       @media (max-width: 1023.98px) {
-        .calculator__credit-form--registration {
-          margin-top: initial; } }
-      .calculator__credit-form--registration form {
-        width: 770px;
-        margin: auto;
-        padding: 70px;
-        padding-top: 60px;
-        border-radius: 4px;
-        background-color: #f6f7ff; }
+        .calculator__credit-form--registration form {
+          width: 100%;
+          padding: initial;
+          background-color: transparent; } }
+      .calculator__credit-form--registration form legend {
+        text-align: center; }
         @media (max-width: 1023.98px) {
-          .calculator__credit-form--registration form {
-            width: 100%;
-            padding: initial;
-            background-color: transparent; } }
-        .calculator__credit-form--registration form legend {
-          text-align: center; }
-          @media (max-width: 1023.98px) {
-            .calculator__credit-form--registration form legend {
-              margin-bottom: 25px; } }
-        .calculator__credit-form--registration form input {
-          -webkit-box-flex: 1;
-              -ms-flex-positive: 1;
-                  flex-grow: 1;
-          border: none;
-          background-color: transparent;
-          outline: 0; }
-        .calculator__credit-form--registration form button[type="submit"] {
-          margin-right: auto;
-          margin-left: auto;
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-pack: center;
-              -ms-flex-pack: center;
-                  justify-content: center;
-          -webkit-box-align: center;
-              -ms-flex-align: center;
-                  align-items: center;
-          min-width: 198px;
-          padding: 16px;
-          font-size: 16px;
-          line-height: 19px;
-          font-weight: 500;
+          .calculator__credit-form--registration form legend {
+            margin-bottom: 25px; } }
+      .calculator__credit-form--registration form input {
+        -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+                flex-grow: 1;
+        border: none;
+        background-color: transparent;
+        outline: 0; }
+      .calculator__credit-form--registration form button[type="submit"] {
+        margin-right: auto;
+        margin-left: auto;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        min-width: 198px;
+        padding: 16px;
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 500;
+        color: #f6f7ff;
+        white-space: nowrap;
+        text-decoration: none;
+        outline: none;
+        border: 0;
+        border-radius: 4px;
+        background-color: #2c36f2;
+        cursor: pointer;
+        -webkit-transition-duration: 0.3s;
+             -o-transition-duration: 0.3s;
+                transition-duration: 0.3s;
+        -webkit-transition-property: color, background-color;
+        -o-transition-property: color, background-color;
+        transition-property: color, background-color; }
+        .calculator__credit-form--registration form button[type="submit"]:hover {
+          text-decoration: none; }
+        .calculator__credit-form--registration form button[type="submit"]:hover, .calculator__credit-form--registration form button[type="submit"]:focus {
           color: #f6f7ff;
-          white-space: nowrap;
-          text-decoration: none;
-          outline: none;
-          border: 0;
-          border-radius: 4px;
-          background-color: #2c36f2;
-          cursor: pointer;
-          -webkit-transition-duration: 0.3s;
-               -o-transition-duration: 0.3s;
-                  transition-duration: 0.3s;
-          -webkit-transition-property: color, background-color;
-          -o-transition-property: color, background-color;
-          transition-property: color, background-color; }
-          .calculator__credit-form--registration form button[type="submit"]:hover {
-            text-decoration: none; }
-          .calculator__credit-form--registration form button[type="submit"]:hover, .calculator__credit-form--registration form button[type="submit"]:focus {
-            color: #f6f7ff;
-            background-color: #1f1e25; }
-          @media (max-width: 1023.98px) {
-            .calculator__credit-form--registration form button[type="submit"] {
-              font-size: 14px;
-              width: 100%; } }
-          @media (max-width: 768.98px) {
-            .calculator__credit-form--registration form button[type="submit"] {
-              max-width: initial;
-              width: 100%;
-              margin-top: 10px;
-              margin-right: initial;
-              margin-left: initial;
-              font-size: 14px;
-              line-height: 16px; } }
-      .calculator__credit-form--registration .calculator__form-field-inner {
+          background-color: #1f1e25; }
+        @media (max-width: 1023.98px) {
+          .calculator__credit-form--registration form button[type="submit"] {
+            font-size: 14px;
+            width: 100%; } }
+        @media (max-width: 768.98px) {
+          .calculator__credit-form--registration form button[type="submit"] {
+            max-width: initial;
+            width: 100%;
+            margin-top: 10px;
+            margin-right: initial;
+            margin-left: initial;
+            font-size: 14px;
+            line-height: 16px; } }
+    .calculator__credit-form--registration .calculator__form-field-inner {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-flow: row wrap;
+              flex-flow: row wrap;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: start;
+          -ms-flex-align: start;
+              align-items: flex-start; }
+      .calculator__credit-form--registration .calculator__form-field-inner .calculator__form-field {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -4599,112 +4622,98 @@ body {
         -webkit-box-pack: justify;
             -ms-flex-pack: justify;
                 justify-content: space-between;
-        -webkit-box-align: start;
-            -ms-flex-align: start;
-                align-items: flex-start; }
-        .calculator__credit-form--registration .calculator__form-field-inner .calculator__form-field {
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-orient: horizontal;
-          -webkit-box-direction: normal;
-              -ms-flex-flow: row wrap;
-                  flex-flow: row wrap;
-          -webkit-box-pack: justify;
-              -ms-flex-pack: justify;
-                  justify-content: space-between;
-          width: 100%; }
-          .calculator__credit-form--registration .calculator__form-field-inner .calculator__form-field--invisible {
-            display: none; }
-        .calculator__credit-form--registration .calculator__form-field-inner--readonly {
-          margin-bottom: 30px; }
-          .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field {
-            padding-top: 11px;
-            padding-bottom: 11px;
-            -webkit-box-align: center;
-                -ms-flex-align: center;
-                    align-items: center;
-            border-bottom: 1px solid #c4c4c4; }
-            @media (max-width: 768.98px) {
-              .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field {
-                padding-top: 10px;
-                padding-bottom: 15px; } }
-            .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field label {
-              font-size: 16px;
-              line-height: 1.4;
-              color: #394959; }
-              @media (max-width: 768.98px) {
-                .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field label {
-                  width: 100%;
-                  -webkit-box-flex: 1;
-                      -ms-flex-positive: 1;
-                          flex-grow: 1;
-                  -webkit-box-ordinal-group: 6;
-                      -ms-flex-order: 5;
-                          order: 5; } }
-            .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field input {
-              font-size: 22px;
-              line-height: 1.4;
-              font-weight: 500;
-              text-align: right; }
-              @media (max-width: 768.98px) {
-                .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field input {
-                  font-size: 18px;
-                  text-align: left; } }
-        .calculator__credit-form--registration .calculator__form-field-inner--editable {
-          margin-bottom: 35px; }
+        width: 100%; }
+        .calculator__credit-form--registration .calculator__form-field-inner .calculator__form-field--invisible {
+          display: none; }
+      .calculator__credit-form--registration .calculator__form-field-inner--readonly {
+        margin-bottom: 30px; }
+        .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field {
+          padding-top: 11px;
+          padding-bottom: 11px;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          border-bottom: 1px solid #c4c4c4; }
           @media (max-width: 768.98px) {
-            .calculator__credit-form--registration .calculator__form-field-inner--editable {
-              margin-bottom: 30px; } }
-          .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field {
-            width: calc(50% - 15px);
-            -webkit-transition-property: border;
-            -o-transition-property: border;
-            transition-property: border;
-            -webkit-transition-duration: 0.3s;
-                 -o-transition-duration: 0.3s;
-                    transition-duration: 0.3s; }
-            .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field--invalid input:invalid {
-              border: 1px solid #f22c2c; }
-            .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field:focus {
-              border: 1px solid #2c36f2; }
-            .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field:first-of-type {
-              width: 100%;
-              margin-bottom: 30px; }
+            .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field {
+              padding-top: 10px;
+              padding-bottom: 15px; } }
+          .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field label {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #394959; }
             @media (max-width: 768.98px) {
-              .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field {
-                width: 100%; }
-                .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field:not(:last-of-type) {
-                  margin-bottom: 20px; } }
-            .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field input {
-              display: -webkit-box;
-              display: -ms-flexbox;
-              display: flex;
-              -webkit-box-orient: horizontal;
-              -webkit-box-direction: normal;
-                  -ms-flex-flow: row nowrap;
-                      flex-flow: row nowrap;
-              padding-right: 24px;
-              padding-left: 24px;
-              padding-top: 18px;
-              padding-bottom: 18px;
-              font-size: 18px;
-              line-height: 1;
-              text-align: left;
-              color: #1f1e25;
-              background-color: transparent;
-              border: 1px solid #1f1e25;
-              border-radius: 4px;
-              outline: none; }
-              .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field input:active, .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field input:focus {
-                border: 1px solid #2c36f2; }
-              .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field input:disabled {
-                cursor: not-allowed; }
-              @media (max-width: 768.98px) {
-                .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field input {
-                  padding-right: 15px;
-                  padding-left: 15px;
-                  font-size: 16px; } }
+              .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field label {
+                width: 100%;
+                -webkit-box-flex: 1;
+                    -ms-flex-positive: 1;
+                        flex-grow: 1;
+                -webkit-box-ordinal-group: 6;
+                    -ms-flex-order: 5;
+                        order: 5; } }
+          .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field input {
+            font-size: 22px;
+            line-height: 1.4;
+            font-weight: 500;
+            text-align: right; }
+            @media (max-width: 768.98px) {
+              .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field input {
+                font-size: 18px;
+                text-align: left; } }
+      .calculator__credit-form--registration .calculator__form-field-inner--editable {
+        margin-bottom: 35px; }
+        @media (max-width: 768.98px) {
+          .calculator__credit-form--registration .calculator__form-field-inner--editable {
+            margin-bottom: 30px; } }
+        .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field {
+          width: calc(50% - 15px);
+          -webkit-transition-property: border;
+          -o-transition-property: border;
+          transition-property: border;
+          -webkit-transition-duration: 0.3s;
+               -o-transition-duration: 0.3s;
+                  transition-duration: 0.3s; }
+          .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field--invalid input:invalid {
+            border: 1px solid #f22c2c; }
+          .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field:focus {
+            border: 1px solid #2c36f2; }
+          .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field:first-of-type {
+            width: 100%;
+            margin-bottom: 30px; }
+          @media (max-width: 768.98px) {
+            .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field {
+              width: 100%; }
+              .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field:not(:last-of-type) {
+                margin-bottom: 20px; } }
+          .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field input {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+                -ms-flex-flow: row nowrap;
+                    flex-flow: row nowrap;
+            padding-right: 24px;
+            padding-left: 24px;
+            padding-top: 18px;
+            padding-bottom: 18px;
+            font-size: 18px;
+            line-height: 1;
+            text-align: left;
+            color: #1f1e25;
+            background-color: transparent;
+            border: 1px solid #1f1e25;
+            border-radius: 4px;
+            outline: none; }
+            .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field input:active, .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field input:focus {
+              border: 1px solid #2c36f2; }
+            .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field input:disabled {
+              cursor: not-allowed; }
+            @media (max-width: 768.98px) {
+              .calculator__credit-form--registration .calculator__form-field-inner--editable .calculator__form-field input {
+                padding-right: 15px;
+                padding-left: 15px;
+                font-size: 16px; } }
   .calculator__message {
     display: block;
     min-width: 500px;

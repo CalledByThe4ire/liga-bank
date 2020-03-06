@@ -142,7 +142,7 @@ mixin calculator(data)
 											tabindex= 0
 										) !{item.label}
 
-				+e('div').col--right
+				+e('div').col--right.--invisible
 					+e('div').credit-form--offering
 						form(id=`credit-${creditOffer.modifier}`, name=`credit-${creditOffer.modifier}`, hidden= true)
 							fieldset

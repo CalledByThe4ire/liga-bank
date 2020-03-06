@@ -4,7 +4,15 @@
 .calculator {
   $calculator: &;
 
-  margin-bottom: 95px;
+  margin-bottom: 65px;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 35px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 10px;
+  }
 
   form {
     fieldset {
@@ -103,6 +111,10 @@
       @include media-breakpoint-down(md) {
         width: 100%;
       }
+    }
+
+    &--invisible {
+      display: none;
     }
   }
 
@@ -485,7 +497,7 @@
     }
 
     &--selection {
-      margin-bottom: 35px;
+      margin-bottom: 30px;
 
       @include media-breakpoint-down(sm) {
         margin-bottom: 25px;
@@ -510,6 +522,7 @@
       }
 
       #{$calculator}__forms-list {
+        z-index: 5;
         position: absolute;
         top: 100%;
         left: 0;
@@ -559,6 +572,12 @@
 
     &--calculation {
       form {
+        margin-bottom: 30px;
+
+        @include media-breakpoint-down(md) {
+          margin-bottom: initial;
+        }
+
         label {
           $label: &;
 
@@ -589,8 +608,7 @@
 
     &--offering {
       @include media-breakpoint-down(md) {
-        margin-top: 40px;
-        margin-bottom: 60px;
+        @include margin-y(40px);
       }
 
       @include media-breakpoint-down(sm) {
@@ -773,11 +791,11 @@
     }
 
     &--registration {
-      margin-top: 70px;
+      // margin-top: 70px;
 
-      @include media-breakpoint-down(md) {
-        margin-top: initial;
-      }
+      // @include media-breakpoint-down(md) {
+      //   margin-top: initial;
+      // }
 
       form {
         width: 770px;

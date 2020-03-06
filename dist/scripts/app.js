@@ -543,6 +543,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (creditSelectionForm) {
+    var calculatorCols = calculator && calculator.querySelectorAll(".calculator__col");
+
+    var toggleCalculatorColVisibility = function toggleCalculatorColVisibility() {
+      calculatorCols.forEach(function (col) {
+        if (col.classList.contains("calculator__col--right") && col.classList.contains("calculator__col--invisible")) {
+          col.classList.remove("calculator__col--invisible");
+        }
+      });
+    };
+
     creditSelectionForm.querySelectorAll(".calculator__forms-list-item").forEach(function (item) {
       item.addEventListener("click", function (event) {
         var target = event.target;
@@ -553,6 +563,7 @@ document.addEventListener("DOMContentLoaded", function () {
               form.hidden = true;
             } else {
               form.hidden = false;
+              toggleCalculatorColVisibility();
               form.dispatchEvent(new Event("change"));
             }
           });
