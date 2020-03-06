@@ -1,0 +1,254 @@
+.tab-services {
+  $tab-services: &;
+  position: relative;
+
+  display: none;
+
+  @include media-breakpoint-down(md) {
+    display: flex;
+  }
+
+  background-color: $body-bg;
+  overflow: hidden;
+
+  &__inner {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    min-height: 310px;
+
+    @include row-cols(2);
+    @include padding-x(70px);
+    @include padding-y(50px);
+
+    @include media-breakpoint-down(md) {
+      min-height: 200px;
+      align-items: initial;
+
+      @include padding-x(45px);
+      @include padding-y(55px);
+    }
+
+    @include media-breakpoint-down(sm) {
+      @include padding-x(15px);
+      min-height: initial;
+    }
+
+    > picture {
+      display: flex;
+
+      @include media-breakpoint-down(md) {
+        flex: 0 0 45%;
+        max-width: 45%;
+        align-self: initial;
+      }
+
+      @include media-breakpoint-down(sm) {
+        flex: initial;
+        max-width: initial;
+      }
+    }
+  }
+
+  &__content {
+    @include media-breakpoint-down(md) {
+      flex: 0 0 55%;
+      max-width: 55%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      z-index: 5;
+      flex: initial;
+      max-width: initial;
+      width: 100%;
+    }
+  }
+
+  &__title {
+    max-width: 80%;
+    margin: 0;
+    margin-bottom: 30px;
+    padding: 0;
+
+    font-size: 22px;
+    line-height: 1.4;
+    font-weight: 500;
+
+    @include media-breakpoint-down(md) {
+      max-width: 100%;
+      margin-bottom: 25px;
+
+      font-size: 18px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+  }
+
+  &__list {
+    @include list-unstyled();
+    margin: 0;
+    margin-bottom: 35px;
+    padding: 0;
+    max-width: 80%;
+
+    font-size: 18px;
+    line-height: 1.3;
+    color: $body-color;
+
+    @include media-breakpoint-down(md) {
+      max-width: 100%;
+      margin-bottom: 30px;
+
+      font-size: 16px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      max-width: 75%;
+      padding-right: 25px;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+  }
+
+  &__item {
+    position: relative;
+    margin-bottom: 15px;
+    padding-left: 20px;
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 12px;
+      padding-left: 15px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+
+      display: block;
+      width: 15px;
+      height: 10px;
+      background: url("@services/check-mark.svg") no-repeat left center;
+
+      @include media-breakpoint-down(md) {
+        width: 11px;
+        height: 8px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        width: 8px;
+        height: 6px;
+      }
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 165px;
+    padding: 16px;
+
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    color: $body-bg;
+    white-space: nowrap;
+    text-decoration: $link-decoration;
+    outline: none;
+    border-radius: 4px;
+    background-color: $primary;
+
+    cursor: pointer;
+    transition-duration: 0.3s;
+    transition-property: color, background-color;
+
+    &:hover {
+      text-decoration: $link-hover-decoration;
+    }
+
+    &:hover,
+    &:focus {
+      color: $body-bg;
+      background-color: $body-color;
+    }
+
+    @include media-breakpoint-down(sm) {
+      display: flex;
+      padding: 14px;
+
+      font-size: 14px;
+      line-height: 16px;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    padding: 0;
+    max-width: 70%;
+
+    font-size: 18px;
+    line-height: 1.4;
+
+    @include media-breakpoint-down(md) {
+      max-width: 85%;
+      font-size: 16px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      max-width: calc(100% - 100px);
+      font-size: 14px;
+    }
+
+    & a {
+      font-weight: 700;
+      color: $body-color;
+
+      transition-duration: 0.3s;
+      transition-property: color;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  &__image {
+    display: block;
+    align-self: center;
+    height: auto;
+    object-fit: contain;
+
+    @include media-breakpoint-down(md) {
+      padding-left: 10px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      position: absolute;
+      top: 50%;
+      right: 0;
+
+      transform: translateY(calc(-50% - 22px)); // link' height = 44px
+
+      width: auto;
+    }
+  }
+
+  &--active {
+    display: flex;
+  }
+
+  &--credit {
+    & #{$tab-services}__list {
+      margin-bottom: 30px;
+    }
+  }
+}

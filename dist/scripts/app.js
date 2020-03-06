@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // tab' switch behaviour
   var servicesListItems = document.querySelectorAll("#services .services__list-item");
   var servicesLinks = document.querySelectorAll("#services .services__link");
-  var servicesTabs = document.querySelectorAll("#services .tab-service");
+  var servicesTabs = document.querySelectorAll("#services .tab-services");
 
   if (servicesLinks && servicesTabs) {
     var eventHandler = function eventHandler(event, activeElement, activeElementIndex) {
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
         link.closest(".services__list-item").classList.remove("services__list-item--active");
       });
       servicesTabs.forEach(function (section) {
-        section.classList.remove("tab-service--active");
+        section.classList.remove("tab-services--active");
       });
     };
 
@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       servicesTabs.forEach(function (tab, index) {
         if (index === tabIndex) {
-          tab.classList.add("tab-service--active");
+          tab.classList.add("tab-services--active");
         }
       });
     };
@@ -245,9 +245,9 @@ document.addEventListener("DOMContentLoaded", function () {
       loop: true,
       speed: 500,
       spaceBetween: 10,
-      autoplay: {
-        delay: 3000
-      },
+      // autoplay: {
+      //   delay: 3000
+      // },
       pagination: {
         el: ".swiper-pagination",
         type: "bullets",

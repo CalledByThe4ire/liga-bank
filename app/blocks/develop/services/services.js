@@ -7,7 +7,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       `#services .services__list-item`
   );
   const servicesLinks = document.querySelectorAll(`#services .services__link`);
-  const servicesTabs = document.querySelectorAll(`#services .tab-service`);
+  const servicesTabs = document.querySelectorAll(`#services .tab-services`);
 
   if (servicesLinks && servicesTabs) {
     const eventHandler = (event, activeElement, activeElementIndex) => {
@@ -36,7 +36,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
           .classList.remove(`services__list-item--active`);
       });
       servicesTabs.forEach((section) => {
-        section.classList.remove(`tab-service--active`);
+        section.classList.remove(`tab-services--active`);
       });
     };
 
@@ -49,7 +49,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       );
       servicesTabs.forEach((tab, index) => {
         if (index === tabIndex) {
-          tab.classList.add(`tab-service--active`);
+          tab.classList.add(`tab-services--active`);
         }
       });
     };
