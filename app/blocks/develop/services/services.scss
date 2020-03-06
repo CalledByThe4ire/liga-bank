@@ -71,8 +71,7 @@
     cursor: pointer;
     outline: none;
 
-    &:hover,
-    &:focus {
+    &:hover {
       & #{$services}__text {
         color: $primary;
         text-decoration: $link-hover-decoration;

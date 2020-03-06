@@ -3758,7 +3758,7 @@ body {
     text-decoration: none;
     cursor: pointer;
     outline: none; }
-    .services__link:hover .services__text, .services__link:focus .services__text {
+    .services__link:hover .services__text {
       color: #2c36f2;
       text-decoration: none;
       -webkit-transition-duration: 0.3s;
@@ -3767,7 +3767,7 @@ body {
       -webkit-transition-property: color;
       -o-transition-property: color;
       transition-property: color; }
-    .services__link:hover .services__icon, .services__link:focus .services__icon {
+    .services__link:hover .services__icon {
       fill: #1f1e25;
       -webkit-transition-duration: 0.3s;
            -o-transition-duration: 0.3s;
