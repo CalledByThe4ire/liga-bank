@@ -4211,6 +4211,9 @@ body {
       line-height: 1;
       text-align: center;
       color: #1f1e25;
+      -webkit-appearance: none;
+         -moz-appearance: none;
+              appearance: none;
       background-color: transparent;
       border: 1px solid transparent;
       border-radius: 4px;
@@ -4701,6 +4704,9 @@ body {
             line-height: 1;
             text-align: left;
             color: #1f1e25;
+            -webkit-appearance: none;
+               -moz-appearance: none;
+                    appearance: none;
             background-color: transparent;
             border: 1px solid #1f1e25;
             border-radius: 4px;
@@ -5600,6 +5606,9 @@ body {
     font-size: 16px;
     line-height: 1;
     color: #1f1e25;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
     background-color: transparent;
     border: 1px solid #1f1e25;
     border-radius: 4px;
@@ -5665,6 +5674,9 @@ body {
     font-size: 16px;
     line-height: 1;
     color: #1f1e25;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
     background-color: transparent;
     border: 1px solid #1f1e25;
     border-radius: 4px;
