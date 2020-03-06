@@ -532,6 +532,10 @@
           text-align: left;
 
           cursor: pointer;
+
+          @include media-breakpoint-down(sm) {
+            padding-left: 15px;
+          }
         }
 
         button {

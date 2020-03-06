@@ -4307,6 +4307,9 @@ body {
           font-size: 16px;
           text-align: left;
           cursor: pointer; }
+          @media (max-width: 768.98px) {
+            .calculator__credit-form--selection .calculator__form-field input[type="text"] {
+              padding-left: 15px; } }
         .calculator__credit-form--selection .calculator__form-field button {
           left: initial;
           right: 0;
