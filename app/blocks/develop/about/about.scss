@@ -23,11 +23,10 @@
       }
 
       .swiper-pagination-bullet {
-        background-color: $body-color;
+        background-color: #2028b6;
         opacity: 1;
 
         &-active {
-          border: 1px solid $body-color;
           background-color: $body-bg;
         }
 
