@@ -197,6 +197,7 @@
         & > input[type="text"] {
           @include padding-x(initial);
           flex-grow: 1;
+          width: 100%;
 
           border: none;
         }
@@ -792,12 +793,6 @@
     }
 
     &--registration {
-      // margin-top: 70px;
-
-      // @include media-breakpoint-down(md) {
-      //   margin-top: initial;
-      // }
-
       form {
         width: 770px;
         margin: auto;
@@ -826,6 +821,7 @@
         input {
           flex-grow: 1;
 
+          appearance: none;
           border: none;
           background-color: transparent;
           outline: 0;
@@ -932,6 +928,8 @@
               font-weight: 500;
               text-align: right;
 
+              border-radius: 0;
+
               @include media-breakpoint-down(sm) {
                 font-size: 18px;
                 text-align: left;
@@ -990,7 +988,6 @@
               text-align: left;
               color: $body-color;
 
-              appearance: none;
               background-color: transparent;
               border: 1px solid $body-color;
               border-radius: 4px;
