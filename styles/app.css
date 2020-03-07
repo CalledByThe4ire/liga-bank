@@ -2906,6 +2906,10 @@ body {
     background-color: transparent; }
   .page--overlay::before {
     display: block; }
+  .page--no-scroll {
+    position: fixed;
+    height: 100vh;
+    overflow: hidden; }
 
 .page-header {
   width: 100%;
@@ -3022,8 +3026,10 @@ body {
         height: 24px; } }
     @media (max-width: 768.98px) {
       .logo__image {
-        width: 113px;
-        height: 17px; } }
+        width: 115px;
+        height: 18px;
+        margin-left: 5px;
+        margin-bottom: 5px; } }
 
 .main-nav-list {
   z-index: 5;
@@ -3202,10 +3208,9 @@ body {
       .about.swiper-container-horizontal > .swiper-pagination-bullets, .about.swiper-pagination-custom, .about.swiper-pagination-fraction {
         bottom: 7px; } }
     .about.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .about.swiper-pagination-custom .swiper-pagination-bullet, .about.swiper-pagination-fraction .swiper-pagination-bullet {
-      background-color: #1f1e25;
+      background-color: #2028b6;
       opacity: 1; }
       .about.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet-active, .about.swiper-pagination-custom .swiper-pagination-bullet-active, .about.swiper-pagination-fraction .swiper-pagination-bullet-active {
-        border: 1px solid #1f1e25;
         background-color: #f6f7ff; }
       @media (max-width: 768.98px) {
         .about.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .about.swiper-pagination-custom .swiper-pagination-bullet, .about.swiper-pagination-fraction .swiper-pagination-bullet {
@@ -4110,6 +4115,7 @@ body {
         -webkit-box-flex: 1;
             -ms-flex-positive: 1;
                 flex-grow: 1;
+        width: 100%;
         border: none; }
       .calculator__credit-form--selection .calculator__form-field > button:first-of-type, .calculator__credit-form--calculation .calculator__form-field > button:first-of-type {
         left: 0;
@@ -4584,6 +4590,9 @@ body {
         -webkit-box-flex: 1;
             -ms-flex-positive: 1;
                 flex-grow: 1;
+        -webkit-appearance: none;
+           -moz-appearance: none;
+                appearance: none;
         border: none;
         background-color: transparent;
         outline: 0; }
@@ -4694,7 +4703,8 @@ body {
             font-size: 22px;
             line-height: 1.4;
             font-weight: 500;
-            text-align: right; }
+            text-align: right;
+            border-radius: 0; }
             @media (max-width: 768.98px) {
               .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field input {
                 font-size: 18px;
@@ -4740,9 +4750,6 @@ body {
             line-height: 1;
             text-align: left;
             color: #1f1e25;
-            -webkit-appearance: none;
-               -moz-appearance: none;
-                    appearance: none;
             background-color: transparent;
             border: 1px solid #1f1e25;
             border-radius: 4px;
@@ -5171,6 +5178,9 @@ body {
     @media (max-width: 1023.98px) {
       .footer__logo {
         margin-bottom: 25px; } }
+    @media (max-width: 768.98px) {
+      .footer__logo {
+        margin-bottom: 15px; } }
   .footer__logo, .footer__output {
     padding-right: 15px; }
   .footer__output {
@@ -5657,9 +5667,6 @@ body {
     .login-modal-form-field input:hover, .login-modal-form-field input:focus {
       outline: none;
       border: 1px solid #2c36f2; }
-    @media (max-width: 768.98px) {
-      .login-modal-form-field input {
-        font-size: 14px; } }
   .login-modal-form-field--invalid input,
   .login-modal-form-field--invalid input:hover,
   .login-modal-form-field--invalid input:focus {
@@ -5725,9 +5732,6 @@ body {
     .password-modal-form-field input:hover, .password-modal-form-field input:focus {
       outline: none;
       border: 1px solid #2c36f2; }
-    @media (max-width: 768.98px) {
-      .password-modal-form-field input {
-        font-size: 14px; } }
   .password-modal-form-field a {
     display: -webkit-box;
     display: -ms-flexbox;

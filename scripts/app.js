@@ -129,11 +129,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (!document.body.classList.contains("page--overlay")) {
-      document.body.classList.add("page--overlay");
+      document.body.classList.add("page--overlay", "page--no-scroll");
     }
 
     var scrollbarWidth = getScrollbarWidth();
-    document.body.style.cssText = "background-color: #f6f7ff; padding-right: ".concat(scrollbarWidth, "px; overflow: hidden");
+    document.body.style.cssText = "background-color: #f6f7ff; padding-right: ".concat(scrollbarWidth, "px;");
 
     if (localStorage.getItem("loginFormData")) {
       if (formSubmit) {
@@ -1435,8 +1435,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       var scrollbarWidth = getScrollbarWidth();
-      document.body.classList.add("page--overlay");
-      document.body.style.cssText = "background-color: #f6f7ff; padding-right: ".concat(scrollbarWidth, "px; overflow: hidden");
+      document.body.classList.add("page--overlay", "page--no-scroll");
+      document.body.style.cssText = "background-color: #f6f7ff; padding-right: ".concat(scrollbarWidth, "px;");
 
       if (creditCalculationForms) {
         creditCalculationForms.forEach(function (form) {
@@ -1718,8 +1718,8 @@ document.addEventListener("DOMContentLoaded", function () {
           case "finished":
             modalPageHeader.classList.add("modal--invisible", "fadeOut");
             modalPageHeader.classList.remove("fadeIn");
-            document.body.style.cssText = "padding-right: ''; overflow: ''";
-            document.body.classList.remove("page--overlay");
+            document.body.style.cssText = "background-color: '', padding-right: '';";
+            document.body.classList.remove("page--overlay", "page--no-scroll");
             break;
 
           default:
@@ -1794,10 +1794,10 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.classList.remove("fadeIn");
 
       if (document.body.classList.contains("page--overlay")) {
-        document.body.classList.remove("page--overlay");
+        document.body.classList.remove("page--overlay", "page--no-scroll");
       }
 
-      document.body.style.cssText = "background-color: ''; padding-right: ''; overflow: ''";
+      document.body.style.cssText = "background-color: ''; padding-right: '';";
     };
 
     if (modalCloseButtons) {
