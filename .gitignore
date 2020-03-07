@@ -36,6 +36,7 @@ build/Release
 node_modules
 bower_components
 jspm_packages
+dist
 _design
 
 # Optional npm cache directory

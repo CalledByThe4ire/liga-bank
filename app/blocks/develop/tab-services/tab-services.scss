@@ -136,7 +136,7 @@
       display: block;
       width: 15px;
       height: 10px;
-      background: url("@services/check-mark.svg") no-repeat left center;
+      background: url("img/check-mark.svg") no-repeat left center;
 
       @include media-breakpoint-down(md) {
         width: 11px;

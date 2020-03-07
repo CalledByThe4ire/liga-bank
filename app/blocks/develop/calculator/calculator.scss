@@ -484,12 +484,12 @@
             }
 
             &:checked + label::before {
-              background: url("@calculator/check-mark.svg") no-repeat center/6px
+              background: url("img/check-mark.svg") no-repeat center/6px
                 auto $primary;
             }
 
             &:focus:checked + label::before {
-              background: url("@calculator/check-mark.svg") no-repeat center/6px
+              background: url("img/check-mark.svg") no-repeat center/6px
                 auto $primary;
             }
           }
