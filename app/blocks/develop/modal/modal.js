@@ -140,8 +140,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
           case `finished`:
             modalPageHeader.classList.add(`modal--invisible`, `fadeOut`);
             modalPageHeader.classList.remove(`fadeIn`);
-            document.body.style.cssText = `padding-right: ''; overflow: ''`;
-            document.body.classList.remove(`page--overlay`);
+            document.body.style.cssText = `background-color: '', padding-right: '';`;
+            document.body.classList.remove(`page--overlay`, `page--no-scroll`);
             break;
           default:
             throw new Error(`Unknown state: ${processState}`);
@@ -220,9 +220,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
       modal.classList.add(`modal--invisible`, `fadeOut`);
       modal.classList.remove(`fadeIn`);
       if (document.body.classList.contains(`page--overlay`)) {
-        document.body.classList.remove(`page--overlay`);
+        document.body.classList.remove(`page--overlay`, `page--no-scroll`);
       }
-      document.body.style.cssText = `background-color: ''; padding-right: ''; overflow: ''`;
+      document.body.style.cssText = `background-color: ''; padding-right: '';`;
     };
 
     if (modalCloseButtons) {

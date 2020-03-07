@@ -21,10 +21,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
       modal.classList.add(`animated`, `fadeIn`);
     }
     if (!document.body.classList.contains(`page--overlay`)) {
-      document.body.classList.add(`page--overlay`);
+      document.body.classList.add(`page--overlay`, `page--no-scroll`);
     }
     const scrollbarWidth = getScrollbarWidth();
-    document.body.style.cssText = `background-color: #f6f7ff; padding-right: ${scrollbarWidth}px; overflow: hidden`;
+    document.body.style.cssText = `background-color: #f6f7ff; padding-right: ${scrollbarWidth}px;`;
 
     if (localStorage.getItem(`loginFormData`)) {
       if (formSubmit) {

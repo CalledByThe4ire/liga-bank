@@ -32,4 +32,10 @@
   &--overlay::before {
     display: block;
   }
+
+  &--no-scroll {
+    position: fixed;
+    height: 100vh;
+    overflow: hidden;
+  }
 }

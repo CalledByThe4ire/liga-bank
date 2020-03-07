@@ -1077,8 +1077,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
         modalCalculator.classList.add(`animated`, `fadeIn`);
       }
       const scrollbarWidth = getScrollbarWidth();
-      document.body.classList.add(`page--overlay`);
-      document.body.style.cssText = `background-color: #f6f7ff; padding-right: ${scrollbarWidth}px; overflow: hidden`;
+      document.body.classList.add(`page--overlay`, `page--no-scroll`);
+      document.body.style.cssText = `background-color: #f6f7ff; padding-right: ${scrollbarWidth}px;`;
 
       if (creditCalculationForms) {
         creditCalculationForms.forEach((form) => {
