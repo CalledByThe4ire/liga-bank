@@ -1,4 +1,0 @@
-
-const app = require( 'path' ).resolve( __dirname, '../app' )
-
-require( 'del' ).sync([ app ])

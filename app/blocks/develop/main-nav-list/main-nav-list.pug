@@ -1,6 +1,0 @@
-mixin main-nav-list(data)
-	+b('ul').main-nav-list--hidden&attributes(attributes)
-		each item in data
-			- const {name, link} = item;
-			+e('li').item
-				+e.link(href=`${link}`) !{name}

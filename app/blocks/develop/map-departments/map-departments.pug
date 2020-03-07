@@ -1,9 +1,0 @@
-mixin map-departments(data)
-	+b('div').map-departments(id='map', data-departments=`${JSON.stringify([`russia`, `nis`])}`)&attributes(attributes)
-		- const { controls } = data;
-		+e('div').controls
-			each control in controls
-				- const {name: iconName, modifier: iconModifier, description: iconDescription, width: iconWidth, height: iconHeight} = control
-					+e('button').button(type='button', class=`--${iconModifier}`, aria-label= iconDescription)
-						+e('svg').icon(width= iconWidth, height= iconHeight)
-							use(xlink:href=`#map-departments__${iconName}`)

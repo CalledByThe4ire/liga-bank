@@ -1,9 +1,0 @@
-include ../map-departments/map-departments
-include ../form-departments/form-departments
-
-mixin departments(data)
-	+b('section').departments(id='departments')&attributes(attributes)
-		+e('h2').title Отделения Лига Банка
-		+form-departments(data)(class='__form')
-		+map-departments(global.jsons['map-departments'])(class='__map')
-		block

@@ -1,4 +1,0 @@
-mixin logo(data = {})
-	+b('a').logo&attributes(attributes)
-		- const { mod = '', width = 149, height = 25 } = data;
-		+e('img').image(src=`@logo/logo${mod ? `--${mod}` : ''}.svg`, width= width, height= height, alt='ЛИГА Банк', title='ЛИГА Банк')

@@ -1,7 +1,0 @@
-include ../slide/slide
-
-mixin slider(data)
-	+b('ul').slider--main(id='main-slider', class='swiper-wrapper')&attributes(attributes)
-		each item in data
-			+slide(item)(class='__slide swiper-slide')
-	div.swiper-pagination
