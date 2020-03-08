@@ -23,13 +23,25 @@
     display: none;
   }
 
+  &__wrapper {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
   &__overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
 
     width: 100%;
     height: 100%;
+
     background-color: rgba($body-color, 0.3);
   }
 

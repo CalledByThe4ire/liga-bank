@@ -2,9 +2,10 @@ include ../logo/logo
 
 mixin modal(data)
 	+b('div').modal--invisible&attributes(attributes)
-		+e('div').overlay
-		+e('div').inner
-			block
+		+e('div').wrapper
+			+e('div').overlay
+			+e('div').inner
+				block
 
 
 
