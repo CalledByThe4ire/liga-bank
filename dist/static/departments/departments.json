@@ -1,0 +1,131 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "group": "russia",
+      "id": 0,
+      "geometry": { "type": "Point", "coordinates": [55.753215, 37.622504] },
+      "properties": {
+        "hintContent": "Россия, Москва"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "russia",
+      "id": 1,
+      "geometry": { "type": "Point", "coordinates": [59.939095, 30.315868] },
+      "properties": {
+        "hintContent": "Россия, Санкт-Петербург"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "russia",
+      "id": 2,
+      "geometry": { "type": "Point", "coordinates": [51.533103, 46.034158] },
+      "properties": {
+        "hintContent": "Россия, Саратов"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "russia",
+      "id": 3,
+      "geometry": { "type": "Point", "coordinates": [67.612056, 33.668228] },
+      "properties": {
+        "hintContent": "Россия, Кировск"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "russia",
+      "id": 4,
+      "geometry": { "type": "Point", "coordinates": [57.153033, 65.534328] },
+      "properties": {
+        "hintContent": "Россия, Тюмень"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "russia",
+      "id": 5,
+      "geometry": { "type": "Point", "coordinates": [54.989342, 73.368212] },
+      "properties": {
+        "hintContent": "Россия, Омск"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "nis",
+      "id": 6,
+      "geometry": { "type": "Point", "coordinates": [40.369539, 49.835011] },
+      "properties": {
+        "hintContent": "Азербайджан, Баку"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "nis",
+      "id": 7,
+      "geometry": { "type": "Point", "coordinates": [41.311151, 69.279737] },
+      "properties": {
+        "hintContent": "Узбекистан, Ташкент"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "nis",
+      "id": 8,
+      "geometry": { "type": "Point", "coordinates": [53.902512, 27.561481] },
+      "properties": {
+        "hintContent": "Беларусь, Минск"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "nis",
+      "id": 9,
+      "geometry": { "type": "Point", "coordinates": [43.238293, 76.945465] },
+      "properties": {
+        "hintContent": "Казахстан, Алматы"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "europe",
+      "id": 10,
+      "geometry": { "type": "Point", "coordinates": [48.856663, 2.351556] },
+      "properties": {
+        "hintContent": "Франция, Иль-де-Франс, Париж"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "europe",
+      "id": 11,
+      "geometry": { "type": "Point", "coordinates": [50.080293, 14.428983] },
+      "properties": {
+        "hintContent": "Чехия, Прага"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "europe",
+      "id": 12,
+      "geometry": { "type": "Point", "coordinates": [51.507351, -0.12766] },
+      "properties": {
+        "hintContent": "Великобритания, Лондон"
+      }
+    },
+    {
+      "type": "Feature",
+      "group": "europe",
+      "id": 13,
+      "geometry": { "type": "Point", "coordinates": [41.902689, 12.496176] },
+      "properties": {
+        "hintContent": "Италия, Рим"
+      }
+    }
+  ]
+}

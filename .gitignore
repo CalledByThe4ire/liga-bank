@@ -46,5 +46,4 @@ jspm_packages
 
 #others
 .publish
-dist
 _design
