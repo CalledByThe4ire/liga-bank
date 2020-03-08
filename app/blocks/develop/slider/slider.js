@@ -5,7 +5,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
   const mainSlider = new Swiper(`.about`, {
     loop: true,
     speed: 500,
-    spaceBetween: 10,
+    spaceBetween: 30,
     noSwiping: false,
     autoplay: {
       delay: 3000
