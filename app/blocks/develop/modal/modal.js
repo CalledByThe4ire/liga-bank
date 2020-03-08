@@ -1,11 +1,10 @@
 /* global WatchJS */
+/* eslint-disable no-undef */
 const {watch} = WatchJS;
 
 document.addEventListener(`DOMContentLoaded`, () => {
-  // Modal Form Validation (Observer Pattern, MVC)
+  // Валидация формы модального окна (Паттерн «Обозреватель», MVC)
   const modalPageHeader = document.querySelector(`#modal-page-header`);
-  const modalCloseButtons = document.querySelectorAll(`.modal__trigger`);
-
   const form = modalPageHeader.querySelector(`form`);
   const fieldElements = {
     login: form.querySelector(`.login-modal-form-field input`),
@@ -182,7 +181,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       }
     });
 
-    // show / hide password
+    // показать / скрыть пароль формы
     const showPassword = (event) => {
       const {target, type} = event;
       const input = target.previousElementSibling;
@@ -215,30 +214,40 @@ document.addEventListener(`DOMContentLoaded`, () => {
       )
     );
 
-    // Modal Visibility
-    const hideModal = (modal) => {
-      modal.classList.add(`modal--invisible`, `fadeOut`);
-      modal.classList.remove(`fadeIn`);
-      if (document.body.classList.contains(`page--overlay`)) {
-        document.body.classList.remove(`page--overlay`, `page--no-scroll`);
-      }
-      document.body.style.cssText = `background-color: ''; padding-right: '';`;
-    };
+    // Скрытие модального окна
+    const modalCloseButtons = document.querySelectorAll(`.modal__trigger`);
+    const modalOverlays = document.querySelectorAll(`.modal__overlay`);
+    const events = [`click`, `keydown`];
 
     if (modalCloseButtons) {
-      [`click`, `keydown`].forEach((event) =>
+      events.forEach((event) =>
         modalCloseButtons.forEach((modalCloseButton) =>
           modalCloseButton.addEventListener(event, (e) => {
             const {type, target} = e;
             if (type === `keydown`) {
               if (e.keyCode === 32 || e.keyCode === 13) {
-                hideModal(target.closest(`#${target.dataset.modal}`));
+                helpers.modal.hide(
+                    target.closest(`#${target.dataset.modal}`).closest(`.modal`)
+                );
+                helpers.scroll.enable();
               }
             } else if (type === `click`) {
-              hideModal(target.closest(`#${target.dataset.modal}`));
+              helpers.modal.hide(
+                  target.closest(`#${target.dataset.modal}`).closest(`.modal`)
+              );
+              helpers.scroll.enable();
             }
           })
         )
+      );
+    }
+
+    if (modalOverlays) {
+      modalOverlays.forEach((modalOverlay) =>
+        modalOverlay.addEventListener(`click`, ({target}) => {
+          helpers.modal.hide(target.closest(`.modal`));
+          helpers.scroll.enable();
+        })
       );
     }
   }

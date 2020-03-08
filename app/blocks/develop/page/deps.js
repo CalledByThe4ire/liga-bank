@@ -8,5 +8,9 @@ module.exports = {
       from: `node_modules/smooth-scroll/dist`,
       inject: [`smooth-scroll.polyfills.min.js`],
     },
+    {
+      from: `app/blocks/develop/page`,
+      import: [`helpers.js`],
+    },
   ],
 };

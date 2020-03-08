@@ -2,44 +2,90 @@
   $modal: &;
 
   position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 1005;
+  z-index: 15;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-  display: block;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  width: 100vw;
+  max-height: 100vh;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
 
   &--invisible {
     display: none;
   }
 
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba($body-color, 0.3);
+  }
+
+  &__inner {
+    position: relative;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  &__trigger {
+    width: 16px;
+    height: 16px;
+
+    stroke: $body-color;
+    stroke-width: 2;
+
+    transition-property: stroke;
+    transition-duration: 0.3s;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      stroke: $primary;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    > * {
+      pointer-events: none;
+    }
+  }
+
   &--page-header {
-    width: 544px;
-    min-height: 493px;
-
-    background-color: $body-bg;
-    border: 4px solid $primary;
-
-    @include media-breakpoint-down(md) {
-      width: 678px;
-    }
-
-    @include media-breakpoint-down(sm) {
-      min-height: 455px;
-      width: 290px;
-    }
-
     & #{$modal}__inner {
       display: flex;
       flex-flow: column wrap;
       padding: 55px;
+      width: 544px;
+      min-height: 493px;
+
+      background-color: $body-bg;
+      border: 4px solid $primary;
 
       @include media-breakpoint-down(md) {
+        width: 678px;
+
         @include padding-x(84px);
         @include padding-y(56px);
       }
 
       @include media-breakpoint-down(sm) {
+        width: 290px;
+        min-height: 455px;
+
         @include padding-x(12px);
         @include padding-y(46px);
       }
@@ -151,23 +197,10 @@
   }
 
   &--calculator {
-    width: 500px;
-    min-height: 193px;
-
-    background-color: $body-bg;
-    border-radius: 4px;
-
-    @include media-breakpoint-down(md) {
-      width: 678px;
-    }
-
-    @include media-breakpoint-down(sm) {
-      width: 290px;
-    }
-
     & #{$modal}__inner {
       display: block;
-      width: 100%;
+      width: 500px;
+      min-height: 193px;
 
       @include padding-x(60px);
       @include padding-y(55px);
@@ -177,12 +210,17 @@
       @include media-breakpoint-down(md) {
         @include padding-x(60px);
         @include padding-y(55px);
+        width: 678px;
       }
 
       @include media-breakpoint-down(sm) {
         @include padding-x(16px);
         @include padding-y(36px);
+        width: 290px;
       }
+
+      background-color: $body-bg;
+      border-radius: 4px;
     }
 
     & #{$modal}__trigger {
@@ -234,31 +272,6 @@
       @include media-breakpoint-down(sm) {
         max-width: initial;
       }
-    }
-  }
-
-  &__trigger {
-    width: 16px;
-    height: 16px;
-
-    stroke: $body-color;
-    stroke-width: 2;
-
-    transition-property: stroke;
-    transition-duration: 0.3s;
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-      stroke: $primary;
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-    > * {
-      pointer-events: none;
     }
   }
 }

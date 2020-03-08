@@ -1,5 +1,5 @@
 /* global Map, IMask */
-/* eslint-disable no-unused-vars, new-cap, max-nested-callbacks */
+/* eslint-disable no-unused-vars, no-undef, new-cap, max-nested-callbacks */
 document.addEventListener(`DOMContentLoaded`, () => {
   const calculator = document.querySelector(`#calculator`);
 
@@ -70,40 +70,11 @@ document.addEventListener(`DOMContentLoaded`, () => {
     });
   };
 
-  // вспомогательные функции
-  const num2str = (n, textForms) => {
-    n = Math.abs(n) % 100;
-    let n1 = n % 10;
-    if (n > 10 && n < 20) {
-      return textForms[2];
-    }
-    if (n1 > 1 && n1 < 5) {
-      return textForms[1];
-    }
-    if (n1 === 1) {
-      return textForms[0];
-    }
-    return textForms[2];
-  };
-
-  const getPercentage = (partialValue, totalValue) =>
-    (100 * partialValue) / totalValue;
-
-  const round = (x, multiplier) => {
-    if (x % multiplier === 0) {
-      return Math.floor(x / multiplier) * multiplier;
-    }
-    return Math.floor(x / multiplier) * multiplier + multiplier;
-  };
-
-  const getScrollbarWidth = () =>
-    window.innerWidth - document.documentElement.clientWidth;
-
   // маски
   const getUnitPluralForm = (unit, value) => {
     switch (unit) {
       case `currency`:
-        unit = ` ${num2str(Number(value), nounRublePlurals)}`;
+        unit = ` ${helpers.num2str(Number(value), nounRublePlurals)}`;
         break;
 
       case `percent`:
@@ -115,7 +86,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
         break;
 
       case `period`:
-        unit = ` ${num2str(Number(value), nounYearPlurals)}`;
+        unit = ` ${helpers.num2str(Number(value), nounYearPlurals)}`;
         break;
 
       case `empty`:
@@ -466,7 +437,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
               initialPaymentRange.value = `${max}`;
             }
           } else if (
-            getPercentage(Number(mask.unmaskedValue), cost.unmaskedValue) <
+            helpers.getPercentage(Number(mask.unmaskedValue), cost.unmaskedValue) <
             Number(min)
           ) {
             mask.value = `${Number(cost.unmaskedValue) / Number(min)}`;
@@ -476,8 +447,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
           }
 
           if (initialPaymentRange) {
-            initialPaymentRange.value = `${round(
-                getPercentage(
+            initialPaymentRange.value = `${helpers.round(
+                helpers.getPercentage(
                     Number(mask.unmaskedValue),
                     Number(cost.unmaskedValue)
                 ),
@@ -520,7 +491,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
           }
 
           if (periodRange) {
-            periodRange.value = `${round(
+            periodRange.value = `${helpers.round(
                 Number(mask.unmaskedValue),
                 Number(step)
             )}`;
@@ -579,7 +550,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
       modifier.textContent = modifiers.get(`${type}`);
       value.textContent = `${minValue
         .toLocaleString(`en-US`)
-        .replace(/,/g, ` `)} ${num2str(minValue, nounRublePlurals)}`;
+        .replace(/,/g, ` `)} ${helpers.num2str(minValue, nounRublePlurals)}`;
       rejectMessage.classList.remove(`calculator__message--invisible`);
       creditOfferingForm.hidden = true;
     } else {
@@ -694,7 +665,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
               Number(initialPayment.unmaskedValue) -
               maternityCapitalSum;
 
-            const percentage = getPercentage(
+            const percentage = helpers.getPercentage(
                 Number(initialPayment.unmaskedValue),
                 Number(cost.unmaskedValue)
             );
@@ -1072,13 +1043,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
       }
 
       creditRegistrationForm.hidden = true;
-      if (modalCalculator.classList.contains(`modal--invisible`)) {
-        modalCalculator.classList.remove(`modal--invisible`, `fadeOut`);
-        modalCalculator.classList.add(`animated`, `fadeIn`);
+      if (modalCalculator) {
+        helpers.modal.show(modalCalculator);
+        helpers.scroll.disable();
       }
-      const scrollbarWidth = getScrollbarWidth();
-      document.body.classList.add(`page--overlay`, `page--no-scroll`);
-      document.body.style.cssText = `background-color: #f6f7ff; padding-right: ${scrollbarWidth}px;`;
 
       if (creditCalculationForms) {
         creditCalculationForms.forEach((form) => {

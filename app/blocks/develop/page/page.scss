@@ -14,7 +14,7 @@
   font-weight: 400;
   font-family: $font-family-base;
 
-  background-color: transparent;
+  background-color: $body-bg;
   overflow-x: hidden;
 
   &::before {
@@ -31,6 +31,10 @@
 
   &--overlay::before {
     display: block;
+  }
+
+  &--transparent {
+    background-color: transparent;
   }
 
   &--no-scroll {

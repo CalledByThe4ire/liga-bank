@@ -1,8 +1,7 @@
+/* eslint-disable no-undef */
+
 document.addEventListener(`DOMContentLoaded`, () => {
   const pageHeaderLogin = document.querySelector(`#page-header-login`);
-
-  const getScrollbarWidth = () =>
-    window.innerWidth - document.documentElement.clientWidth;
 
   const clickHandler = ({target}) => {
     const form = document.querySelector(`#${target.dataset.modal} form`);
@@ -17,14 +16,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
     const modal = document.getElementById(target.dataset.modal);
 
     if (modal) {
-      modal.classList.remove(`modal--invisible`, `fadeOut`);
-      modal.classList.add(`animated`, `fadeIn`);
+      helpers.modal.show(modal);
+      helpers.scroll.disable();
     }
-    if (!document.body.classList.contains(`page--overlay`)) {
-      document.body.classList.add(`page--overlay`, `page--no-scroll`);
-    }
-    const scrollbarWidth = getScrollbarWidth();
-    document.body.style.cssText = `background-color: #f6f7ff; padding-right: ${scrollbarWidth}px;`;
 
     if (localStorage.getItem(`loginFormData`)) {
       if (formSubmit) {

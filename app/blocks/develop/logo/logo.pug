@@ -2,5 +2,6 @@ mixin logo(data = {})
 	+b('a').logo&attributes(attributes)
 		- const { mod = '', width = 149, height = 25 } = data;
 		picture
-			source(type='image/svg+xml', media='(max-width: 768px)', srcset=`@logo/logo--mobile.svg`)
+			if mod !== 'extended'
+				source(type='image/svg+xml', media='(max-width: 768px)', srcset=`@logo/logo--mobile.svg`)
 			+e('img').image(src=`@logo/logo${mod ? `--${mod}` : ''}.svg`, width= width, height= height, alt='ЛИГА Банк', title='ЛИГА Банк')
