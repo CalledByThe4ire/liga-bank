@@ -191,9 +191,9 @@ document.addEventListener("DOMContentLoaded", function () {
     speed: 500,
     spaceBetween: 10,
     noSwiping: false,
-    autoplay: {
-      delay: 3000
-    },
+    // autoplay: {
+    //   delay: 3000
+    // },
     pagination: {
       el: ".swiper-pagination",
       type: "bullets",
