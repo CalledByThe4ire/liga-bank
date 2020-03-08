@@ -5373,8 +5373,20 @@ body {
   overflow-y: auto; }
   .modal--invisible {
     display: none; }
+  .modal__wrapper {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px; }
   .modal__overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;

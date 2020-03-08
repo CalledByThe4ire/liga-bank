@@ -12,8 +12,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="description" content="Description">
-    <link rel="stylesheet" href="./styles/app.min.css?v=1583666342596">
-    <link rel="stylesheet" href="./styles/swiper.min.css?v=1583666342596">
+    <link rel="stylesheet" href="./styles/app.min.css?v=1583671353416">
+    <link rel="stylesheet" href="./styles/swiper.min.css?v=1583671353416">
     <link rel="shortcut icon" href="./favicons/favicon.ico" type="image/x-icon">
     <link rel="icon" href="./favicons/favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="icon" href="./favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -638,62 +638,66 @@
       </footer>
     </div>
     <div class="modal modal--invisible modal--page-header animated" id="modal-page-header">
-      <div class="modal__overlay"></div>
-      <div class="modal__inner">
-        <header class="modal__header">
-          <a class="logo modal__logo">
-            <picture>
-              <img class="logo__image" src="./static/logo/logo--extended.svg" width="150" height="30" alt="ЛИГА Банк" title="ЛИГА Банк" />
-            </picture>
-          </a>
-          <a class="modal__trigger" tabindex="0" aria-label="Close modal" data-modal="modal-page-header">
-            <svg class="modal__icon" width="16" height="16">
-              <use xlink:href="#modal__close"></use>
-            </svg>
-          </a>
-        </header>
-        <div class="modal__content">
-          <form>
-            <div class="modal__form-field modal__form-field--login login-modal-form-field">
-              <label for="login-modal-form-field">Логин</label>
-              <input type="text" id="login-modal-form-field" name="login">
-              <div class="login-modal-form-field__feedback"></div>
-            </div>
-            <div class="modal__form-field modal__form-field--password password-modal-form-field">
-              <label for="password-modal-form-field">Пароль</label>
-              <div class="password-modal-form-field__inner">
-                <input type="password" id="password-modal-form-field" name="password">
-                <button type="button" aria-label="Show password">
-                  <svg width="22" height="12">
-                    <use xlink:href="#modal__show"></use>
-                  </svg>
-                </button>
+      <div class="modal__wrapper">
+        <div class="modal__overlay"></div>
+        <div class="modal__inner">
+          <header class="modal__header">
+            <a class="logo modal__logo">
+              <picture>
+                <img class="logo__image" src="./static/logo/logo--extended.svg" width="150" height="30" alt="ЛИГА Банк" title="ЛИГА Банк" />
+              </picture>
+            </a>
+            <a class="modal__trigger" tabindex="0" aria-label="Close modal" data-modal="modal-page-header">
+              <svg class="modal__icon" width="16" height="16">
+                <use xlink:href="#modal__close"></use>
+              </svg>
+            </a>
+          </header>
+          <div class="modal__content">
+            <form>
+              <div class="modal__form-field modal__form-field--login login-modal-form-field">
+                <label for="login-modal-form-field">Логин</label>
+                <input type="text" id="login-modal-form-field" name="login">
+                <div class="login-modal-form-field__feedback"></div>
               </div>
-              <div class="password-modal-form-field__feedback"></div>
-              <a href="#">Забыли&nbsp;пароль?</a>
-            </div>
-            <button type="submit">Войти</button>
-          </form>
+              <div class="modal__form-field modal__form-field--password password-modal-form-field">
+                <label for="password-modal-form-field">Пароль</label>
+                <div class="password-modal-form-field__inner">
+                  <input type="password" id="password-modal-form-field" name="password">
+                  <button type="button" aria-label="Show password">
+                    <svg width="22" height="12">
+                      <use xlink:href="#modal__show"></use>
+                    </svg>
+                  </button>
+                </div>
+                <div class="password-modal-form-field__feedback"></div>
+                <a href="#">Забыли&nbsp;пароль?</a>
+              </div>
+              <button type="submit">Войти</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
     <div class="modal modal--invisible modal--calculator animated" id="modal-calculator">
-      <div class="modal__overlay"></div>
-      <div class="modal__inner">
-        <a class="modal__trigger" aria-label="Close modal" data-modal="modal-calculator" tabindex="0">
-          <svg class="modal__icon" width="16" height="16">
-            <use xlink:href="#modal__close"></use>
-          </svg>
-        </a>
-        <header class="modal__title">Спасибо за&nbsp;обращение в&nbsp;наш банк.</header>
-        <div class="modal__content">Наш менеджер скоро свяжется с&nbsp;вами по&nbsp;указанному номеру телефона.</div>
+      <div class="modal__wrapper">
+        <div class="modal__overlay"></div>
+        <div class="modal__inner">
+          <a class="modal__trigger" aria-label="Close modal" data-modal="modal-calculator" tabindex="0">
+            <svg class="modal__icon" width="16" height="16">
+              <use xlink:href="#modal__close"></use>
+            </svg>
+          </a>
+          <header class="modal__title">Спасибо за&nbsp;обращение в&nbsp;наш банк.</header>
+          <div class="modal__content">Наш менеджер скоро свяжется с&nbsp;вами по&nbsp;указанному номеру телефона.</div>
+        </div>
       </div>
     </div>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=11aaabb3-db81-4870-9404-82e2fb51e3d8&amp;lang=ru_RU"></script>
-    <script src="./scripts/smooth-scroll.polyfills.min.js?v=1583666342596"></script>
-    <script src="./scripts/swiper.min.js?v=1583666342596"></script>
-    <script src="./scripts/imask.min.js?v=1583666342596"></script>
-    <script src="./scripts/watch.min.js?v=1583666342596"></script>
-    <script src="./scripts/app.min.js?v=1583666342596"></script>
+    <script src="./scripts/smooth-scroll.polyfills.min.js?v=1583671353416"></script>
+    <script src="./scripts/swiper.min.js?v=1583671353416"></script>
+    <script src="./scripts/imask.min.js?v=1583671353416"></script>
+    <script src="./scripts/watch.min.js?v=1583671353416"></script>
+    <script src="./scripts/app.min.js?v=1583671353416"></script>
   </body>
 </html>
