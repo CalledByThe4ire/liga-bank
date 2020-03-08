@@ -1,55 +1,97 @@
+/* eslint-disable no-unused-vars */
+var helpers = {
+  modal: {
+    hide: function hide(modal) {
+      modal.classList.add("modal--invisible", "fadeOut");
+      modal.classList.remove("fadeIn");
+    },
+    show: function show(modal) {
+      modal.classList.remove("modal--invisible", "fadeOut");
+      modal.classList.add("fadeIn");
+    }
+  },
+  scroll: {
+    disable: function disable() {
+      document.body.classList.add("page--no-scroll");
+      document.body.classList.remove("page--transparent");
+      document.body.style.paddingRight = "".concat(helpers.getScrollbarWidth(), "px");
+    },
+    enable: function enable() {
+      document.body.classList.remove("page--no-scroll");
+      document.body.classList.add("page--transparent");
+      document.body.style.paddingRight = "";
+    }
+  },
+  hideModal: function hideModal(modal) {
+    if (!modal.classList.contains("modal--invisible")) {
+      modal.classList.add("modal--invisible", "fadeOut");
+      modal.classList.remove("fadeIn");
+    }
+
+    document.body.classList.remove("page--no-scroll");
+    document.body.classList.add("page--transparent");
+    document.body.style.paddingRight = "";
+  },
+  num2str: function num2str(n, textForms) {
+    n = Math.abs(n) % 100;
+    var n1 = n % 10;
+
+    if (n > 10 && n < 20) {
+      return textForms[2];
+    }
+
+    if (n1 > 1 && n1 < 5) {
+      return textForms[1];
+    }
+
+    if (n1 === 1) {
+      return textForms[0];
+    }
+
+    return textForms[2];
+  },
+  getPercentage: function getPercentage(partialValue, totalValue) {
+    return 100 * partialValue / totalValue;
+  },
+  round: function round(x, multiplier) {
+    if (x % multiplier === 0) {
+      return Math.floor(x / multiplier) * multiplier;
+    }
+
+    return Math.floor(x / multiplier) * multiplier + multiplier;
+  },
+  getScrollbarWidth: function getScrollbarWidth() {
+    return window.innerWidth - document.documentElement.clientWidth;
+  }
+};
 /* global SmoothScroll */
 
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars, no-undef */
 document.addEventListener("DOMContentLoaded", function () {
   var scroll = new SmoothScroll("a[href*=\"#\"]", {
     speed: 1000,
     speedAsDuration: true
   });
-  var page = document.querySelector(".page");
-  page.classList.remove("page_no_js");
-  page.classList.add("page_js");
+  document.body.classList.remove("page_no_js");
+  document.body.classList.add("page_js");
+  var modals = document.querySelectorAll(".modal");
 
   var keydownHandler = function keydownHandler(_ref) {
     var keyCode = _ref.keyCode;
 
     if (keyCode === 27) {
-      var modals = document.querySelectorAll(".modal");
-
       if (modals) {
         modals.forEach(function (modal) {
           if (!modal.classList.contains("modal--invisible")) {
-            modal.classList.add("modal--invisible", "fadeOut");
-            modal.classList.remove("fadeIn");
+            helpers.modal.hide(modal);
+            helpers.scroll.enable();
           }
-
-          document.body.style.cssText = "padding-right: ''; overflow: ''";
         });
       }
-
-      document.body.classList.remove("page--overlay");
-    }
-  };
-
-  var clickHandler = function clickHandler(_ref2) {
-    var target = _ref2.target;
-
-    if (target.classList.contains("page--overlay")) {
-      target.classList.remove("page--overlay");
-      var modals = target.querySelectorAll(".modal");
-      modals.forEach(function (modal) {
-        if (!modal.classList.contains("modal--invisible")) {
-          modal.classList.add("modal--invisible", "fadeOut");
-          modal.classList.remove("fadeIn");
-        }
-
-        document.body.style.cssText = "padding-right: ''; overflow: ''";
-      });
     }
   };
 
   document.addEventListener("keydown", keydownHandler);
-  document.addEventListener("click", clickHandler);
 });
 document.addEventListener("DOMContentLoaded", function () {
   var trigger = document.querySelector(".main-nav__trigger");
@@ -103,12 +145,9 @@ document.addEventListener("DOMContentLoaded", function () {
     trigger.addEventListener("click", clickHandler);
   }
 });
+/* eslint-disable no-undef */
 document.addEventListener("DOMContentLoaded", function () {
   var pageHeaderLogin = document.querySelector("#page-header-login");
-
-  var getScrollbarWidth = function getScrollbarWidth() {
-    return window.innerWidth - document.documentElement.clientWidth;
-  };
 
   var clickHandler = function clickHandler(_ref) {
     var target = _ref.target;
@@ -124,16 +163,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var modal = document.getElementById(target.dataset.modal);
 
     if (modal) {
-      modal.classList.remove("modal--invisible", "fadeOut");
-      modal.classList.add("animated", "fadeIn");
+      helpers.modal.show(modal);
+      helpers.scroll.disable();
     }
-
-    if (!document.body.classList.contains("page--overlay")) {
-      document.body.classList.add("page--overlay", "page--no-scroll");
-    }
-
-    var scrollbarWidth = getScrollbarWidth();
-    document.body.style.cssText = "background-color: #f6f7ff; padding-right: ".concat(scrollbarWidth, "px;");
 
     if (localStorage.getItem("loginFormData")) {
       if (formSubmit) {
@@ -301,7 +333,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /* global Map, IMask */
 
-/* eslint-disable no-unused-vars, new-cap, max-nested-callbacks */
+/* eslint-disable no-unused-vars, no-undef, new-cap, max-nested-callbacks */
 document.addEventListener("DOMContentLoaded", function () {
   var calculator = document.querySelector("#calculator");
   var creditSelectionForm = null;
@@ -376,49 +408,13 @@ document.addEventListener("DOMContentLoaded", function () {
         target.click();
       }
     });
-  }; // вспомогательные функции
-
-
-  var num2str = function num2str(n, textForms) {
-    n = Math.abs(n) % 100;
-    var n1 = n % 10;
-
-    if (n > 10 && n < 20) {
-      return textForms[2];
-    }
-
-    if (n1 > 1 && n1 < 5) {
-      return textForms[1];
-    }
-
-    if (n1 === 1) {
-      return textForms[0];
-    }
-
-    return textForms[2];
-  };
-
-  var getPercentage = function getPercentage(partialValue, totalValue) {
-    return 100 * partialValue / totalValue;
-  };
-
-  var round = function round(x, multiplier) {
-    if (x % multiplier === 0) {
-      return Math.floor(x / multiplier) * multiplier;
-    }
-
-    return Math.floor(x / multiplier) * multiplier + multiplier;
-  };
-
-  var getScrollbarWidth = function getScrollbarWidth() {
-    return window.innerWidth - document.documentElement.clientWidth;
   }; // маски
 
 
   var getUnitPluralForm = function getUnitPluralForm(unit, value) {
     switch (unit) {
       case "currency":
-        unit = " ".concat(num2str(Number(value), nounRublePlurals));
+        unit = " ".concat(helpers.num2str(Number(value), nounRublePlurals));
         break;
 
       case "percent":
@@ -430,7 +426,7 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
 
       case "period":
-        unit = " ".concat(num2str(Number(value), nounYearPlurals));
+        unit = " ".concat(helpers.num2str(Number(value), nounYearPlurals));
         break;
 
       case "empty":
@@ -798,7 +794,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (initialPaymentRange) {
               initialPaymentRange.value = "".concat(max);
             }
-          } else if (getPercentage(Number(mask.unmaskedValue), cost.unmaskedValue) < Number(min)) {
+          } else if (helpers.getPercentage(Number(mask.unmaskedValue), cost.unmaskedValue) < Number(min)) {
             mask.value = "".concat(Number(cost.unmaskedValue) / Number(min));
 
             if (initialPaymentRange) {
@@ -807,7 +803,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           if (initialPaymentRange) {
-            initialPaymentRange.value = "".concat(round(getPercentage(Number(mask.unmaskedValue), Number(cost.unmaskedValue)), Number(step)));
+            initialPaymentRange.value = "".concat(helpers.round(helpers.getPercentage(Number(mask.unmaskedValue), Number(cost.unmaskedValue)), Number(step)));
           }
 
           maskUnit = getUnitPluralForm(unit, mask.unmaskedValue);
@@ -846,7 +842,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           if (periodRange) {
-            periodRange.value = "".concat(round(Number(mask.unmaskedValue), Number(step)));
+            periodRange.value = "".concat(helpers.round(Number(mask.unmaskedValue), Number(step)));
           }
 
           maskUnit = getUnitPluralForm(unit, mask.unmaskedValue);
@@ -907,7 +903,7 @@ document.addEventListener("DOMContentLoaded", function () {
           value = _messageData[1];
 
       modifier.textContent = modifiers.get("".concat(type));
-      value.textContent = "".concat(minValue.toLocaleString("en-US").replace(/,/g, " "), " ").concat(num2str(minValue, nounRublePlurals));
+      value.textContent = "".concat(minValue.toLocaleString("en-US").replace(/,/g, " "), " ").concat(helpers.num2str(minValue, nounRublePlurals));
       rejectMessage.classList.remove("calculator__message--invisible");
       creditOfferingForm.hidden = true;
     } else {
@@ -1038,7 +1034,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if (initialPayment && maternityCapital) {
             var maternityCapitalSum = maternityCapital.checked ? 470000 : 0;
             var creditSum = Number(cost.unmaskedValue) - Number(initialPayment.unmaskedValue) - maternityCapitalSum;
-            var percentage = getPercentage(Number(initialPayment.unmaskedValue), Number(cost.unmaskedValue));
+            var percentage = helpers.getPercentage(Number(initialPayment.unmaskedValue), Number(cost.unmaskedValue));
             var percentageRateThreshold = 15;
             var interestRate = 0;
 
@@ -1429,14 +1425,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       creditRegistrationForm.hidden = true;
 
-      if (modalCalculator.classList.contains("modal--invisible")) {
-        modalCalculator.classList.remove("modal--invisible", "fadeOut");
-        modalCalculator.classList.add("animated", "fadeIn");
+      if (modalCalculator) {
+        helpers.modal.show(modalCalculator);
+        helpers.scroll.disable();
       }
-
-      var scrollbarWidth = getScrollbarWidth();
-      document.body.classList.add("page--overlay", "page--no-scroll");
-      document.body.style.cssText = "background-color: #f6f7ff; padding-right: ".concat(scrollbarWidth, "px;");
 
       if (creditCalculationForms) {
         creditCalculationForms.forEach(function (form) {
@@ -1570,12 +1562,13 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /* global WatchJS */
+
+/* eslint-disable no-undef */
 var _WatchJS = WatchJS,
     watch = _WatchJS.watch;
 document.addEventListener("DOMContentLoaded", function () {
-  // Modal Form Validation (Observer Pattern, MVC)
+  // Валидация формы модального окна (Паттерн «Обозреватель», MVC)
   var modalPageHeader = document.querySelector("#modal-page-header");
-  var modalCloseButtons = document.querySelectorAll(".modal__trigger");
   var form = modalPageHeader.querySelector("form");
   var fieldElements = {
     login: form.querySelector(".login-modal-form-field input"),
@@ -1762,7 +1755,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
       }
-    }); // show / hide password
+    }); // показать / скрыть пароль формы
 
     var showPassword = function showPassword(event) {
       var target = event.target,
@@ -1787,21 +1780,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     ["mouseup", "keyup"].forEach(function (event) {
       return fieldElements["password"].nextElementSibling.addEventListener(event, hidePassword);
-    }); // Modal Visibility
+    }); // Скрытие модального окна
 
-    var hideModal = function hideModal(modal) {
-      modal.classList.add("modal--invisible", "fadeOut");
-      modal.classList.remove("fadeIn");
-
-      if (document.body.classList.contains("page--overlay")) {
-        document.body.classList.remove("page--overlay", "page--no-scroll");
-      }
-
-      document.body.style.cssText = "background-color: ''; padding-right: '';";
-    };
+    var modalCloseButtons = document.querySelectorAll(".modal__trigger");
+    var modalOverlays = document.querySelectorAll(".modal__overlay");
+    var events = ["click", "keydown"];
 
     if (modalCloseButtons) {
-      ["click", "keydown"].forEach(function (event) {
+      events.forEach(function (event) {
         return modalCloseButtons.forEach(function (modalCloseButton) {
           return modalCloseButton.addEventListener(event, function (e) {
             var type = e.type,
@@ -1809,15 +1795,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (type === "keydown") {
               if (e.keyCode === 32 || e.keyCode === 13) {
-                hideModal(target.closest("#".concat(target.dataset.modal)));
+                helpers.modal.hide(target.closest("#".concat(target.dataset.modal)).closest(".modal"));
+                helpers.scroll.enable();
               }
             } else if (type === "click") {
-              hideModal(target.closest("#".concat(target.dataset.modal)));
+              helpers.modal.hide(target.closest("#".concat(target.dataset.modal)).closest(".modal"));
+              helpers.scroll.enable();
             }
           });
         });
       });
     }
+
+    if (modalOverlays) {
+      modalOverlays.forEach(function (modalOverlay) {
+        return modalOverlay.addEventListener("click", function (_ref8) {
+          var target = _ref8.target;
+          helpers.modal.hide(target.closest(".modal"));
+          helpers.scroll.enable();
+        });
+      });
+    }
   }
 });
-//# sourceMappingURL=app.js.map

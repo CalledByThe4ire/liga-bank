@@ -12,10 +12,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="description" content="Description">
-    <link rel="stylesheet" href="./styles/app.css">
-    <link rel="stylesheet" href="./styles/swiper.min.css">
+    <link rel="stylesheet" href="./styles/app.min.css?v=1583665143380">
+    <link rel="stylesheet" href="./styles/swiper.min.css?v=1583665143380">
+    <link rel="shortcut icon" href="./favicons/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="./favicons/favicon-32x32.png" sizes="32x32" type="image/png">
   </head>
-  <body class="page page_no_js">
+  <body class="page page--transparent page_no_js">
     <svg style="position:absolute;top:0;left:0;width:1px;height:1px;visibility:hidden;opacity:0;" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <symbol viewBox="0 0 17.414 10.121" stroke-width="2" id="calculator__arrow" xmlns="http://www.w3.org/2000/svg">
         <path fill="none" d="M.707.707l8 8 8-8" />
@@ -46,9 +49,6 @@
       </symbol>
       <symbol viewBox="0 0 20 22" id="login__icon" xmlns="http://www.w3.org/2000/svg">
         <path d="M2.222 14.3h2.222v5.5h13.334V2.2H4.444v5.5H2.222V1.1c0-.292.117-.572.326-.778.208-.206.49-.322.785-.322H18.89c.295 0 .577.116.786.322.208.206.325.486.325.778v19.8c0 .292-.117.572-.325.778a1.117 1.117 0 0 1-.786.322H3.333c-.294 0-.577-.116-.785-.322a1.095 1.095 0 0 1-.326-.778v-6.6zM8.89 9.9V6.6l5.555 4.4-5.555 4.4v-3.3H0V9.9h8.889z" />
-      </symbol>
-      <symbol fill="none" viewBox="0 0 18 18" id="main-nav__close" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 1l16 16m0-16L1 17" />
       </symbol>
       <symbol fill="none" viewBox="0 0 16 12" id="main-nav__menu" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 1h16M0 6h16M0 11h16" />
@@ -637,12 +637,12 @@
         </div>
       </footer>
     </div>
-    <div class="modal modal--invisible modal--page-header" id="modal-page-header">
+    <div class="modal modal--invisible modal--page-header animated" id="modal-page-header">
+      <div class="modal__overlay"></div>
       <div class="modal__inner">
         <header class="modal__header">
           <a class="logo modal__logo">
             <picture>
-              <source type="image/svg+xml" media="(max-width: 768px)" srcset="./static/logo/logo--mobile.svg">
               <img class="logo__image" src="./static/logo/logo--extended.svg" width="150" height="30" alt="ЛИГА Банк" title="ЛИГА Банк" />
             </picture>
           </a>
@@ -677,7 +677,8 @@
         </div>
       </div>
     </div>
-    <div class="modal modal--invisible modal--calculator" id="modal-calculator">
+    <div class="modal modal--invisible modal--calculator animated" id="modal-calculator">
+      <div class="modal__overlay"></div>
       <div class="modal__inner">
         <a class="modal__trigger" aria-label="Close modal" data-modal="modal-calculator" tabindex="0">
           <svg class="modal__icon" width="16" height="16">
@@ -689,10 +690,10 @@
       </div>
     </div>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=11aaabb3-db81-4870-9404-82e2fb51e3d8&amp;lang=ru_RU"></script>
-    <script src="./scripts/smooth-scroll.polyfills.min.js"></script>
-    <script src="./scripts/swiper.min.js"></script>
-    <script src="./scripts/imask.min.js"></script>
-    <script src="./scripts/watch.min.js"></script>
-    <script src="./scripts/app.js"></script>
+    <script src="./scripts/smooth-scroll.polyfills.min.js?v=1583665143380"></script>
+    <script src="./scripts/swiper.min.js?v=1583665143380"></script>
+    <script src="./scripts/imask.min.js?v=1583665143380"></script>
+    <script src="./scripts/watch.min.js?v=1583665143380"></script>
+    <script src="./scripts/app.min.js?v=1583665143380"></script>
   </body>
 </html>
