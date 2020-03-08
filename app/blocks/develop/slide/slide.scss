@@ -134,28 +134,28 @@
     }
 
     & #{$slide}__container {
-      background: url("img/sprite/bg-image1--desktop.png") no-repeat center/auto 100%;
+      background: url("img/bg-image1--desktop.png") no-repeat center/auto 100%;
 
       @media #{$retina} {
-        background: url("img/sprite/bg-image1--desktop@2x.png") no-repeat
+        background: url("img/bg-image1--desktop@2x.png") no-repeat
           center/cover;
       }
 
       @include media-breakpoint-down(md) {
-        background: url("img/sprite/bg-image1--tablet.png") no-repeat center/auto 100%;
+        background: url("img/bg-image1--tablet.png") no-repeat center/auto 100%;
 
         @media #{$retina} {
-          background: url("img/sprite/bg-image1--tablet@2x.png") no-repeat
+          background: url("img/bg-image1--tablet@2x.png") no-repeat
             center/cover;
         }
       }
 
       @include media-breakpoint-down(sm) {
-        background: url("img/sprite/bg-image1--mobile.png") no-repeat right
+        background: url("img/bg-image1--mobile.png") no-repeat right
           center/auto;
 
         @media #{$retina} {
-          background: url("img/sprite/bg-image1--mobile@2x.png") no-repeat right
+          background: url("img/bg-image1--mobile@2x.png") no-repeat right
             center/auto 100%;
         }
       }
@@ -197,28 +197,28 @@
     }
 
     & #{$slide}__container {
-      background: url("img/sprite/bg-image2--desktop.png") no-repeat center/auto 100%;
+      background: url("img/bg-image2--desktop.png") no-repeat center/auto 100%;
 
       @media #{$retina} {
-        background: url("img/sprite/bg-image2--desktop@2x.png") no-repeat
+        background: url("img/bg-image2--desktop@2x.png") no-repeat
           center/cover;
       }
 
       @include media-breakpoint-down(md) {
-        background: url("img/sprite/bg-image2--tablet.png") no-repeat center/auto 100%;
+        background: url("img/bg-image2--tablet.png") no-repeat center/auto 100%;
 
         @media #{$retina} {
-          background: url("img/sprite/bg-image2--tablet@2x.png") no-repeat
+          background: url("img/bg-image2--tablet@2x.png") no-repeat
             center/cover;
         }
       }
 
       @include media-breakpoint-down(sm) {
-        background: url("img/sprite/bg-image2--mobile.png") no-repeat right
+        background: url("img/bg-image2--mobile.png") no-repeat right
           center/auto;
 
         @media #{$retina} {
-          background: url("img/sprite/bg-image2--mobile@2x.png") no-repeat right
+          background: url("img/bg-image2--mobile@2x.png") no-repeat right
             center/auto 100%;
         }
       }
@@ -229,28 +229,28 @@
     background-color: #e6f1fe;
 
     & #{$slide}__container {
-      background: url("img/sprite/bg-image3--desktop.png") no-repeat center/auto 100%;
+      background: url("img/bg-image3--desktop.png") no-repeat center/auto 100%;
 
       @media #{$retina} {
-        background: url("img/sprite/bg-image3--desktop@2x.png") no-repeat
+        background: url("img/bg-image3--desktop@2x.png") no-repeat
           center/cover;
       }
 
       @include media-breakpoint-down(md) {
-        background: url("img/sprite/bg-image3--tablet.png") no-repeat center/auto 100%;
+        background: url("img/bg-image3--tablet.png") no-repeat center/auto 100%;
 
         @media #{$retina} {
-          background: url("img/sprite/bg-image3--tablet@2x.png") no-repeat
+          background: url("img/bg-image3--tablet@2x.png") no-repeat
             center/cover;
         }
       }
 
       @include media-breakpoint-down(sm) {
-        background: url("img/sprite/bg-image3--mobile.png") no-repeat right
+        background: url("img/bg-image3--mobile.png") no-repeat right
           center/auto;
 
         @media #{$retina} {
-          background: url("img/sprite/bg-image3--mobile@2x.png") no-repeat right
+          background: url("img/bg-image3--mobile@2x.png") no-repeat right
             center/auto 100%;
         }
       }
