@@ -94,17 +94,17 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("keydown", keydownHandler);
 });
 document.addEventListener("DOMContentLoaded", function () {
+  var breakpoint = window.matchMedia("only screen and (max-width: 767px)");
   var trigger = document.querySelector(".main-nav__trigger");
+  var nav = document.querySelector(".main-nav-list");
 
-  var toggleMenu = function toggleMenu(state, selector) {
-    var nav = selector.closest(".main-nav").querySelector(".main-nav-list");
-
+  var toggleMenu = function toggleMenu(state, element) {
     switch (state) {
       case "close":
-        selector.classList.remove("main-nav__trigger--open-menu");
-        selector.classList.add("main-nav__trigger--close-menu");
-        selector.setAttribute("aria-label", "Close menu");
-        selector.querySelector("use").setAttribute("xlink:href", "#main-nav__close");
+        element.classList.remove("main-nav__trigger--open-menu");
+        element.classList.add("main-nav__trigger--close-menu");
+        element.setAttribute("aria-label", "Close menu");
+        element.querySelector("use").setAttribute("xlink:href", "#main-nav__close");
 
         if (nav) {
           nav.classList.remove("main-nav-list--hidden", "fadeOut");
@@ -114,10 +114,10 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
 
       case "open":
-        selector.classList.remove("main-nav__trigger--close-menu");
-        selector.classList.add("main-nav__trigger--open-menu");
-        selector.setAttribute("aria-label", "Open menu");
-        selector.querySelector("use").setAttribute("xlink:href", "#main-nav__menu");
+        element.classList.remove("main-nav__trigger--close-menu");
+        element.classList.add("main-nav__trigger--open-menu");
+        element.setAttribute("aria-label", "Open menu");
+        element.querySelector("use").setAttribute("xlink:href", "#main-nav__menu");
 
         if (nav) {
           nav.classList.add("main-nav-list--hidden", "fadeOut");
@@ -141,10 +141,32 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  if (trigger) {
-    trigger.addEventListener("click", clickHandler);
-  }
+  trigger.addEventListener("click", clickHandler);
 
+  var breakpointChecker = function breakpointChecker() {
+    if (breakpoint.matches) {
+      if (trigger) {
+        toggleMenu("open", trigger);
+      }
+
+      if (nav.classList.contains("fadeIn")) {
+        nav.classList.remove("fadeIn");
+        nav.classList.add("fadeOut");
+      }
+    } else {
+      if (trigger) {
+        toggleMenu("close", trigger);
+      }
+
+      if (nav.classList.contains("fadeOut")) {
+        nav.classList.remove("fadeOut");
+        nav.classList.add("fadeIn");
+      }
+    }
+  };
+
+  breakpointChecker();
+  breakpoint.addListener(breakpointChecker);
   ["click", "keydown"].forEach(function (event) {
     document.addEventListener(event, function (e) {
       var type = e.type,

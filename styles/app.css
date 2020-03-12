@@ -2981,14 +2981,13 @@ body {
     margin-left: -37px; }
     @media (max-width: 1023.98px) {
       .main-nav__logo {
-        margin-right: 66px;
         margin-left: initial; } }
     @media (max-width: 768.98px) {
       .main-nav__logo {
         margin-left: initial;
         margin-right: auto; } }
   .main-nav__trigger {
-    z-index: 15;
+    z-index: 20;
     display: none;
     width: 40px;
     height: 40px;
@@ -3017,7 +3016,7 @@ body {
     .main-nav__trigger:focus {
       outline: none; }
   .main-nav__login {
-    z-index: 15;
+    z-index: 20;
     margin-left: auto; }
   .main-nav__dropdown {
     display: none; }
@@ -3040,7 +3039,7 @@ body {
         margin-bottom: 5px; } }
 
 .main-nav-list {
-  z-index: 5;
+  z-index: 15;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3093,7 +3092,7 @@ body {
     white-space: nowrap; }
     @media (max-width: 1023.98px) {
       .main-nav-list__item {
-        margin-right: 20px;
+        margin-right: initial;
         font-size: 14px;
         line-height: 16px;
         white-space: initial; } }
@@ -3117,9 +3116,11 @@ body {
     -webkit-transition-property: color, font-weight;
     -o-transition-property: color, font-weight;
     transition-property: color, font-weight; }
+    @media (max-width: 1023.98px) {
+      .main-nav-list__link {
+        padding: 10px; } }
 
 .login {
-  z-index: 5;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3133,6 +3134,7 @@ body {
   -ms-flex-item-align: center;
       align-self: center;
   padding: 0;
+  padding-left: 15px;
   color: #1f1e25;
   font-size: 16px;
   line-height: 19px;
@@ -3564,7 +3566,7 @@ body {
         font-size: 16px; } }
     @media (max-width: 768.98px) {
       .tab-services__list {
-        max-width: 75%;
+        max-width: 80%;
         padding-right: 25px;
         margin-bottom: 25px;
         font-size: 14px; } }
@@ -3696,7 +3698,7 @@ body {
       background-color: #f6f7ff; } }
   @media (max-width: 768.98px) {
     .services {
-      margin-bottom: 60px; } }
+      margin-bottom: 50px; } }
   .services__title {
     position: absolute;
     width: 1px;
@@ -3811,7 +3813,7 @@ body {
         display: block; } }
   @media (max-width: 1023.98px) {
     .services.swiper-container-horizontal > .swiper-pagination-bullets, .services.swiper-pagination-custom, .services.swiper-pagination-fraction {
-      bottom: 7px; } }
+      bottom: 10px; } }
   .services.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .services.swiper-pagination-custom .swiper-pagination-bullet, .services.swiper-pagination-fraction .swiper-pagination-bullet {
     background-color: #2c36f2;
     opacity: 1; }
@@ -3928,7 +3930,7 @@ body {
       margin-bottom: 35px; } }
   @media (max-width: 768.98px) {
     .calculator {
-      margin-bottom: 10px; } }
+      margin-bottom: 25px; } }
   .calculator form fieldset {
     width: 100%;
     margin: 0;
@@ -4683,6 +4685,7 @@ body {
             border-radius: 0; }
             @media (max-width: 768.98px) {
               .calculator__credit-form--registration .calculator__form-field-inner--readonly .calculator__form-field input {
+                padding-left: 0;
                 font-size: 18px;
                 text-align: left; } }
       .calculator__credit-form--registration .calculator__form-field-inner--editable {
@@ -4827,7 +4830,7 @@ body {
       .departments__title {
         padding-right: 15px;
         padding-left: 15px;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
         font-size: 22px; } }
 
 .form-departments {
@@ -4923,7 +4926,7 @@ body {
   @media (max-width: 768.98px) {
     .map-departments {
       height: 381px;
-      margin-bottom: 55px; } }
+      margin-bottom: 60px; } }
   .map-departments__controls {
     z-index: 5;
     position: absolute;
@@ -5154,9 +5157,9 @@ body {
     @media (max-width: 1023.98px) {
       .footer__logo {
         margin-bottom: 25px; } }
-    @media (max-width: 768.98px) {
-      .footer__logo {
-        margin-bottom: 15px; } }
+    .footer__logo .logo__image {
+      margin-left: initial;
+      margin-bottom: initial; }
   .footer__logo, .footer__output {
     padding-right: 15px; }
   .footer__output {
@@ -5377,8 +5380,6 @@ body {
   background-color: transparent;
   width: 100vw;
   max-height: 100vh;
-  padding-top: 15px;
-  padding-bottom: 15px;
   overflow-x: hidden;
   overflow-y: auto; }
   .modal--invisible {
