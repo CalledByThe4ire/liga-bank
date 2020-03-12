@@ -144,6 +144,23 @@ document.addEventListener("DOMContentLoaded", function () {
   if (trigger) {
     trigger.addEventListener("click", clickHandler);
   }
+
+  ["click", "keydown"].forEach(function (event) {
+    document.addEventListener(event, function (e) {
+      var type = e.type,
+          target = e.target;
+
+      if (type === "click") {
+        if (!target.closest(".main-nav")) {
+          toggleMenu("open", document.querySelector(".main-nav__trigger"));
+        }
+      }
+
+      if (type === "keydown" && e.keyCode === 27) {
+        toggleMenu("open", document.querySelector(".main-nav__trigger"));
+      }
+    });
+  });
 });
 /* eslint-disable no-undef */
 document.addEventListener("DOMContentLoaded", function () {
