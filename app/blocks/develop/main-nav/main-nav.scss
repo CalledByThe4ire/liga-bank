@@ -25,15 +25,20 @@
     }
 
     @include media-breakpoint-down(sm) {
-      @include margin-x(initial);
+      margin-left: initial;
+      margin-right: auto;
     }
   }
 
   &__trigger {
-    z-index: 10;
+    z-index: 15;
 
     display: none;
+    width: 40px;
+    height: 40px;
     min-height: inherit;
+    justify-content: center;
+    margin-left: -$offset--mobile;
 
     background-color: transparent;
     border: 0;
@@ -44,7 +49,6 @@
 
     @include media-breakpoint-down(sm) {
       display: flex;
-      margin-right: 6px;
       padding: 0;
     }
 
@@ -59,6 +63,7 @@
   }
 
   &__login {
+    z-index: 15;
     margin-left: auto;
   }
 

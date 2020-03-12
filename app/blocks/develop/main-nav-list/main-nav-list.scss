@@ -2,6 +2,7 @@
   $main-nav-list: &;
 
   z-index: 5;
+  align-items: center;
 
   @include make-container();
   @include make-row();
@@ -33,7 +34,6 @@
 
     #{$main-nav-list}__item {
       margin: 0;
-      padding: 15px;
     }
   }
 
@@ -68,6 +68,9 @@
   }
 
   &__link {
+    display: block;
+    padding: 15px;
+
     color: inherit;
     font-weight: inherit;
     text-decoration: inherit;

@@ -48,4 +48,18 @@ document.addEventListener(`DOMContentLoaded`, () => {
   if (trigger) {
     trigger.addEventListener(`click`, clickHandler);
   }
+
+  [`click`, `keydown`].forEach((event) => {
+    document.addEventListener(event, (e) => {
+      const {type, target} = e;
+      if (type === `click`) {
+        if (!target.closest(`.main-nav`)) {
+          toggleMenu(`open`, document.querySelector(`.main-nav__trigger`));
+        }
+      }
+      if (type === `keydown` && e.keyCode === 27) {
+        toggleMenu(`open`, document.querySelector(`.main-nav__trigger`));
+      }
+    });
+  });
 });
