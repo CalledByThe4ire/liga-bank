@@ -20,7 +20,6 @@
     margin-left: -37px;
 
     @include media-breakpoint-down(md) {
-      margin-right: 66px;
       margin-left: initial;
     }
 
@@ -31,7 +30,7 @@
   }
 
   &__trigger {
-    z-index: 15;
+    z-index: 20;
 
     display: none;
     width: 40px;
@@ -63,7 +62,7 @@
   }
 
   &__login {
-    z-index: 15;
+    z-index: 20;
     margin-left: auto;
   }
 

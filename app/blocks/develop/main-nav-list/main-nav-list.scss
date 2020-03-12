@@ -1,7 +1,7 @@
 .main-nav-list {
   $main-nav-list: &;
 
-  z-index: 5;
+  z-index: 15;
   align-items: center;
 
   @include make-container();
@@ -46,7 +46,7 @@
     white-space: nowrap;
 
     @include media-breakpoint-down(md) {
-      margin-right: 20px;
+      margin-right: initial;
       font-size: 14px;
       line-height: 16px;
       white-space: initial;
@@ -76,5 +76,9 @@
     text-decoration: inherit;
     transition-duration: 0.3s;
     transition-property: color, font-weight;
+
+    @include media-breakpoint-down(md) {
+      padding: 10px;
+    }
   }
 }

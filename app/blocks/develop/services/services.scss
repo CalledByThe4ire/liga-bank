@@ -10,7 +10,7 @@
   }
 
   @include media-breakpoint-down(sm) {
-    margin-bottom: 60px;
+    margin-bottom: 50px;
   }
 
   &__title {
@@ -118,7 +118,7 @@
     &-pagination-custom,
     &-pagination-fraction {
       @include media-breakpoint-down(md) {
-        bottom: 7px;
+        bottom: 10px;
       }
 
       .swiper-pagination-bullet {

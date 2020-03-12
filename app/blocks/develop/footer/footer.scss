@@ -144,8 +144,9 @@
       margin-bottom: 25px;
     }
 
-    @include media-breakpoint-down(sm) {
-      margin-bottom: 15px;
+    & .logo__image {
+      margin-left: initial;
+      margin-bottom: initial;
     }
   }
 

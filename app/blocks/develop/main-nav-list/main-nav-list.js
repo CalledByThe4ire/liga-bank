@@ -1,15 +1,15 @@
 document.addEventListener(`DOMContentLoaded`, () => {
+  const breakpoint = window.matchMedia(`only screen and (max-width: 767px)`);
   const trigger = document.querySelector(`.main-nav__trigger`);
+  const nav = document.querySelector(`.main-nav-list`);
 
-  const toggleMenu = (state, selector) => {
-    const nav = selector.closest(`.main-nav`).querySelector(`.main-nav-list`);
-
+  const toggleMenu = (state, element) => {
     switch (state) {
       case `close`:
-        selector.classList.remove(`main-nav__trigger--open-menu`);
-        selector.classList.add(`main-nav__trigger--close-menu`);
-        selector.setAttribute(`aria-label`, `Close menu`);
-        selector
+        element.classList.remove(`main-nav__trigger--open-menu`);
+        element.classList.add(`main-nav__trigger--close-menu`);
+        element.setAttribute(`aria-label`, `Close menu`);
+        element
           .querySelector(`use`)
           .setAttribute(`xlink:href`, `#main-nav__close`);
         if (nav) {
@@ -18,11 +18,11 @@ document.addEventListener(`DOMContentLoaded`, () => {
         }
         break;
       case `open`:
-        selector.classList.remove(`main-nav__trigger--close-menu`);
-        selector.classList.add(`main-nav__trigger--open-menu`);
+        element.classList.remove(`main-nav__trigger--close-menu`);
+        element.classList.add(`main-nav__trigger--open-menu`);
 
-        selector.setAttribute(`aria-label`, `Open menu`);
-        selector
+        element.setAttribute(`aria-label`, `Open menu`);
+        element
           .querySelector(`use`)
           .setAttribute(`xlink:href`, `#main-nav__menu`);
         if (nav) {
@@ -45,9 +45,31 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   };
 
-  if (trigger) {
-    trigger.addEventListener(`click`, clickHandler);
-  }
+  trigger.addEventListener(`click`, clickHandler);
+
+  const breakpointChecker = () => {
+    if (breakpoint.matches) {
+      if (trigger) {
+        toggleMenu(`open`, trigger);
+      }
+
+      if (nav.classList.contains(`fadeIn`)) {
+        nav.classList.remove(`fadeIn`);
+        nav.classList.add(`fadeOut`);
+      }
+    } else {
+      if (trigger) {
+        toggleMenu(`close`, trigger);
+      }
+      if (nav.classList.contains(`fadeOut`)) {
+        nav.classList.remove(`fadeOut`);
+        nav.classList.add(`fadeIn`);
+      }
+    }
+  };
+
+  breakpointChecker();
+  breakpoint.addListener(breakpointChecker);
 
   [`click`, `keydown`].forEach((event) => {
     document.addEventListener(event, (e) => {
