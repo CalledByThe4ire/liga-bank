@@ -121,8 +121,8 @@ document.addEventListener("DOMContentLoaded", function () {
         element.querySelector("use").setAttribute("xlink:href", "#main-nav__menu");
 
         if (nav) {
-          nav.classList.add("main-nav-list--hidden", "fadeOut");
-          nav.classList.remove("main-nav-list--hidden", "fadeIn");
+          nav.classList.add("main-nav-list--hidden", "animated", "fadeOut");
+          nav.classList.remove("fadeIn");
         }
 
         break;
