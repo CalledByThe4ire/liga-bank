@@ -2,6 +2,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
   const breakpoint = window.matchMedia(`only screen and (max-width: 767px)`);
   const trigger = document.querySelector(`.main-nav__trigger`);
   const nav = document.querySelector(`.main-nav-list`);
+  const events = [`click`, `keydown`];
 
   const toggleMenu = (state, element) => {
     switch (state) {
@@ -35,7 +36,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   };
 
-  const clickHandler = ({currentTarget}) => {
+  const triggerClickHandler = ({currentTarget}) => {
     if (currentTarget.classList.contains(`main-nav__trigger--open-menu`)) {
       toggleMenu(`close`, currentTarget);
     } else if (
@@ -45,43 +46,41 @@ document.addEventListener(`DOMContentLoaded`, () => {
     }
   };
 
-  trigger.addEventListener(`click`, clickHandler);
-
-  const breakpointChecker = () => {
-    if (breakpoint.matches) {
+  const documentClickHandler = (event) => {
+    const {type, target} = event;
+    if (type === `click`) {
+      if (!target.closest(`.main-nav`)) {
+        if (trigger) {
+          toggleMenu(`open`, trigger);
+        }
+      }
+    }
+    if (type === `keydown` && event.keyCode === 27) {
       if (trigger) {
         toggleMenu(`open`, trigger);
       }
+    }
+  };
 
-      if (nav.classList.contains(`fadeIn`)) {
-        nav.classList.remove(`fadeIn`);
-        nav.classList.add(`fadeOut`);
-      }
-    } else {
-      if (trigger) {
+  trigger.addEventListener(`click`, triggerClickHandler);
+
+  const breakpointChecker = () => {
+    if (trigger && nav) {
+      if (breakpoint.matches) {
+        toggleMenu(`open`, trigger);
+        events.forEach((event) => {
+          document.addEventListener(event, documentClickHandler);
+        });
+      } else {
         toggleMenu(`close`, trigger);
-      }
-      if (nav.classList.contains(`fadeOut`)) {
-        nav.classList.remove(`fadeOut`);
-        nav.classList.add(`fadeIn`);
+        events.forEach((event) => {
+          document.removeEventListener(event, documentClickHandler);
+        });
       }
     }
   };
 
   breakpointChecker();
   breakpoint.addListener(breakpointChecker);
-
-  [`click`, `keydown`].forEach((event) => {
-    document.addEventListener(event, (e) => {
-      const {type, target} = e;
-      if (type === `click`) {
-        if (!target.closest(`.main-nav`)) {
-          toggleMenu(`open`, document.querySelector(`.main-nav__trigger`));
-        }
-      }
-      if (type === `keydown` && e.keyCode === 27) {
-        toggleMenu(`open`, document.querySelector(`.main-nav__trigger`));
-      }
-    });
-  });
 });
+
