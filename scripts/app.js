@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var breakpoint = window.matchMedia("only screen and (max-width: 767px)");
   var trigger = document.querySelector(".main-nav__trigger");
   var nav = document.querySelector(".main-nav-list");
+  var events = ["click", "keydown"];
 
   var toggleMenu = function toggleMenu(state, element) {
     switch (state) {
@@ -131,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  var clickHandler = function clickHandler(_ref) {
+  var triggerClickHandler = function triggerClickHandler(_ref) {
     var currentTarget = _ref.currentTarget;
 
     if (currentTarget.classList.contains("main-nav__trigger--open-menu")) {
@@ -141,48 +142,45 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  trigger.addEventListener("click", clickHandler);
+  var documentClickHandler = function documentClickHandler(event) {
+    var type = event.type,
+        target = event.target;
 
-  var breakpointChecker = function breakpointChecker() {
-    if (breakpoint.matches) {
+    if (type === "click") {
+      if (!target.closest(".main-nav")) {
+        if (trigger) {
+          toggleMenu("open", trigger);
+        }
+      }
+    }
+
+    if (type === "keydown" && event.keyCode === 27) {
       if (trigger) {
         toggleMenu("open", trigger);
       }
+    }
+  };
 
-      if (nav.classList.contains("fadeIn")) {
-        nav.classList.remove("fadeIn");
-        nav.classList.add("fadeOut");
-      }
-    } else {
-      if (trigger) {
+  trigger.addEventListener("click", triggerClickHandler);
+
+  var breakpointChecker = function breakpointChecker() {
+    if (trigger && nav) {
+      if (breakpoint.matches) {
+        toggleMenu("open", trigger);
+        events.forEach(function (event) {
+          document.addEventListener(event, documentClickHandler);
+        });
+      } else {
         toggleMenu("close", trigger);
-      }
-
-      if (nav.classList.contains("fadeOut")) {
-        nav.classList.remove("fadeOut");
-        nav.classList.add("fadeIn");
+        events.forEach(function (event) {
+          document.removeEventListener(event, documentClickHandler);
+        });
       }
     }
   };
 
   breakpointChecker();
   breakpoint.addListener(breakpointChecker);
-  ["click", "keydown"].forEach(function (event) {
-    document.addEventListener(event, function (e) {
-      var type = e.type,
-          target = e.target;
-
-      if (type === "click") {
-        if (!target.closest(".main-nav")) {
-          toggleMenu("open", document.querySelector(".main-nav__trigger"));
-        }
-      }
-
-      if (type === "keydown" && e.keyCode === 27) {
-        toggleMenu("open", document.querySelector(".main-nav__trigger"));
-      }
-    });
-  });
 });
 /* eslint-disable no-undef */
 document.addEventListener("DOMContentLoaded", function () {
